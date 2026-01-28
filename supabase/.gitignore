@@ -1,0 +1,23 @@
+# Supabase local development
+.branches
+.temp
+.env.local
+
+# Supabase CLI state
+.supabase
+
+# Backup files
+*.backup
+*.bak
+
+# Logs
+*.log
+
+# Supabase
+.branches
+.temp
+
+# dotenvx
+.env.keys
+.env.local
+.env.*.local

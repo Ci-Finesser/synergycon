@@ -1,0 +1,74 @@
+# SynergyCon 2.0 - Robots.txt
+# Updated: 2026-01-02
+
+User-agent: *
+Allow: /
+Allow: /speakers
+Allow: /schedule
+Allow: /partners
+Allow: /gallery
+Allow: /about
+Allow: /register
+Allow: /apply-speaker
+Allow: /become-partner
+Allow: /collaborate
+Allow: /press
+
+# Disallow admin areas
+Disallow: /admin/
+Disallow: /admin
+Disallow: /api/admin/
+Disallow: /api/admin
+
+# Disallow PWA settings
+Disallow: /pwa-settings/
+Disallow: /offline/
+
+# Disallow API routes
+Disallow: /api/
+
+# Block common scanning patterns
+Disallow: /_next/
+Disallow: /static/
+
+# Sitemap
+Sitemap: https://synergycon.live/sitemap.xml
+
+# Additional security - block known scrapers and bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+# Block AI training bots
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+# Crawl delay for allowed bots
+User-agent: Googlebot
+Crawl-delay: 2
+
+User-agent: Bingbot
+Crawl-delay: 2

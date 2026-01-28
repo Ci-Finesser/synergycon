@@ -1,0 +1,8 @@
+node_modules
+.next
+.env
+.env.actual
+.env.local
+.env.production
+package-lock.json
+azure-env.json

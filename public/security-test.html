@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Security Test - SynergyCon</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        h1 { color: #0A0A0A; margin-top: 0; }
+        h2 { color: #333; border-bottom: 2px solid #0A0A0A; padding-bottom: 10px; }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+        button {
+            background: #0A0A0A;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        button:hover { background: #333; }
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .result {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 13px;
+        }
+        .success { background: #d4edda; border: 1px solid #c3e6cb; color: #155724; }
+        .error { background: #f8d7da; border: 1px solid #f5c6cb; color: #721c24; }
+        .info { background: #d1ecf1; border: 1px solid #bee5eb; color: #0c5460; }
+        .warning { background: #fff3cd; border: 1px solid #ffeaa7; color: #856404; }
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        .status-pass { background: #28a745; }
+        .status-fail { background: #dc3545; }
+        .status-pending { background: #ffc107; }
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .stat-card {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+        .stat-number {
+            font-size: 32px;
+            font-weight: bold;
+            color: #0A0A0A;
+        }
+        .stat-label {
+            color: #666;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔒 Form Security Test Suite</h1>
+        <p>Test the security implementation of all forms on the SynergyCon website.</p>
+    </div>
+
+    <div class="container">
+        <h2>1. CSRF Token Test</h2>
+        <div class="test-section">
+            <button onclick="testCSRF()">Test CSRF Token Generation</button>
+            <div id="csrf-result"></div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>2. Honeypot Detection Test</h2>
+        <div class="test-section">
+            <button onclick="testHoneypot()">Test Honeypot Trigger</button>
+            <p><small>This will attempt to submit with filled honeypot fields (should fail)</small></p>
+            <div id="honeypot-result"></div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>3. Timing Validation Test</h2>
+        <div class="test-section">
+            <button onclick="testTiming()">Test Quick Submission</button>
+            <p><small>This will attempt immediate submission (should fail)</small></p>
+            <div id="timing-result"></div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>4. Rate Limiting Test</h2>
+        <div class="test-section">
+            <button onclick="testRateLimit()">Test Rate Limit (3 requests)</button>
+            <p><small>This will make multiple rapid requests (later ones should be rate limited)</small></p>
+            <div id="ratelimit-result"></div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>5. Valid Submission Test</h2>
+        <div class="test-section">
+            <button onclick="testValidSubmission()">Test Valid Submission</button>
+            <p><small>This will make a properly formatted request (should succeed)</small></p>
+            <div id="valid-result"></div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>6. Security Statistics</h2>
+        <div class="test-section">
+            <button onclick="getStats()">Fetch Security Stats</button>
+            <div id="stats-result"></div>
+        </div>
+    </div>
+
+    <script>
+        let cachedToken = null;
+        const startTime = Date.now();
+
+        function showResult(elementId, message, type = 'info') {
+            const element = document.getElementById(elementId);
+            element.className = `result ${type}`;
+            element.innerHTML = message;
+        }
+
+        async function testCSRF() {
+            showResult('csrf-result', 'Fetching CSRF token...', 'info');
+            try {
+                const response = await fetch('/api/csrf');
+                const data = await response.json();
+                
+                if (data.token) {
+                    cachedToken = data.token;
+                    showResult('csrf-result', 
+                        `<span class="status-indicator status-pass"></span>` +
+                        `<strong>✅ PASS:</strong> CSRF token received<br>` +
+                        `<small>Token: ${data.token.substring(0, 20)}...</small><br>` +
+                        `<small>Expires in: ${data.expiresIn} seconds</small>`,
+                        'success'
+                    );
+                } else {
+                    showResult('csrf-result', 
+                        `<span class="status-indicator status-fail"></span>` +
+                        `<strong>❌ FAIL:</strong> No token in response`,
+                        'error'
+                    );
+                }
+            } catch (error) {
+                showResult('csrf-result', 
+                    `<span class="status-indicator status-fail"></span>` +
+                    `<strong>❌ ERROR:</strong> ${error.message}`,
+                    'error'
+                );
+            }
+        }
+
+        async function testHoneypot() {
+            if (!cachedToken) {
+                await testCSRF();
+                await new Promise(resolve => setTimeout(resolve, 500));
+            }
+
+            showResult('honeypot-result', 'Testing honeypot detection...', 'info');
+            
+            try {
+                const response = await fetch('/api/newsletter/subscribe', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        email: 'honeypot-test@example.com',
+                        _csrf: cachedToken,
+                        _formStartTime: Date.now() - 5000,
+                        website_url: 'https://spam-bot.com', // Trigger honeypot
+                        company_name: '',
+                        business_address: ''
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.status === 403) {
+                    showResult('honeypot-result',
+                        `<span class="status-indicator status-pass"></span>` +
+                        `<strong>✅ PASS:</strong> Honeypot correctly detected bot<br>` +
+                        `<small>Status: ${response.status}</small><br>` +
+                        `<small>Message: ${data.error}</small>`,
+                        'success'
+                    );
+                } else {
+                    showResult('honeypot-result',
+                        `<span class="status-indicator status-fail"></span>` +
+                        `<strong>❌ FAIL:</strong> Honeypot did not trigger<br>` +
+                        `<small>Response: ${JSON.stringify(data)}</small>`,
+                        'error'
+                    );
+                }
+            } catch (error) {
+                showResult('honeypot-result',
+                    `<span class="status-indicator status-fail"></span>` +
+                    `<strong>❌ ERROR:</strong> ${error.message}`,
+                    'error'
+                );
+            }
+        }
+
+        async function testTiming() {
+            if (!cachedToken) {
+                await testCSRF();
+                await new Promise(resolve => setTimeout(resolve, 500));
+            }
+
+            showResult('timing-result', 'Testing timing validation...', 'info');
+            
+            try {
+                const response = await fetch('/api/newsletter/subscribe', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        email: 'timing-test@example.com',
+                        _csrf: cachedToken,
+                        _formStartTime: Date.now(), // Immediate submission
+                        website_url: '',
+                        company_name: '',
+                        business_address: ''
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.status === 403) {
+                    showResult('timing-result',
+                        `<span class="status-indicator status-pass"></span>` +
+                        `<strong>✅ PASS:</strong> Quick submission detected<br>` +
+                        `<small>Status: ${response.status}</small><br>` +
+                        `<small>Message: ${data.error}</small>`,
+                        'success'
+                    );
+                } else {
+                    showResult('timing-result',
+                        `<span class="status-indicator status-fail"></span>` +
+                        `<strong>❌ FAIL:</strong> Timing validation did not trigger<br>` +
+                        `<small>Response: ${JSON.stringify(data)}</small>`,
+                        'error'
+                    );
+                }
+            } catch (error) {
+                showResult('timing-result',
+                    `<span class="status-indicator status-fail"></span>` +
+                    `<strong>❌ ERROR:</strong> ${error.message}`,
+                    'error'
+                );
+            }
+        }
+
+        async function testRateLimit() {
+            if (!cachedToken) {
+                await testCSRF();
+                await new Promise(resolve => setTimeout(resolve, 500));
+            }
+
+            showResult('ratelimit-result', 'Testing rate limiting (3 attempts)...', 'info');
+            const results = [];
+
+            for (let i = 0; i < 3; i++) {
+                try {
+                    const response = await fetch('/api/newsletter/subscribe', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            email: `ratelimit-${i}-${Date.now()}@example.com`,
+                            _csrf: cachedToken,
+                            _formStartTime: Date.now() - 5000,
+                            website_url: '',
+                            company_name: '',
+                            business_address: ''
+                        })
+                    });
+
+                    const data = await response.json();
+                    const remaining = response.headers.get('X-RateLimit-Remaining');
+                    
+                    results.push({
+                        attempt: i + 1,
+                        status: response.status,
+                        remaining: remaining,
+                        rateLimited: response.status === 429
+                    });
+
+                    if (response.status === 429) {
+                        break; // Stop if rate limited
+                    }
+                } catch (error) {
+                    results.push({
+                        attempt: i + 1,
+                        error: error.message
+                    });
+                }
+            }
+
+            const rateLimited = results.some(r => r.rateLimited);
+            const resultHTML = results.map(r => 
+                `Attempt ${r.attempt}: Status ${r.status}, Remaining: ${r.remaining}`
+            ).join('<br>');
+
+            if (rateLimited) {
+                showResult('ratelimit-result',
+                    `<span class="status-indicator status-pass"></span>` +
+                    `<strong>✅ PASS:</strong> Rate limiting triggered<br>` +
+                    `<small>${resultHTML}</small>`,
+                    'success'
+                );
+            } else {
+                showResult('ratelimit-result',
+                    `<span class="status-indicator status-warning"></span>` +
+                    `<strong>⚠️ INFO:</strong> No rate limit hit (may need more attempts)<br>` +
+                    `<small>${resultHTML}</small>`,
+                    'warning'
+                );
+            }
+        }
+
+        async function testValidSubmission() {
+            if (!cachedToken) {
+                await testCSRF();
+                await new Promise(resolve => setTimeout(resolve, 500));
+            }
+
+            // Wait at least 3 seconds from page load
+            const elapsed = Date.now() - startTime;
+            if (elapsed < 3000) {
+                const waitTime = 3000 - elapsed;
+                showResult('valid-result', `Waiting ${Math.ceil(waitTime/1000)}s for valid timing...`, 'info');
+                await new Promise(resolve => setTimeout(resolve, waitTime));
+            }
+
+            showResult('valid-result', 'Submitting valid request...', 'info');
+            
+            try {
+                const response = await fetch('/api/newsletter/subscribe', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        email: `valid-test-${Date.now()}@example.com`,
+                        _csrf: cachedToken,
+                        _formStartTime: startTime,
+                        website_url: '',
+                        company_name: '',
+                        business_address: ''
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    showResult('valid-result',
+                        `<span class="status-indicator status-pass"></span>` +
+                        `<strong>✅ PASS:</strong> Valid submission accepted<br>` +
+                        `<small>Status: ${response.status}</small><br>` +
+                        `<small>Message: ${data.message || JSON.stringify(data)}</small>`,
+                        'success'
+                    );
+                } else {
+                    showResult('valid-result',
+                        `<span class="status-indicator status-fail"></span>` +
+                        `<strong>❌ FAIL:</strong> Valid submission rejected<br>` +
+                        `<small>Status: ${response.status}</small><br>` +
+                        `<small>Error: ${data.error}</small>`,
+                        'error'
+                    );
+                }
+            } catch (error) {
+                showResult('valid-result',
+                    `<span class="status-indicator status-fail"></span>` +
+                    `<strong>❌ ERROR:</strong> ${error.message}`,
+                    'error'
+                );
+            }
+        }
+
+        async function getStats() {
+            showResult('stats-result', 'Fetching security statistics...', 'info');
+            
+            try {
+                const response = await fetch('/api/admin/security/logs?action=stats');
+                const data = await response.json();
+
+                if (response.ok) {
+                    const stats = data.stats;
+                    const statsHTML = `
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-number">${stats.total}</div>
+                                <div class="stat-label">Total Events</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">${stats.recentViolations}</div>
+                                <div class="stat-label">Violations</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">${stats.byType.csrf_violation || 0}</div>
+                                <div class="stat-label">CSRF Violations</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">${stats.byType.honeypot_triggered || 0}</div>
+                                <div class="stat-label">Honeypot Triggers</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">${stats.byType.rate_limit_exceeded || 0}</div>
+                                <div class="stat-label">Rate Limits</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">${stats.byType.timing_violation || 0}</div>
+                                <div class="stat-label">Timing Violations</div>
+                            </div>
+                        </div>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    `;
+                    showResult('stats-result',
+                        `<strong>✅ Security Statistics (Last Hour)</strong>${statsHTML}`,
+                        'success'
+                    );
+                } else {
+                    showResult('stats-result',
+                        `<strong>❌ Failed to fetch stats</strong><br>` +
+                        `<small>${data.error || 'Unknown error'}</small>`,
+                        'error'
+                    );
+                }
+            } catch (error) {
+                showResult('stats-result',
+                    `<strong>❌ ERROR:</strong> ${error.message}`,
+                    'error'
+                );
+            }
+        }
+
+        // Auto-run CSRF test on load
+        window.addEventListener('load', () => {
+            testCSRF();
+        });
+    </script>
+</body>
+</html>

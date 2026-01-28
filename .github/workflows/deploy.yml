@@ -1,0 +1,85 @@
+name: Build and deploy Docker container to Azure Web App - synergycon
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  AZURE_WEBAPP_NAME: synergycon
+  ACR_LOGIN_SERVER: synergyco.azurecr.io
+  IMAGE_NAME: synergycon-website
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # - name: Setup Supabase CLI
+      #   uses: supabase/setup-cli@v1
+      #   with:
+      #     version: latest
+
+      # - name: Run Database Migrations
+      #   env:
+      #     SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+      #     SUPABASE_PROJECT_REF: ${{ secrets.SUPABASE_PROJECT_REF }}
+      #   run: |
+      #     set -e
+          
+      #     echo "🔗 Linking to Supabase project..."
+      #     supabase link --project-ref $SUPABASE_PROJECT_REF
+          
+      #     echo "📤 Pushing database migrations..."
+      #     if ! supabase db push 2>&1; then
+      #       echo "⚠️ Migration push failed, checking for orphaned migrations..."
+      #       echo "Attempting to repair migration history..."
+            
+      #       # Mark known problematic migrations as reverted
+      #       supabase migration repair --status reverted 20251215125905 || true
+      #       supabase migration repair --status reverted 20251215132027 || true
+            
+      #       echo "Retrying migration push..."
+      #       supabase db push
+      #     fi
+          
+      #     echo "✅ Migrations completed successfully!"
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to Azure Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.ACR_LOGIN_SERVER }}
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ env.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+            ${{ env.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:latest
+          build-args: |
+            NEXT_PUBLIC_SUPABASE_URL=${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+            NEXT_PUBLIC_SUPABASE_ANON_KEY=${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+            NEXT_PUBLIC_APP_URL=${{ secrets.NEXT_PUBLIC_APP_URL }}
+            NEXT_PUBLIC_BASE_URL=${{ secrets.NEXT_PUBLIC_BASE_URL }}
+            NEXT_PUBLIC_FLUTTERWAVE_PUBLIC_KEY=${{ secrets.NEXT_PUBLIC_FLUTTERWAVE_PUBLIC_KEY }}
+            NEXT_PUBLIC_VAPID_PUBLIC_KEY=${{ secrets.NEXT_PUBLIC_VAPID_PUBLIC_KEY }}
+          cache-from: type=registry,ref=${{ env.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:buildcache
+          cache-to: type=registry,ref=${{ env.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:buildcache,mode=max
+
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          images: ${{ env.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:${{ github.sha }}

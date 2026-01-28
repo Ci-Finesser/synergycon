@@ -1,0 +1,129 @@
+## Database Setup Instructions
+
+### Option 1: Using Supabase Migrations (Recommended)
+
+The project now includes a proper migration system in the `supabase/migrations/` directory.
+
+To apply migrations:
+```bash
+# Install Supabase CLI (if not already installed)
+# macOS: brew install supabase/tap/supabase
+# Linux: curl -fsSL https://deb.supabase.com/supabase-cli.sh | bash
+# Windows: scoop install supabase
+# ⚠️ NOTE: npm install -g supabase is NOT supported
+# Alternative: Use npx supabase [command] (no install needed)
+
+# Link to your project
+supabase link --project-ref your-project-ref
+# Or with npx: npx supabase link --project-ref your-project-ref
+
+# Apply all migrations
+supabase db push
+# Or with npx: npx supabase db push
+```
+
+See `supabase/migrations/README.md` for detailed instructions.
+
+### Option 2: Manual SQL Scripts (Legacy)
+
+Please run these SQL scripts in order from the Scripts section of v0:
+
+1. scripts/001_create_registrations_table.sql
+2. scripts/002_create_admin_tables.sql  
+3. scripts/003_seed_initial_data.sql
+4. scripts/004_create_newsletter_and_email_tables.sql
+5. scripts/017_create_mailing_lists_and_campaigns.sql
+   **OR** use: supabase/migrations/20251226053932_create_email_campaigns_schema.sql
+
+These scripts will create all necessary database tables and seed initial data for the admin system.
+
+### Email Campaigns Migration (Script 017 / Migration 20251226053932)
+
+**Updated: December 30, 2025** - Fixed table creation order and added `template_id` column
+
+Creates the email campaigns infrastructure including:
+- Mailing lists management
+- Subscriber management with custom fields
+- Email campaigns with rich text support (now with template support)
+- Campaign recipient tracking
+- Email templates table (NEW)
+- SMTP configurations table (NEW)
+- Personalization engine support
+- Automatic count updates via triggers
+- Row Level Security policies
+- Performance indexes
+
+**Important:** If you ran this migration before Dec 30, 2025, you need to apply the patch:
+```bash
+# Create the patch file first (see below), then:
+supabase db push supabase/migrations/20251230_patch_email_campaigns_template_id.sql
+```
+
+**Patch Script Content** (save as `supabase/migrations/20251230_patch_email_campaigns_template_id.sql`):
+```sql
+-- Migration Patch: Add template_id Column to email_campaigns
+-- Description: Fixes missing template_id column for databases that already ran the original migration
+-- Author: Database Schema Fix
+-- Date: 2025-12-30
+
+-- Verification Check
+DO $$
+BEGIN
+  IF EXISTS (
+    SELECT 1 FROM information_schema.columns 
+    WHERE table_schema = 'public' 
+    AND table_name = 'email_campaigns' 
+    AND column_name = 'template_id'
+  ) THEN
+    RAISE NOTICE 'template_id column already exists. Patch not needed.';
+  ELSE
+    RAISE NOTICE 'Applying patch: Adding template_id column...';
+    
+    IF NOT EXISTS (
+      SELECT 1 FROM information_schema.tables 
+      WHERE table_schema = 'public' AND table_name = 'email_templates'
+    ) THEN
+      RAISE EXCEPTION 'email_templates table does not exist. Cannot add foreign key.';
+    END IF;
+  END IF;
+END $$;
+
+-- Add template_id column with foreign key constraint
+ALTER TABLE public.email_campaigns 
+ADD COLUMN IF NOT EXISTS template_id UUID 
+REFERENCES public.email_templates(id) ON DELETE SET NULL;
+
+COMMENT ON COLUMN public.email_campaigns.template_id IS 'Optional reference to email template for campaign content';
+
+-- Add missing index
+CREATE INDEX IF NOT EXISTS email_campaigns_template_idx 
+ON public.email_campaigns(template_id) 
+WHERE template_id IS NOT NULL;
+
+-- Verification
+DO $$
+DECLARE
+  column_exists BOOLEAN;
+  index_exists BOOLEAN;
+BEGIN
+  SELECT EXISTS (
+    SELECT 1 FROM information_schema.columns 
+    WHERE table_schema = 'public' 
+    AND table_name = 'email_campaigns' 
+    AND column_name = 'template_id'
+  ) INTO column_exists;
+
+  SELECT EXISTS (
+    SELECT 1 FROM pg_indexes 
+    WHERE schemaname = 'public' 
+    AND tablename = 'email_campaigns' 
+    AND indexname = 'email_campaigns_template_idx'
+  ) INTO index_exists;
+
+  IF column_exists AND index_exists THEN
+    RAISE NOTICE '✅ Patch applied successfully!';
+  ELSE
+    RAISE WARNING '⚠️ Patch may not have applied correctly.';
+  END IF;
+END $$;
+```
