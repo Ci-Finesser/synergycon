@@ -36,7 +36,7 @@ export const metadata: Metadata = {
 }
 
 // Set to true to show maintenance page, false to show full site
-const MAINTENANCE_MODE = true
+const MAINTENANCE_MODE = false
 // Preview key - append ?preview=synergy2026 to URL to bypass maintenance
 const PREVIEW_KEY = "synergy2026"
 
@@ -93,9 +93,9 @@ export default async function HomePage({
       <div style={{ borderBottom: "0.5px solid #e5e7eb" }}>
         <GallerySection />
       </div>
-      <div style={{ borderBottom: "0.5px solid #e5e7eb" }}>
+      {/* <div style={{ borderBottom: "0.5px solid #e5e7eb" }}>
         <LazyTestimonialsSection />
-      </div>
+      </div> */}
       <div style={{ borderBottom: "0.5px solid #e5e7eb" }}>
         <CtaSection />
       </div>
