@@ -85,7 +85,7 @@ export default async function HomePage({
       <div style={{ borderBottom: "0.5px solid #e5e7eb" }}>
         <SponsorsSection />
       </div>
-      <div style={{ borderBottom: "0.5px solid #e5e7eb" }}>
+      {/* <div style={{ borderBottom: "0.5px solid #e5e7eb" }}>
         <VendorsSection />
       </div>
       <div style={{ borderBottom: "0.5px solid #e5e7eb" }}>
@@ -93,7 +93,7 @@ export default async function HomePage({
       </div>
       <div style={{ borderBottom: "0.5px solid #e5e7eb" }}>
         <MediaPartnersSection />
-      </div>
+      </div> */}
       <div style={{ borderBottom: "0.5px solid #e5e7eb" }}>
         <GallerySection />
       </div>
