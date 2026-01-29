@@ -1,6 +1,6 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
-import "./globals.css"
+import "@/app/globals.css"
 import { Toaster } from "@/components/ui/toaster"
 import { PWAProvider } from "@/components/pwa/pwa-provider"
 import { MobileScrollFix } from "@/components/mobile-scroll-fix"
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     "Lagos Conference",
     "Abuja Conference",
     "Port Harcourt Conference",
-    "African Tech",
+    "Nigerian Tech",
     "Creative Industry",
     "Digital Arts",
     "Music Conference",

@@ -20,7 +20,7 @@ const mediaPartners = [
   {
     name: "TechCabal",
     logo: "/techcabal-logo.jpg",
-    description: "Africa's leading technology and business news platform covering innovation across the continent.",
+    description: "Nigeria's leading technology and business news platform covering innovation across the continent.",
   },
   {
     name: "Channels Television",
@@ -33,9 +33,9 @@ const mediaPartners = [
     description: "Leading Nigerian newspaper covering business, technology, and creative economy news.",
   },
   {
-    name: "Techpoint Africa",
-    logo: "/techpoint-africa-logo.jpg",
-    description: "Pan-African technology media platform covering startups and innovation.",
+    name: "Techpoint Nigeria",
+    logo: "/techpoint-Nigeria-logo.jpg",
+    description: "Pan-Nigerian technology media platform covering startups and innovation.",
   },
   {
     name: "Pulse Nigeria",
@@ -43,9 +43,9 @@ const mediaPartners = [
     description: "Leading digital media company focusing on entertainment, lifestyle, and technology.",
   },
   {
-    name: "Ventures Africa",
-    logo: "/ventures-africa-logo.jpg",
-    description: "Business and lifestyle magazine covering Africa's growth and innovation.",
+    name: "Ventures Nigeria",
+    logo: "/ventures-Nigeria-logo.jpg",
+    description: "Business and lifestyle magazine covering Nigeria's growth and innovation.",
   },
 ]
 

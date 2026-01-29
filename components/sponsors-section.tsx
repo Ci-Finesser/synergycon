@@ -169,7 +169,7 @@ export function SponsorsSection() {
                 const needsPadding =
                   sponsor.name === "Sterling Bank" ||
                   sponsor.name === "Finesser Ltd" ||
-                  sponsor.name === "Future Africa"
+                  sponsor.name === "Future Nigeria"
                 return (
                   <div
                     key={sponsor.id}

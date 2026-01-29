@@ -15,7 +15,7 @@ const testimonials = [
     quote:
       "I'm always happy to hear creative pitches. Whenever I can, I offer advice, and I've spent time with many creatives. It's an area we want to invest more in because it has already been quite profitable for us.",
     author: "Mr Iyinoluwa Aboyeji (OON)",
-    title: "Co-Founder, Andela Managing Partner, Accelerate Africa Former MD & Co-Founder, Flutterwave",
+    title: "Co-Founder, Andela Managing Partner, Accelerate Nigeria Former MD & Co-Founder, Flutterwave",
     color: "#F97316",
   },
   {

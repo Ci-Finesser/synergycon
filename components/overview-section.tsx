@@ -13,16 +13,16 @@ export function OverviewSection() {
           <div className="space-y-5 md:space-y-6">
             <div className="space-y-2 md:space-y-3">
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight text-balance">
-                Where Innovation Meets Opportunity
+                The Epicenter of Nigeria&apos;s Creative Revolution
               </h2>
               <p className="text-sm md:text-base text-muted-foreground text-pretty leading-relaxed">
-                SynergyCon is Nigeria's flagship annual conference that brings together creative professionals, industry
-                leaders, policymakers, and investors.
+                SynergyCon 2.0 is Nigeria&apos;s flagship creative economy summit—a full-day immersive experience uniting 
+                visionary entrepreneurs, industry titans, policymakers, and global investors under one iconic roof.
               </p>
               <p className="text-sm md:text-base text-muted-foreground text-pretty leading-relaxed">
-                The event features keynote presentations, panel discussions, masterclasses, exhibition spaces, and
-                networking opportunities designed to showcase innovations and shape the future of Nigeria's creative
-                economy.
+                Experience electrifying keynotes, hands-on masterclasses, thought-provoking panels, curated exhibitions, 
+                and high-impact networking—all designed to catalyze partnerships, unlock funding, and propel Nigeria&apos;s 
+                creative industries onto the world stage.
               </p>
             </div>
 
@@ -57,12 +57,12 @@ export function OverviewSection() {
                 </div>
                 <div className="space-y-0.5 flex-1">
                   <div className="text-xs md:text-sm text-muted-foreground font-medium">Venue</div>
-                  <div className="font-semibold text-sm md:text-base">{ALL_VENUES.length} Venues Across Lagos</div>
+                  <div className="font-semibold text-sm md:text-base">National Theatre, Iganmu</div>
                   <Link
                     href="#venue"
                     className="text-xs md:text-sm text-muted-foreground hover:underline inline-flex items-center gap-1"
                   >
-                    View Event Details
+                    Four Districts, One Iconic Location
                     <ArrowRight className="w-3 h-3" />
                   </Link>
                 </div>

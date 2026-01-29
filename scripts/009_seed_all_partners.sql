@@ -33,13 +33,13 @@ INSERT INTO sponsors (name, logo_url, website_url, description, tier, category, 
   'Lagos State Tourism, Arts and Culture',
   '/images/lagos-20state-20tourism-2c-20arts-20and-20culture.png',
   'https://tourism.lagosstate.gov.ng',
-  'Promoting and developing Lagos as a premier tourism, arts, and cultural destination in Africa.',
+  'Promoting and developing Lagos as a premier tourism, arts, and cultural destination in Nigeria.',
   'ecosystem',
   'government',
   'State Ministry',
   3,
   false,
-  'The Lagos State Ministry of Tourism, Arts and Culture is responsible for the development and promotion of tourism, arts, and cultural heritage in Lagos State. The ministry works to position Lagos as a major cultural and tourism hub in Africa.'
+  'The Lagos State Ministry of Tourism, Arts and Culture is responsible for the development and promotion of tourism, arts, and cultural heritage in Lagos State. The ministry works to position Lagos as a major cultural and tourism hub in Nigeria.'
 );
 
 -- Financial Services Partners
@@ -72,16 +72,16 @@ INSERT INTO sponsors (name, logo_url, website_url, description, tier, category, 
   'Finesser Ltd is a pioneering organization dedicated to empowering Nigeria''s creative community through integrated support services. By bridging the gaps between creativity, technology, finance, and legal support, Finesser provides comprehensive solutions that enable creative professionals and businesses to thrive in the digital economy.'
 ),
 (
-  'Future Africa',
-  '/images/future-20africa.png',
-  'https://future.africa',
-  'The Fund for Africa''s Future - Investing in visionary founders building transformative companies across Africa.',
+  'Future Nigeria',
+  '/images/future-20Nigeria.png',
+  'https://future.Nigeria',
+  'The Fund for Nigeria''s Future - Investing in visionary founders building transformative companies across Nigeria.',
   'ecosystem',
   'corporate',
   'Venture Capital',
   6,
   true,
-  'Future Africa is a venture capital fund and community dedicated to supporting Africa''s most ambitious founders. With a focus on technology and innovation, Future Africa provides funding, mentorship, and strategic support to help African entrepreneurs build world-class companies that solve critical problems across the continent.'
+  'Future Nigeria is a venture capital fund and community dedicated to supporting Nigeria''s most ambitious founders. With a focus on technology and innovation, Future Nigeria provides funding, mentorship, and strategic support to help Nigerian entrepreneurs build world-class companies that solve critical problems across the continent.'
 ),
 (
   'Asolar Nigeria',
@@ -99,13 +99,13 @@ INSERT INTO sponsors (name, logo_url, website_url, description, tier, category, 
   'Wakanow',
   '/images/wakanow.png',
   'https://wakanow.com',
-  'Africa''s leading online travel company, making travel easy and accessible for everyone.',
+  'Nigeria''s leading online travel company, making travel easy and accessible for everyone.',
   'ecosystem',
   'corporate',
   'Travel/Tourism',
   8,
   false,
-  'Wakanow is Africa''s leading online travel agency, providing seamless booking experiences for flights, hotels, visa services, and holiday packages. With a mission to make travel easy and accessible, Wakanow has become the go-to platform for millions of travelers across Africa.'
+  'Wakanow is Nigeria''s leading online travel agency, providing seamless booking experiences for flights, hotels, visa services, and holiday packages. With a mission to make travel easy and accessible, Wakanow has become the go-to platform for millions of travelers across Nigeria.'
 ),
 (
   'emBlue',
@@ -123,13 +123,13 @@ INSERT INTO sponsors (name, logo_url, website_url, description, tier, category, 
   'The Plug',
   '/images/the-20plug.png',
   'https://theplug.ng',
-  'Connecting Africa''s creative talent with opportunities through events, networking, and community building.',
+  'Connecting Nigeria''s creative talent with opportunities through events, networking, and community building.',
   'ecosystem',
   'corporate',
   'Events/Media',
   10,
   false,
-  'The Plug is a dynamic platform connecting Africa''s creative professionals with opportunities, resources, and networks. Through events, content, and community initiatives, The Plug helps creatives showcase their work, collaborate, and grow their careers.'
+  'The Plug is a dynamic platform connecting Nigeria''s creative professionals with opportunities, resources, and networks. Through events, content, and community initiatives, The Plug helps creatives showcase their work, collaborate, and grow their careers.'
 ),
 (
   'Sodium Brand Solutions',
@@ -204,7 +204,7 @@ INSERT INTO sponsors (name, logo_url, website_url, description, tier, category, 
   'Aristokrat',
   '/images/aristokrat.png',
   'https://aristokrat.com',
-  'Leading music and entertainment company nurturing Africa''s most talented artists and shaping the sound of African music globally.',
+  'Leading music and entertainment company nurturing Nigeria''s most talented artists and shaping the sound of Nigerian music globally.',
   'ecosystem',
   'entertainment',
   'Music/Entertainment',

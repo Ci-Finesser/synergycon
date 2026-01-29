@@ -155,10 +155,10 @@ const Hero: React.FC = () => {
           {/* Tagline */}
           <div className="mb-6 md:mb-8 opacity-0 animate-[fadeIn_1s_ease-out_0.5s_forwards]">
             <p className="text-lg md:text-xl lg:text-2xl text-zinc-600 font-light leading-relaxed max-w-2xl">
-              Where <span className="font-semibold text-black">creativity</span>, <span className="font-semibold text-black">technology</span>, and <span className="font-semibold text-black">culture</span> converge.
+              Where <span className="font-semibold text-black">creativity</span>, <span className="font-semibold text-black">technology</span>, and <span className="font-semibold text-black">culture</span> collide to shape Nigeria&apos;s tomorrow.
             </p>
             <p className="mt-2 text-sm md:text-base text-zinc-500">
-              The Blueprint for Creative Growth.
+              One powerful day. Four creative districts. Infinite possibilities.
             </p>
           </div>
 
@@ -166,11 +166,11 @@ const Hero: React.FC = () => {
           <div className="flex flex-wrap justify-center gap-3 mb-8 md:mb-10 opacity-0 animate-[slideUp_1s_ease-out_0.6s_forwards]">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-zinc-200 shadow-sm text-xs md:text-sm font-medium text-zinc-700">
               <Calendar className="w-4 h-4 text-zinc-400" />
-              <span>March 2026</span>
+              <span>March 27, 2026</span>
             </div>
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-zinc-200 shadow-sm text-xs md:text-sm font-medium text-zinc-700">
               <MapPin className="w-4 h-4 text-zinc-400" />
-              <span>Lagos, Nigeria</span>
+              <span>National Theatre, Lagos</span>
             </div>
           </div>
 

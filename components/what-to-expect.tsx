@@ -5,14 +5,14 @@ const expectations = [
     icon: Lightbulb,
     title: "Keynote Presentations",
     description:
-      "Hear from industry leaders, policymakers, and visionaries shaping the future of Nigeria's Creative Economy.",
+      "Be inspired by trailblazers who've redefined industries—from Grammy-winning producers to billion-naira founders sharing the secrets behind Nigeria's creative renaissance.",
     iconBg: "bg-orange-500/10 group-hover:bg-orange-500/20",
     iconColor: "text-orange-500",
   },
   {
     icon: Users,
     title: "Panel Discussions",
-    description: "Engage in thought-provoking conversations on technology, policy, funding, and creative innovation.",
+    description: "Dive deep into debates shaping Nigeria's future—from AI in Nollywood to fashion sustainability and the gaming revolution transforming youth employment.",
     iconBg: "bg-blue-500/10 group-hover:bg-blue-500/20",
     iconColor: "text-blue-500",
   },
@@ -20,14 +20,14 @@ const expectations = [
     icon: Rocket,
     title: "Masterclasses",
     description:
-      "Participate in hands-on workshops covering practical skills from business strategy to technical implementation.",
+      "Roll up your sleeves in intimate sessions—learn music production from chart-toppers, master digital art techniques, or build your first game prototype with industry mentors.",
     iconBg: "bg-green-500/10 group-hover:bg-green-500/20",
     iconColor: "text-green-500",
   },
   {
     icon: Network,
-    title: "Networking Opportunities",
-    description: "Connect with fellow creatives, investors, partners, and mentors in structured and informal settings.",
+    title: "Networking Lounges",
+    description: "Forge career-defining connections in curated spaces—from casual coffee chats to structured speed-networking sessions with investors actively seeking the next big thing.",
     iconBg: "bg-purple-500/10 group-hover:bg-purple-500/20",
     iconColor: "text-purple-500",
   },
@@ -87,9 +87,9 @@ export function WhatToExpect() {
     <section className="py-16 md:py-20 px-4 md:px-6 bg-muted/30">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-6 md:mb-8 lg:mb-10">
-          <h2 className="text-xl md:text-2xl lg:text-3xl font-bold mb-2.5 md:mb-3">What to Expect</h2>
+          <h2 className="text-xl md:text-2xl lg:text-3xl font-bold mb-2.5 md:mb-3">One Day. Limitless Experiences.</h2>
           <p className="text-xs md:text-sm text-muted-foreground max-w-3xl mx-auto">
-            SynergyCon 2.0 offers a comprehensive experience designed to inspire, educate, and connect
+            SynergyCon 2.0 packs an entire festival&apos;s worth of transformative experiences into one unforgettable day at Nigeria&apos;s most iconic cultural landmark.
           </p>
         </div>
 

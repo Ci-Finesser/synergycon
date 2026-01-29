@@ -7,7 +7,7 @@ export function PartnersNotice() {
         <Info className="w-5 h-5 text-blue-600" />
       </div>
       <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">
-        Stay tuned. Full list of organizations supporting SynergyCon 2.0 will be available closer to the event.
+        <span className="font-semibold text-foreground">Partnership opportunities still available.</span> Join leading brands supporting Nigeria&apos;s creative economy on March 27 at National Theatre.
       </p>
     </div>
   )

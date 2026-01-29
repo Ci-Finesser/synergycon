@@ -160,15 +160,15 @@ VALUES (
     true
 );
 
--- 14. Future Africa - Ecosystem Partner
+-- 14. Future Nigeria - Ecosystem Partner
 INSERT INTO sponsors (name, logo_url, website_url, category, sub_category, bio, featured)
 VALUES (
-    'Future Africa',
-    '/images/future-africa.png',
-    'https://future.africa',
+    'Future Nigeria',
+    '/images/future-Nigeria.png',
+    'https://future.Nigeria',
     'Partners',
     'Ecosystem',
-    'The Fund for Africa''s Future - Investing in African innovation and entrepreneurs',
+    'The Fund for Nigeria''s Future - Investing in Nigerian innovation and entrepreneurs',
     true
 );
 
@@ -228,6 +228,6 @@ VALUES (
     'https://wakanow.com',
     'Partners',
     'Ecosystem',
-    'Africa''s leading online travel company - Making travel accessible and affordable',
+    'Nigeria''s leading online travel company - Making travel accessible and affordable',
     true
 );

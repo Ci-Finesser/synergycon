@@ -102,12 +102,12 @@ export function CtaSection() {
           </div>
 
           <h2 className="text-xl md:text-3xl lg:text-4xl xl:text-5xl font-bold tracking-tight mb-4 md:mb-5 text-balance">
-            <span className="text-white">Don't Miss Out on {EVENT_NAME}</span>
+            <span className="text-white">One Day That Could Change Everything</span>
           </h2>
 
           <p className="text-xs md:text-base text-gray-400 mb-5 md:mb-8 text-pretty leading-relaxed max-w-2xl mx-auto">
-            Join {EVENT_STATS.maximumAttendeeCapacity.toLocaleString()}+ creatives, innovators, investors, and industry leaders for a 
-            once-in-a-year experience at {VENUES.nationalTheatre.name} and pop-up locations across Lagos.
+            On March 27, 2026, the brightest minds in Nigeria&apos;s creative economy converge at National Theatre. 
+            {EVENT_STATS.maximumAttendeeCapacity.toLocaleString()}+ innovators. Four immersive districts. Countless opportunities to collaborate, learn, and launch what&apos;s next.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 max-w-6xl mx-auto mb-6 md:mb-8">
@@ -160,7 +160,7 @@ export function CtaSection() {
             {/* VVIP - Green */}
             <div className="bg-white/5 backdrop-blur-sm rounded-xl md:rounded-2xl p-4 md:p-5 border border-green-500/30 hover:bg-green-500/5 transition-all hover:scale-[1.02] flex flex-col relative">
               <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-2.5 py-0.5 md:px-3 md:py-1 bg-green-500 text-white text-[10px] md:text-xs font-bold rounded-full">
-                FULL FESTIVAL
+                ALL-ACCESS PASS
               </div>
               <div className="mb-3 md:mb-4">
                 <h3 className="text-base md:text-xl font-bold text-green-400 mb-1 md:mb-2">{TICKET_TYPES.vvip.name}</h3>

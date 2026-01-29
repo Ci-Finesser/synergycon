@@ -13,7 +13,7 @@ import {
 
 export const metadata: Metadata = generatePageMetadata({
   title: "About SynergyCon",
-  description: "Learn about SynergyCon, Nigeria's premier Creative Economy conference. Discover our mission to connect creatives, innovators, and industry leaders across Africa.",
+  description: "Learn about SynergyCon, Nigeria's premier Creative Economy conference. Discover our mission to connect creatives, innovators, and industry leaders across Nigeria.",
   path: "/about",
 })
 
@@ -62,7 +62,7 @@ export default function AboutPage() {
             </h1>
             <p className="text-sm md:text-base text-muted-foreground text-pretty leading-relaxed max-w-2xl mx-auto">
               Creating a new nexus for Nigerian innovation where creativity meets opportunity, connecting visionaries,
-              builders, and investors to shape the future of Africa's Creative Economy.
+              builders, and investors to shape the future of Nigeria's Creative Economy.
             </p>
           </div>
         </div>
@@ -77,7 +77,7 @@ export default function AboutPage() {
               </div>
               <h2 className="text-lg md:text-xl font-bold mb-3">Our Vision</h2>
               <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">
-                To position Nigeria as Africa's leading hub for creative innovation, where talent, technology, and
+                To position Nigeria as Nigeria's leading hub for creative innovation, where talent, technology, and
                 opportunity converge to drive economic growth and cultural impact.
               </p>
             </div>

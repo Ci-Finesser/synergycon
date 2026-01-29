@@ -104,7 +104,7 @@ export function MediaPartnersSection() {
               Media & Strategic Partners
             </h2>
             <p className="text-sm md:text-base text-muted-foreground text-pretty leading-relaxed">
-              Join us in building Africa's largest Creative Economy movement with our incredible media and government partners.
+              Join us in building Nigeria's largest Creative Economy movement with our incredible media and government partners.
             </p>
           </div>
         </div>

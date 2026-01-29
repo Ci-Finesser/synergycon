@@ -3,47 +3,47 @@
 import Link from "next/link"
 import { Calendar, MapPin, Clock, Users, ArrowRight } from "lucide-react"
 import { ScheduleNotice } from "./schedule-notice"
-import { DISTRICTS } from "@/lib/constants"
+import { EVENT_DATES, DISTRICTS, VENUES } from "@/lib/constants"
 
 const scheduleHighlights = [
   {
-    day: 1,
-    date: "TBA",
-    time: "9:00 AM - 5:00 PM",
+    track: 1,
+    date: EVENT_DATES.displayRange,
+    time: "9:00 AM - 12:00 PM",
     title: DISTRICTS.artsSculptureDesign.name,
-    venue: DISTRICTS.artsSculptureDesign.venue.shortName,
-    location: DISTRICTS.artsSculptureDesign.venue.area,
-    sessions: 12,
+    venue: VENUES.nationalTheatre.shortName,
+    location: "Main Gallery Wing",
+    sessions: 6,
     color: "accent-red",
   },
   {
-    day: 2,
-    date: "TBA",
-    time: "9:00 AM - 5:00 PM",
+    track: 2,
+    date: EVENT_DATES.displayRange,
+    time: "9:00 AM - 12:00 PM",
     title: DISTRICTS.musicFashionFilmPhotography.name,
-    venue: DISTRICTS.musicFashionFilmPhotography.venue.shortName,
-    location: DISTRICTS.musicFashionFilmPhotography.venue.area,
-    sessions: 15,
+    venue: VENUES.nationalTheatre.shortName,
+    location: "Fashion & Film Pavilion",
+    sessions: 8,
     color: "accent-green",
   },
   {
-    day: 3,
-    date: "TBA",
-    time: "9:00 AM - 5:00 PM",
+    track: 3,
+    date: EVENT_DATES.displayRange,
+    time: "1:00 PM - 5:00 PM",
     title: DISTRICTS.techGamingMusic.name,
-    venue: DISTRICTS.techGamingMusic.venue.shortName,
-    location: DISTRICTS.techGamingMusic.venue.area,
-    sessions: 14,
+    venue: VENUES.nationalTheatre.shortName,
+    location: "Innovation Hub",
+    sessions: 7,
     color: "accent-blue",
   },
   {
-    day: 4,
-    date: "TBA",
-    time: "9:00 AM - 6:00 PM",
+    track: 4,
+    date: EVENT_DATES.displayRange,
+    time: "5:00 PM - 8:00 PM",
     title: DISTRICTS.mainConference.shortName,
-    venue: DISTRICTS.mainConference.venue.shortName,
-    location: DISTRICTS.mainConference.venue.area,
-    sessions: 20,
+    venue: VENUES.nationalTheatre.shortName,
+    location: "Main Stage Arena",
+    sessions: 5,
     color: "accent-purple",
   },
 ]
@@ -55,10 +55,10 @@ export function ScheduleSection() {
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 md:gap-5 mb-8 md:mb-10 lg:mb-12">
           <div className="max-w-3xl">
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight mb-3 md:mb-4 text-balance">
-              Event Schedule
+              One Day, Four Immersive Tracks
             </h2>
             <p className="text-sm md:text-base text-muted-foreground leading-relaxed text-pretty">
-              Multi-day inspiring talks, hands-on workshops, and networking across Nigeria's four creative districts.
+              Experience Nigeria&apos;s creative industries in parallel sessions—from visual arts to gaming, fashion to fintech—all under the iconic dome of National Theatre.
             </p>
           </div>
           <a
@@ -78,7 +78,7 @@ export function ScheduleSection() {
                 href="/schedule"
                 className="group bg-white border-[1.5px] border-foreground rounded-2xl p-4 hover:shadow-xl transition-all duration-300 flex flex-col min-w-[85vw] max-w-[85vw] flex-shrink-0"
               >
-                {/* Day Badge */}
+                {/* Track Badge */}
                 <div
                   className={`inline-flex self-start px-3 py-1.5 rounded-lg text-xs font-bold mb-3 ${
                     item.color === "accent-red"
@@ -90,7 +90,7 @@ export function ScheduleSection() {
                           : "bg-accent-blue/10 text-accent-blue"
                   }`}
                 >
-                  District {item.day}
+                  Track {item.track}
                 </div>
 
                 {/* Title */}
@@ -131,7 +131,7 @@ export function ScheduleSection() {
               href="/schedule"
               className="group bg-background border-[1.5px] border-foreground rounded-2xl p-5 md:p-6 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col"
             >
-              {/* Day Badge */}
+              {/* Track Badge */}
               <div
                 className={`inline-flex self-start px-3 py-1.5 rounded-lg text-xs font-bold mb-4 ${
                   item.color === "accent-red"
@@ -143,7 +143,7 @@ export function ScheduleSection() {
                         : "bg-accent-blue/10 text-accent-blue"
                 }`}
               >
-                District {item.day}
+                Track {item.track}
               </div>
 
               {/* Title */}

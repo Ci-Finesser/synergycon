@@ -142,7 +142,7 @@ export const siteConfig = {
     topics: [
       'Creative Economy Development',
       'Digital Transformation',
-      'African Innovation',
+      'Nigerian Innovation',
       'Youth Empowerment',
       'Cultural Preservation',
       'Tech Entrepreneurship',
@@ -156,8 +156,8 @@ export const siteConfig = {
     name: 'SynergyCon',
     legalName: 'SynergyCon Nigeria Limited',
     foundingDate: '2024',
-    description: 'SynergyCon is Nigeria\'s leading creative economy conference platform, dedicated to fostering innovation, collaboration, and growth in Africa\'s creative industries.',
-    areaServed: ['Nigeria', 'West Africa', 'Africa'],
+    description: 'SynergyCon is Nigeria\'s leading creative economy conference platform, dedicated to fostering innovation, collaboration, and growth in Nigeria\'s creative industries.',
+    areaServed: ['Nigeria', 'West Nigeria', 'Nigeria'],
     award: [
       'Best Tech Conference Nigeria 2025',
     ],
@@ -189,7 +189,7 @@ export const siteConfig = {
     },
     {
       question: 'Who should attend SynergyCon?',
-      answer: 'SynergyCon is designed for creative professionals, tech innovators, entrepreneurs, content creators, policymakers, investors, and anyone passionate about Africa\'s creative economy.',
+      answer: 'SynergyCon is designed for creative professionals, tech innovators, entrepreneurs, content creators, policymakers, investors, and anyone passionate about Nigeria\'s creative economy.',
     },
     {
       question: `Can I apply to speak at SynergyCon ${EVENT_YEAR}?`,

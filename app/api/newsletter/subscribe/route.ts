@@ -106,7 +106,7 @@ export async function POST(req: NextRequest) {
                 </tr>
                 <tr>
                   <td style="padding: 30px; background-color: #f9fafb; border-top: 1px solid #e5e7eb; text-align: center;">
-                    <p style="margin: 0 0 10px 0; color: #6b7280; font-size: 14px;">${template?.footer_text || "Powered by Finesser - Building Africa's Creative Economy"}</p>
+                    <p style="margin: 0 0 10px 0; color: #6b7280; font-size: 14px;">${template?.footer_text || "Powered by Finesser - Building Nigeria's Creative Economy"}</p>
                   </td>
                 </tr>
               </table>

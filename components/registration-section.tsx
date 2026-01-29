@@ -100,11 +100,11 @@ export function RegistrationSection() {
         {/* Header */}
         <div className="text-center mb-12 md:mb-16">
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight mb-6 text-balance">
-            Secure Your Spot
+            Claim Your Place in History
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground text-pretty">
-            Join Nigeria's brightest minds at SynergyCon 2.0. Fill out the form below and we'll confirm your attendance
-            via email.
+            Join 5,000+ visionaries, creators, and industry leaders on March 27, 2026 at National Theatre, Lagos. 
+            Spaces are limited—secure yours now.
           </p>
         </div>
 

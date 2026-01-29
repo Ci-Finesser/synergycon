@@ -100,10 +100,10 @@ export function SpeakersSection() {
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 md:gap-6 mb-6 md:mb-8 lg:mb-10">
           <div className="max-w-2xl">
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight mb-3 md:mb-4 text-balance">
-              Meet Our Speakers
+              Voices Shaping the Future
             </h2>
             <p className="text-sm md:text-base text-muted-foreground text-pretty leading-relaxed">
-              Learn from visionaries who are shaping Nigeria's creative and digital economy.
+              From Grammy-winning producers to tech unicorn founders, meet the trailblazers who&apos;ll share battle-tested insights on March 27.
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-3">

@@ -67,9 +67,9 @@ export function NewsletterSection() {
     <section className="py-20 md:py-32 px-6">
       <div className="max-w-4xl mx-auto">
         <div className="bg-foreground text-background rounded-3xl p-12 md:p-16 text-center">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 text-balance">Stay Updated</h2>
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 text-balance">Don&apos;t Miss a Beat</h2>
           <p className="text-lg md:text-xl mb-10 text-background/80 text-pretty">
-            Get the latest news about SynergyCon 2.0, speaker announcements, and exclusive updates.
+            Be the first to know about speaker reveals, session drops, and exclusive access opportunities for March 27.
           </p>
 
           {isSuccess ? (

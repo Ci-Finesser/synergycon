@@ -1,24 +1,30 @@
-import { Users, Network, Calendar } from "lucide-react"
+import { Users, Network, MapPin, Zap } from "lucide-react"
 
 export function ImpactStatsSection() {
   const stats = [
     {
       value: "5,000+",
-      label: "Youth Participants",
+      label: "Expected Attendees",
       icon: Users,
       color: "accent-red",
     },
     {
-      value: "100,000+",
-      label: "Creator Waitlist",
-      icon: Network,
+      value: "100+",
+      label: "Sessions & Workshops",
+      icon: Zap,
       color: "accent-green",
     },
     {
       value: "4",
-      label: "Creative Districts",
-      icon: Calendar,
+      label: "Immersive Districts",
+      icon: Network,
       color: "accent-blue",
+    },
+    {
+      value: "1",
+      label: "Iconic Venue",
+      icon: MapPin,
+      color: "accent-purple",
     },
   ]
 
@@ -28,16 +34,16 @@ export function ImpactStatsSection() {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-8 md:mb-10 lg:mb-12">
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight mb-3 md:mb-4 text-balance text-white">
-            The Movement Grows
+            One Day to Shape the Future
           </h2>
           <p className="text-sm md:text-base text-white/70 text-pretty leading-relaxed">
-            Building on SynergyCon 1.0's success, we're creating a self-sustaining ecosystem of innovation and
-            enterprise for Nigeria's vibrant youth, defining the nation's future.
+            March 27, 2026 at National Theatre—where Nigeria&apos;s brightest creative minds converge to forge partnerships, 
+            launch ventures, and define the next decade of Nigeria&apos;s creative economy.
           </p>
         </div>
 
         {/* Stats Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 lg:gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 lg:gap-6">
           {stats.map((stat, index) => {
             const Icon = stat.icon
             return (

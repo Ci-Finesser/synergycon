@@ -57,10 +57,9 @@ export function TicketsSection() {
       <div className="container mx-auto px-4 md:px-6 max-w-7xl">
         {/* Section Header */}
         <div className="text-center mb-12 md:mb-16">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">Don't Miss Out on {EVENT_NAME}</h2>
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">Invest in One Transformative Day</h2>
           <p className="text-sm md:text-base lg:text-lg text-muted-foreground max-w-3xl mx-auto">
-            Secure your spot at Nigeria's most anticipated creative and tech festival. Choose the pass that's right for
-            you.
+            March 27 at National Theatre—four immersive tracks, world-class speakers, and connections that could change your career. Choose the access level that fits your ambitions.
           </p>
         </div>
 

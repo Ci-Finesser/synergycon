@@ -2,50 +2,48 @@
 
 import { useState } from "react"
 import { ChevronDown } from "lucide-react"
-import { EVENT_NAME, EVENT_DATES, DISTRICTS, VENUE_SHORT_NAMES } from "@/lib/constants"
-
-const venueList = VENUE_SHORT_NAMES.join(", ")
+import { EVENT_NAME, EVENT_DATES, VENUES } from "@/lib/constants"
 
 const faqs = [
   {
     question: `What is ${EVENT_NAME}?`,
     answer:
-      `${EVENT_NAME} is Nigeria's flagship annual conference bringing together creative professionals, industry leaders, policymakers, and investors to shape the future of Nigeria's Creative Economy.`,
+      `${EVENT_NAME} is Nigeria's flagship creative economy summit—a single, action-packed day bringing together creators, industry titans, policymakers, and investors to shape the future of Nigeria's creative industries.`,
   },
   {
     question: "When and where is the event taking place?",
     answer:
-      `${EVENT_NAME} will take place from ${EVENT_DATES.displayRange}, across four districts in Lagos: ${DISTRICTS.artsSculptureDesign.shortName} at ${DISTRICTS.artsSculptureDesign.venue.shortName}, ${DISTRICTS.musicFashionFilmPhotography.shortName} at ${DISTRICTS.musicFashionFilmPhotography.venue.shortName}, ${DISTRICTS.techGamingMusic.shortName} at ${DISTRICTS.techGamingMusic.venue.shortName}, and the ${DISTRICTS.mainConference.shortName} at ${DISTRICTS.mainConference.venue.shortName}.`,
+      `${EVENT_NAME} takes place on ${EVENT_DATES.displayRange} at ${VENUES.nationalTheatre.name} in Lagos. All four creative districts (Arts & Design, Fashion & Film, Tech & Gaming, and the Main Conference) run simultaneously in different zones within the venue.`,
   },
   {
     question: "Who should attend SynergyCon?",
     answer:
-      "The conference is designed for creative professionals, entrepreneurs, industry leaders, policymakers, investors, students, and anyone interested in Nigeria's Creative Economy.",
+      "Whether you're a seasoned creative professional, ambitious entrepreneur, policymaker shaping regulations, investor seeking the next big thing, or a student hungry to learn—SynergyCon is designed for anyone passionate about Nigeria's creative economy.",
   },
   {
     question: "How do I register for the event?",
     answer:
-      'You can register by clicking the "Register Now" or "Secure Your Spot" button anywhere on the website. Fill out the registration form with your details to secure your spot.',
+      'Click the "Register Now" or "Secure Your Spot" button anywhere on the website. Complete the form with your details and select your preferred ticket tier to confirm your attendance.',
   },
   {
-    question: "Is there a registration fee?",
+    question: "What ticket options are available?",
     answer:
-      "Yes, we offer three ticket options: Day Pass (₦5,000) for single day access, Full 3-Day Festival Pass (₦12,000) for complete access to all three days and locations, and VIP/Backstage Access (₦50,000) for an exclusive premium experience with special perks.",
+      "We offer multiple access tiers: VIP Day Pass (₦5,000) for single-district access, VIP+ (₦10,000) for enhanced access with networking lounges, VVIP (₦100,000) for all-access including backstage and deal rooms, and Priority Pass (₦250,000) for the ultimate premium experience.",
   },
   {
     question: "Can I become a speaker at SynergyCon?",
     answer:
-      'Yes! We welcome speaker applications. Click on "Become a Speaker" in the footer or visit our speaker application page to submit your proposal.',
+      'Absolutely! We welcome proposals from industry experts and rising voices alike. Click "Apply to Speak" in our navigation or footer to submit your session idea.',
   },
   {
     question: "How can my organization partner with SynergyCon?",
     answer:
-      'We offer various partnership tiers including Title, Platinum, Gold, and Silver sponsorships. Visit our Partners page or click "Partner with Us" to learn more about partnership opportunities.',
+      'We offer tailored partnership packages from Title Sponsor to Ecosystem Partner. Visit our Partners page or click "Partner with Us" to explore opportunities and connect with our team.',
   },
   {
-    question: "Will there be networking opportunities?",
+    question: "What networking opportunities are available?",
     answer:
-      "SynergyCon features dedicated networking sessions, exhibition spaces, and informal meetup opportunities throughout the day to connect with fellow attendees, speakers, and partners.",
+      "Beyond the sessions, SynergyCon features dedicated networking lounges, curated deal rooms for investor meetings, exhibition spaces, and informal meetup zones throughout National Theatre—plus our signature after-party.",
   },
 ]
 

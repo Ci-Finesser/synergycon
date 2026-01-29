@@ -101,7 +101,7 @@ const scheduleData = [
     district: DISTRICTS.techGamingMusic.name,
     date: EVENT_DATES.datesAnnounced ? "Day 3" : "Day 3 (Date TBA)",
     time: "10:00 AM - 11:30 AM",
-    title: "Tech Innovation: Building Solutions for Africa",
+    title: "Tech Innovation: Building Solutions for Nigeria",
     description: "How Nigerian tech entrepreneurs are solving local and global challenges.",
     sessionType: "Keynote",
     location: `${VENUES.lionWonderArena.shortName} - Tech Arena`,

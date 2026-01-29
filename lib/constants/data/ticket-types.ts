@@ -181,13 +181,13 @@ export const TICKET_TYPES_DATA = [
     "id": "adc472ff-3592-4efb-8106-4365cdffc804",
     "ticket_id": "vvip",
     "name": "VVIP",
-    "description": "Full festival access across all event days",
+    "description": "Single-day premium festival access",
     "price": 100000,
     "benefits": [
-      "Full festival access",
+      "Premium festival access",
       "All keynotes & panels",
       "VIP lounge access",
-      "All meals included",
+      "Lunch included",
       "Official swag bag",
       "Priority registration"
     ],
@@ -195,7 +195,7 @@ export const TICKET_TYPES_DATA = [
     "sold_quantity": 0,
     "is_active": true,
     "category": "vvip",
-    "duration": "full-event",
+    "duration": "day",
     "display_order": 3,
     "valid_from": null,
     "valid_until": null,
@@ -208,7 +208,7 @@ export const TICKET_TYPES_DATA = [
     "early_bird_until": null,
     "group_discount_threshold": null,
     "group_discount_percent": null,
-    "access_type": "full"
+    "access_type": "all-access"
   },
   {
     "id": "3417b0a6-29b7-400c-9dbb-562023ea0902",
@@ -244,10 +244,10 @@ export const TICKET_TYPES_DATA = [
     "id": "653ffc92-188f-4615-974e-3dd1c2c18dd2",
     "ticket_id": "priority-pass",
     "name": "Priority Pass",
-    "description": "Ultimate premium experience with exclusive access",
+    "description": "Single-day ultimate premium experience with exclusive access",
     "price": 150000,
     "benefits": [
-      "All VVIP benefits",
+      "All VVIP single-day benefits",
       "Front-row reserved seating",
       "Exclusive speaker dinner invite",
       "Meet & greet with speakers",
@@ -259,7 +259,7 @@ export const TICKET_TYPES_DATA = [
     "sold_quantity": 0,
     "is_active": true,
     "category": "priority",
-    "duration": "full-event",
+    "duration": "day",
     "display_order": 4,
     "valid_from": null,
     "valid_until": null,
@@ -272,7 +272,7 @@ export const TICKET_TYPES_DATA = [
     "early_bird_until": null,
     "group_discount_threshold": null,
     "group_discount_percent": null,
-    "access_type": "full"
+    "access_type": "all-access"
   }
 ] as const
 

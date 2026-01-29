@@ -141,7 +141,7 @@ export default function PartnersPage() {
             </h1>
             <p className="text-sm md:text-base text-muted-foreground text-pretty leading-relaxed">
               These visionary organizations share our commitment to building a thriving Creative Economy in Nigeria and
-              across Africa.
+              across Nigeria.
             </p>
           </div>
 

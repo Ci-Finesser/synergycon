@@ -137,7 +137,7 @@ export default function AdminSchedulePage() {
           <Label className="text-sm">Date *</Label>
           <Input
             required
-            placeholder="March 4, 2026"
+            placeholder="March 27, 2026"
             value={formData.date}
             onChange={(e) => setFormData({ ...formData, date: e.target.value })}
             className="rounded-lg h-9 text-sm"
@@ -211,7 +211,7 @@ export default function AdminSchedulePage() {
           <Label className="text-sm">Venue *</Label>
           <Input
             required
-            placeholder="Federal Palace Hotel"
+            placeholder="National Theatre"
             value={formData.venue}
             onChange={(e) => setFormData({ ...formData, venue: e.target.value })}
             className="rounded-lg h-9 text-sm"
@@ -221,7 +221,7 @@ export default function AdminSchedulePage() {
           <Label className="text-sm">Location *</Label>
           <Input
             required
-            placeholder="Federal Palace Hotel - Main Hall"
+            placeholder="National Theatre - Main Hall"
             value={formData.location}
             onChange={(e) => setFormData({ ...formData, location: e.target.value })}
             className="rounded-lg h-9 text-sm"
@@ -311,7 +311,7 @@ export default function AdminSchedulePage() {
                     <Label className="text-sm">Date *</Label>
                     <Input
                       required
-                      placeholder="March 4, 2026"
+                      placeholder="March 27, 2026"
                       value={formData.date}
                       onChange={(e) => setFormData({ ...formData, date: e.target.value })}
                       className="rounded-lg h-9 text-sm"
@@ -385,7 +385,7 @@ export default function AdminSchedulePage() {
                     <Label className="text-sm">Venue *</Label>
                     <Input
                       required
-                      placeholder="Federal Palace Hotel"
+                      placeholder="National Theatre"
                       value={formData.venue}
                       onChange={(e) => setFormData({ ...formData, venue: e.target.value })}
                       className="rounded-lg h-9 text-sm"
@@ -395,7 +395,7 @@ export default function AdminSchedulePage() {
                     <Label className="text-sm">Location *</Label>
                     <Input
                       required
-                      placeholder="Federal Palace Hotel - Main Hall"
+                      placeholder="National Theatre - Main Hall"
                       value={formData.location}
                       onChange={(e) => setFormData({ ...formData, location: e.target.value })}
                       className="rounded-lg h-9 text-sm"

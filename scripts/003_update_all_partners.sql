@@ -31,7 +31,7 @@ VALUES
 
 -- AFE BABALOLA & CO - Ecosystem Partner
 ('Afe Babalola & Co', '/images/afe-babalola-co.png', 'ecosystem', 'Partners', 'Ecosystem',
-'Afe Babalola & Co. is a leading full-service international law firm with nearly six decades of excellence in delivering innovative, world-class legal representation across Nigeria, Africa, and global markets. Renowned for landmark victories that have shaped the nation''s legal landscape, the firm combines deep expertise with a tradition of professionalism and exceptional client service. With the highest number of Senior Advocates of Nigeria (SANs) in any Nigerian law firm and a team of distinguished arbitrators, litigators, and commercial lawyers, Afe Babalola & Co. provides unmatched counsel in complex transactions, high-stakes disputes, and multi-sector advisory.',
+'Afe Babalola & Co. is a leading full-service international law firm with nearly six decades of excellence in delivering innovative, world-class legal representation across Nigeria, Nigeria, and global markets. Renowned for landmark victories that have shaped the nation''s legal landscape, the firm combines deep expertise with a tradition of professionalism and exceptional client service. With the highest number of Senior Advocates of Nigeria (SANs) in any Nigerian law firm and a team of distinguished arbitrators, litigators, and commercial lawyers, Afe Babalola & Co. provides unmatched counsel in complex transactions, high-stakes disputes, and multi-sector advisory.',
 'https://afebabalola.com/', true),
 
 -- AJIKE PEOPLE CENTRE - Ecosystem Partner
@@ -41,7 +41,7 @@ VALUES
 
 -- ARISTOKRAT - Ecosystem Partner
 ('Aristokrat', '/images/aristokrat.png', 'ecosystem', 'Partners', 'Ecosystem',
-'Aristokrat Records is a pioneering African entertainment company known for discovering, developing, and launching some of the continent''s most influential music talents. Founded in Nigeria, the label has built a reputation for shaping the modern Afrobeats sound through its artist-first approach, innovative production culture, and commitment to global music excellence.',
+'Aristokrat Records is a pioneering Nigerian entertainment company known for discovering, developing, and launching some of the continent''s most influential music talents. Founded in Nigeria, the label has built a reputation for shaping the modern Afrobeats sound through its artist-first approach, innovative production culture, and commitment to global music excellence.',
 'http://aristokratrecords.com/', true),
 
 -- ASOLAR - Ecosystem Partner
@@ -56,7 +56,7 @@ VALUES
 
 -- EMBLUE - Ecosystem Partner
 ('Emblue', '/images/emblue.png', 'ecosystem', 'Partners', 'Ecosystem',
-'Emblue Africa is a premier media and technology hub shaping the future of connectivity across Nigeria and the African continent. Positioned at the intersection of strategy, technology, and media, the company delivers innovative branding, marketing, and digital solutions that help brands build meaningful consumer connections and penetrate global markets. Trusted by leading brands and agencies, Emblue specializes in content creation, go-to-market strategy, technology-driven marketing, and business intelligence.',
+'Emblue Nigeria is a premier media and technology hub shaping the future of connectivity across Nigeria and the Nigerian continent. Positioned at the intersection of strategy, technology, and media, the company delivers innovative branding, marketing, and digital solutions that help brands build meaningful consumer connections and penetrate global markets. Trusted by leading brands and agencies, Emblue specializes in content creation, go-to-market strategy, technology-driven marketing, and business intelligence.',
 'https://emblue.com.ng/', true),
 
 -- FINESSER LTD - Principal Partner
@@ -69,10 +69,10 @@ VALUES
 'Finesser is a Nigerian innovation company transforming the nation''s creative and technological landscape through cutting-edge digital solutions, talent development, and financial empowerment. Founded in 2021, the company bridges the gap between creativity, technology, finance, and legal support. Equipping creatives, entrepreneurs, and small businesses with the tools they need to grow, protect, and scale their work.',
 'https://www.finesser.co/', true),
 
--- FUTURE AFRICA - Ecosystem Partner
-('Future Africa', '/images/future-africa.png', 'ecosystem', 'Partners', 'Ecosystem',
-'Future Africa is an investment firm backing visionary founders building solutions to Africa''s biggest challenges. With a strong track record of funding and scaling high-impact technology companies, the firm provides capital, expertise, and a global community to help entrepreneurs create transformative, globally competitive businesses across the continent.',
-'https://www.future.africa/', true),
+-- FUTURE Nigeria - Ecosystem Partner
+('Future Nigeria', '/images/future-Nigeria.png', 'ecosystem', 'Partners', 'Ecosystem',
+'Future Nigeria is an investment firm backing visionary founders building solutions to Nigeria''s biggest challenges. With a strong track record of funding and scaling high-impact technology companies, the firm provides capital, expertise, and a global community to help entrepreneurs create transformative, globally competitive businesses across the continent.',
+'https://www.future.Nigeria/', true),
 
 -- NELSON JACK SOLUTIONS - Ecosystem Partner
 ('Nelson Jack Solutions', '/images/nelson-jack-solutions.png', 'ecosystem', 'Partners', 'Ecosystem',
@@ -86,15 +86,15 @@ VALUES
 
 -- SODIUM BRAND SOLUTIONS - Ecosystem Partner
 ('Sodium Brand Solutions', '/images/sodium-brand-solutions.png', 'ecosystem', 'Partners', 'Ecosystem',
-'Sodium Brand Solutions is a leading integrated marketing communications agency transforming ideas into high-performance brand experiences across Africa and global markets. For more than 16 years, the Lagos-based firm has delivered strategic, creative, and insight-driven solutions that help brands stand out, stay relevant, and achieve measurable growth. With expertise spanning brand strategy, experiential marketing, product launches, media activation, consumer insight, and retail visibility, Sodium creates memorable campaigns that connect emotionally, visually, and intellectually.',
+'Sodium Brand Solutions is a leading integrated marketing communications agency transforming ideas into high-performance brand experiences across Nigeria and global markets. For more than 16 years, the Lagos-based firm has delivered strategic, creative, and insight-driven solutions that help brands stand out, stay relevant, and achieve measurable growth. With expertise spanning brand strategy, experiential marketing, product launches, media activation, consumer insight, and retail visibility, Sodium creates memorable campaigns that connect emotionally, visually, and intellectually.',
 'https://sodiumng.com/', true),
 
 -- THE PLUG - Ecosystem Partner
 ('The Plug', '/images/the-plug.png', 'ecosystem', 'Partners', 'Ecosystem',
-'The Plug Global Agency is a leading entertainment company expanding the possibilities of music, sports, and culture across borders. Based in Lagos, the firm operates as a full-service music distribution, licensing, and publishing powerhouse, managing some of Africa''s biggest and most influential talents. With a growing team and a strong industry presence, The Plug curates world-class creative experiences and builds pathways that elevate African voices from Nigeria to the global stage.',
+'The Plug Global Agency is a leading entertainment company expanding the possibilities of music, sports, and culture across borders. Based in Lagos, the firm operates as a full-service music distribution, licensing, and publishing powerhouse, managing some of Nigeria''s biggest and most influential talents. With a growing team and a strong industry presence, The Plug curates world-class creative experiences and builds pathways that elevate Nigerian voices from Nigeria to the global stage.',
 'https://www.plugglobal.com/', true),
 
 -- WAKANOW - Ecosystem Partner
 ('Wakanow', '/images/wakanow.png', 'ecosystem', 'Partners', 'Ecosystem',
-'Wakanow is Africa''s premier online travel agency, providing seamless access to the best deals on flights, hotels, visa assistance, holiday packages, and travel services. Founded in 2008 and headquartered in Lagos, the company has grown into a leading travel solutions provider with 32 physical travel centers and international offices across the UK, UAE, and multiple African countries. With a mission to make travel affordable and stress-free, Wakanow offers competitive pricing, transparent booking, flexible payment plans like "Pay Small Small," and 24/7 customer support.',
+'Wakanow is Nigeria''s premier online travel agency, providing seamless access to the best deals on flights, hotels, visa assistance, holiday packages, and travel services. Founded in 2008 and headquartered in Lagos, the company has grown into a leading travel solutions provider with 32 physical travel centers and international offices across the UK, UAE, and multiple Nigerian countries. With a mission to make travel affordable and stress-free, Wakanow offers competitive pricing, transparent booking, flexible payment plans like "Pay Small Small," and 24/7 customer support.',
 'https://www.wakanow.com/', true);
