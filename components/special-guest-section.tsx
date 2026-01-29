@@ -227,7 +227,7 @@ function GuestCard({
   return (
     <div 
       onClick={onClick}
-      className="group cursor-pointer bg-white rounded-2xl border-2 border-foreground overflow-hidden transition-all hover:shadow-lg"
+      className="group cursor-pointer bg-white rounded-2xl border-2 border-foreground overflow-hidden transition-all hover:shadow-lg h-72 md:h-80"
     >
       {/* Guest Image - Square like SpeakerCard */}
       <div className="aspect-square overflow-hidden bg-neutral-100 relative">

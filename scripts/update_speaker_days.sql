@@ -1,5 +1,5 @@
 -- Update speakers with their assigned event days and speaking topics based on expertise
--- Day 1: Arts, Sculpture & Design (February 2)
+-- Day 1: Arts, Sculpture & Design (March 2)
 UPDATE speakers SET event_day = 1, topic = 'Arts, Culture & Creative Policy' WHERE name = 'Mrs. Toke Benson-Awoyinka';
 UPDATE speakers SET event_day = 1, topic = 'Sustainable Design & Infrastructure' WHERE name = 'Mr. Hakeem Shagaya';
 UPDATE speakers SET event_day = 1, topic = 'Community Empowerment Through Arts' WHERE name = 'Mr. Gossy Ukanwoke';
@@ -7,14 +7,14 @@ UPDATE speakers SET event_day = 1, topic = 'Legal Framework for Creative Sectors
 UPDATE speakers SET event_day = 1, topic = 'Tax & Revenue in Creative Businesses' WHERE name = 'Mr. Jimi Aina';
 UPDATE speakers SET event_day = 1, topic = 'Trade & Investment in Creative Economy' WHERE name = 'Dr. Jumoke Oduwole';
 
--- Day 2: Fashion, Film & Photography (February 4)
+-- Day 2: Fashion, Film & Photography (March 4)
 UPDATE speakers SET event_day = 2, topic = 'Talent, Entertainment & Media Strategy' WHERE name = 'Mr. Idris Olorunnimbe';
 UPDATE speakers SET event_day = 2, topic = 'Entertainment Law & Film Industry Policy' WHERE name = 'Ms. Oyinkansola ''Foza'' Fawehinmi';
 UPDATE speakers SET event_day = 2, topic = 'Music & Entertainment Consulting' WHERE name = 'Mr. Bizzle Osikoya';
 UPDATE speakers SET event_day = 2, topic = 'Corporate Communications & Brand Strategy' WHERE name = 'Mr. Olakunle Olusanya Esq';
 UPDATE speakers SET event_day = 2, topic = 'Media, Telecom & Tech Regulation' WHERE name = 'Mr. Rotimi Akapo';
 
--- Day 3: Music, Tech & Gaming (February 8)
+-- Day 3: Music, Tech & Gaming (March 8)
 UPDATE speakers SET event_day = 3, topic = 'Music Industry Operations & Strategy' WHERE name = 'Mr. Tega Oghenejobo';
 UPDATE speakers SET event_day = 3, topic = 'Music Law & Songwriter Advocacy' WHERE name = 'Mr. Akinyemi Ayinoluwa';
 UPDATE speakers SET event_day = 3, topic = 'Fintech, Digital Lending & Gaming' WHERE name = 'Engr. Tunde Bally';

@@ -166,7 +166,7 @@ const Hero: React.FC = () => {
           <div className="flex flex-wrap justify-center gap-3 mb-8 md:mb-10 opacity-0 animate-[slideUp_1s_ease-out_0.6s_forwards]">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-zinc-200 shadow-sm text-xs md:text-sm font-medium text-zinc-700">
               <Calendar className="w-4 h-4 text-zinc-400" />
-              <span>February 2026</span>
+              <span>March 2026</span>
             </div>
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-zinc-200 shadow-sm text-xs md:text-sm font-medium text-zinc-700">
               <MapPin className="w-4 h-4 text-zinc-400" />
@@ -194,7 +194,7 @@ const Hero: React.FC = () => {
                   Event Starts In
                 </span>
               </div>
-              <Countdown targetDate="2026-02-04T09:00:00" />
+              <Countdown targetDate="2026-03-27T09:00:00" />
               <div className="mt-4 flex justify-center items-center gap-2">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-lime-500 opacity-75"></span>
@@ -215,7 +215,7 @@ const Hero: React.FC = () => {
                   Event Starts In
                 </span>
               </div>
-              <CountdownMobile targetDate="2026-02-04T09:00:00" />
+              <CountdownMobile targetDate="2026-03-27T09:00:00" />
               <div className="mt-3 flex justify-center items-center gap-2">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-lime-500 opacity-75"></span>

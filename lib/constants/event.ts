@@ -17,28 +17,19 @@ export const EVENT_HASHTAGS = ["SynergyCon2026", "CreativeEconomy", "Innovation"
 // ============================================================================
 // Note: Exact dates are TBA. Using placeholder dates for March 2026.
 export const EVENT_DATES = {
-  // Primary event dates (TBA - placeholder)
-  startDate: "2026-03-15",
-  endDate: "2026-03-17",
-  
-  // Display format
-  displayRange: "March 15-17, 2026",
-  displayRangeShort: "Mar 15-17, 2026",
-  
-  // Status
-  datesAnnounced: false,
-  datesPlaceholder: "Dates To Be Announced",
-  
-  // ISO format for structured data
-  startDateISO: "2026-03-15T09:00:00+01:00",
-  endDateISO: "2026-03-17T18:00:00+01:00",
-  doorTimeISO: "2026-03-15T08:00:00+01:00",
-  
-  // Duration (tentative - subject to change)
-  duration: "P3D", // Placeholder - actual duration TBA
-  daysCount: 3, // Tentative - subject to confirmation
-  daysCountDisplay: "Multiple", // Use this for display text
-  daysCountTentative: true,
+  startDate: "2026-03-27",
+  endDate: "2026-03-27",
+  displayRange: "March 27, 2026",
+  displayRangeShort: "Mar 27, 2026",
+  datesAnnounced: true,
+  datesPlaceholder: "March 27, 2026",
+  startDateISO: "2026-03-27T09:00:00+01:00",
+  endDateISO: "2026-03-27T18:00:00+01:00",
+  doorTimeISO: "2026-03-27T08:00:00+01:00",
+  duration: "P1D",
+  daysCount: 1,
+  daysCountDisplay: "1 Day",
+  daysCountTentative: false,
 } as const
 
 // ============================================================================
@@ -51,18 +42,18 @@ export const DISTRICTS = {
     shortName: "Arts & Design",
     focus: ["Arts", "Sculpture", "Design"],
     venue: {
-      name: "J. Randle Centre for Yorùbá Culture & History",
-      shortName: "J. Randle Centre",
-      address: "J.K. Randle Rd, Onikan Round About, Lagos Island, Onikan, Lagos",
-      area: "Onikan, Lagos Island",
+      name: "Wole Soyinka Centre for Culture and Creative Arts (National Theatre Nigeria)",
+      shortName: "National Theatre",
+      address: "Iganmu, Lagos Apapa Local Government, Lagos",
+      area: "Iganmu",
       city: "Lagos",
       state: "Lagos State",
       country: "Nigeria",
       geo: {
-        latitude: 6.4541,
-        longitude: 3.4082,
+        latitude: 6.4698,
+        longitude: 3.3892,
       },
-      googleMapsUrl: "https://maps.google.com/?q=J.+Randle+Centre+for+Yoruba+Culture+History+Lagos",
+      googleMapsUrl: "https://maps.google.com/?q=National+Theatre+Nigeria+Iganmu+Lagos",
     },
   },
   musicFashionFilmPhotography: {
@@ -71,18 +62,18 @@ export const DISTRICTS = {
     shortName: "Fashion & Film",
     focus: ["Music", "Fashion", "Film", "Photography"],
     venue: {
-      name: "The Royal Box/Cube",
-      shortName: "Royal Box",
-      address: "65 Adeola Odeku St, Victoria Island, Lagos",
-      area: "Victoria Island",
+      name: "Wole Soyinka Centre for Culture and Creative Arts (National Theatre Nigeria)",
+      shortName: "National Theatre",
+      address: "Iganmu, Lagos Apapa Local Government, Lagos",
+      area: "Iganmu",
       city: "Lagos",
       state: "Lagos State",
       country: "Nigeria",
       geo: {
-        latitude: 6.4281,
-        longitude: 3.4219,
+        latitude: 6.4698,
+        longitude: 3.3892,
       },
-      googleMapsUrl: "https://maps.google.com/?q=Royal+Box+65+Adeola+Odeku+Victoria+Island+Lagos",
+      googleMapsUrl: "https://maps.google.com/?q=National+Theatre+Nigeria+Iganmu+Lagos",
     },
   },
   techGamingMusic: {
@@ -91,18 +82,18 @@ export const DISTRICTS = {
     shortName: "Tech & Gaming",
     focus: ["Tech", "Gaming", "Music"],
     venue: {
-      name: "Lion Wonder Arena Alausa",
-      shortName: "Lion Wonder Arena",
-      address: "54 Obafemi Awolowo Way, Ikeja, Lagos",
-      area: "Ikeja",
+      name: "Wole Soyinka Centre for Culture and Creative Arts (National Theatre Nigeria)",
+      shortName: "National Theatre",
+      address: "Iganmu, Lagos Apapa Local Government, Lagos",
+      area: "Iganmu",
       city: "Lagos",
       state: "Lagos State",
       country: "Nigeria",
       geo: {
-        latitude: 6.6018,
-        longitude: 3.3515,
+        latitude: 6.4698,
+        longitude: 3.3892,
       },
-      googleMapsUrl: "https://maps.google.com/?q=Lion+Wonder+Arena+54+Obafemi+Awolowo+Way+Ikeja+Lagos",
+      googleMapsUrl: "https://maps.google.com/?q=National+Theatre+Nigeria+Iganmu+Lagos",
     },
   },
   mainConference: {
@@ -182,12 +173,12 @@ export type Track = (typeof TRACKS)[number]
 // Event Location (Primary)
 // ============================================================================
 export const EVENT_LOCATION = {
-  area: "Victoria Island",
+  area: "Iganmu",
   city: "Lagos",
   state: "Lagos State",
   country: "Nigeria",
   countryCode: "NG",
-  displayLocation: "Lagos, Nigeria",
+  displayLocation: "National Theatre, Lagos",
 } as const
 
 // ============================================================================
@@ -209,7 +200,7 @@ export const CONTACT = {
   email: "hello@synergycon.live",
   phone: "+234 800 000 0000",
   address: {
-    street: "Victoria Island",
+    street: "Iganmu",
     city: "Lagos",
     state: "Lagos State",
     country: "Nigeria",
@@ -287,14 +278,14 @@ export const TICKET_TYPES: Record<string, TicketTier> = {
     price: 100000,
     priceCurrency: "NGN",
     priceDisplay: "₦100,000",
-    description: "Full festival access across all event days",
-    accessType: "full",
-    duration: "full-event",
+    description: "Single-day premium festival access",
+    accessType: "day",
+    duration: "single-day",
     features: [
-      "Full festival access",
+      "Premium festival access",
       "All keynotes & panels",
       "VIP lounge access",
-      "All meals included",
+      "Lunch included",
       "Official swag bag",
       "Priority registration",
     ],
@@ -305,11 +296,11 @@ export const TICKET_TYPES: Record<string, TicketTier> = {
     price: 150000,
     priceCurrency: "NGN",
     priceDisplay: "₦150,000",
-    description: "Ultimate premium experience with exclusive access",
-    accessType: "full",
-    duration: "full-event",
+    description: "Single-day ultimate premium experience with exclusive access",
+    accessType: "day",
+    duration: "single-day",
     features: [
-      "All VVIP benefits",
+      "All VVIP single-day benefits",
       "Front-row reserved seating",
       "Exclusive speaker dinner invite",
       "Meet & greet with speakers",

@@ -51,7 +51,7 @@ values (
   'newsletter_welcome',
   'Welcome to SynergyCon Updates! 🎉',
   'Thank You for Subscribing!',
-  '<p style="font-size: 16px; line-height: 1.6; color: #333;">We''re thrilled to have you join the SynergyCon community! You''ll be the first to know about:</p><ul style="font-size: 16px; line-height: 1.8; color: #333;"><li>Speaker announcements and exclusive interviews</li><li>Early bird registration opportunities</li><li>Event schedule and session details</li><li>Behind-the-scenes updates from the creative economy</li></ul><p style="font-size: 16px; line-height: 1.6; color: #333;">SynergyCon 2.0 is happening on <strong>February 4-6, 2026</strong> at the Federal Palace Hotel, Royal Box Event Center, and Police College Ground. Mark your calendar!</p>',
+  '<p style="font-size: 16px; line-height: 1.6; color: #333;">We''re thrilled to have you join the SynergyCon community! You''ll be the first to know about:</p><ul style="font-size: 16px; line-height: 1.8; color: #333;"><li>Speaker announcements and exclusive interviews</li><li>Early bird registration opportunities</li><li>Event schedule and session details</li><li>Behind-the-scenes updates from the creative economy</li></ul><p style="font-size: 16px; line-height: 1.6; color: #333;">SynergyCon 2.0 is happening on <strong>March 4-6, 2026</strong> at the Federal Palace Hotel, Royal Box Event Center, and Police College Ground. Mark your calendar!</p>',
   'This is a Finesser Initiative. Building Nigeria''s Creative Economy.',
   '/finesser-logo.jpg'
 ) on conflict (name) do nothing;

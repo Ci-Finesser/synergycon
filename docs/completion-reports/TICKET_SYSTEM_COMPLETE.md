@@ -154,7 +154,7 @@ Response:
       "attendee_name": "John Doe",
       "attendee_email": "john@example.com",
       "purchase_date": "2026-01-03T10:00:00Z",
-      "event_date": "February 20-22, 2026",
+      "event_date": "March 20-22, 2026",
       "ticket_number": "SYN2-ABC123",
       "price": 150000,
       "metadata": {}

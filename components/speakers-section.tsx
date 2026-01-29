@@ -74,7 +74,7 @@ export function SpeakersSection() {
             <div className="overflow-x-auto scrollbar-hide px-4 md:px-0 pt-2">
               <div className="flex gap-5 md:gap-6 pb-4">
                 {[...Array(6)].map((_, i) => (
-                  <div key={i} className="flex-shrink-0 w-56 md:w-64">
+                  <div key={i} className="flex-shrink-0 w-64 md:w-72">
                     <div className="animate-pulse space-y-3">
                       <div className="aspect-square bg-muted rounded-lg" />
                       <div className="h-4 bg-muted rounded w-3/4" />
@@ -150,8 +150,8 @@ export function SpeakersSection() {
                     },
                   }}
                 >
-                  <div className="group flex-shrink-0 w-56 md:w-64 cursor-pointer">
-                    <div className="bg-background border-[1.5px] border-foreground rounded-xl p-3.5 md:p-4 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                  <div className="group flex-shrink-0 w-64 md:w-72 cursor-pointer">
+                    <div className="bg-background border-[1.5px] border-foreground rounded-xl p-3.5 md:p-4 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 h-72 md:h-80 overflow-hidden">
                       {/* Speaker Image */}
                       <div className="relative aspect-square rounded-lg overflow-hidden bg-muted border-2 border-transparent group-hover:border-foreground transition-all duration-200 mb-2.5">
                         <img

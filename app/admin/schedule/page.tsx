@@ -137,7 +137,7 @@ export default function AdminSchedulePage() {
           <Label className="text-sm">Date *</Label>
           <Input
             required
-            placeholder="February 4, 2026"
+            placeholder="March 4, 2026"
             value={formData.date}
             onChange={(e) => setFormData({ ...formData, date: e.target.value })}
             className="rounded-lg h-9 text-sm"
@@ -311,7 +311,7 @@ export default function AdminSchedulePage() {
                     <Label className="text-sm">Date *</Label>
                     <Input
                       required
-                      placeholder="February 4, 2026"
+                      placeholder="March 4, 2026"
                       value={formData.date}
                       onChange={(e) => setFormData({ ...formData, date: e.target.value })}
                       className="rounded-lg h-9 text-sm"

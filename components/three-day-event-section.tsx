@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { Calendar, MapPin, ArrowRight, Users, Ticket } from "lucide-react"
+import { EVENT_DATES, VENUES } from "@/lib/constants"
 
 export function ThreeDayEventSection() {
   const events = [
@@ -41,11 +42,10 @@ export function ThreeDayEventSection() {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-8 md:mb-10 lg:mb-12">
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight mb-3 md:mb-4 text-balance">
-            Four Districts, Endless Possibilities
+            Four Districts at One Venue
           </h2>
           <p className="text-sm md:text-base text-muted-foreground text-pretty leading-relaxed">
-            Experience the breadth of Nigeria's creative and technological innovation across four unique districts,
-            each celebrating a different facet of our thriving ecosystem.
+            All experiences happen on {EVENT_DATES.displayRange} at the National Theatre, Lagos.
           </p>
         </div>
 
@@ -84,8 +84,8 @@ export function ThreeDayEventSection() {
                   <div className="flex items-start gap-1.5 flex-1">
                     <Calendar className="w-3.5 h-3.5 text-neutral-500 flex-shrink-0 mt-0.5" />
                     <div className="text-[11px]">
-                      <div className="font-semibold leading-tight mb-0.5">Date TBA</div>
-                      <div className="text-neutral-500 leading-tight">Time TBA</div>
+                      <div className="font-semibold leading-tight mb-0.5">{EVENT_DATES.displayRange}</div>
+                      <div className="text-neutral-500 leading-tight">Lagos, Nigeria</div>
                     </div>
                   </div>
 
@@ -93,8 +93,8 @@ export function ThreeDayEventSection() {
                   <div className="flex items-start gap-1.5 flex-1">
                     <MapPin className="w-3.5 h-3.5 text-neutral-500 flex-shrink-0 mt-0.5" />
                     <div className="text-[11px]">
-                      <div className="font-semibold leading-tight mb-0.5">Venue TBA</div>
-                      <div className="text-neutral-500 leading-tight line-clamp-1">Lagos, Nigeria</div>
+                      <div className="font-semibold leading-tight mb-0.5">{VENUES.nationalTheatre.shortName}</div>
+                      <div className="text-neutral-500 leading-tight line-clamp-1">{VENUES.nationalTheatre.city}, Nigeria</div>
                     </div>
                   </div>
                 </div>
@@ -161,8 +161,8 @@ export function ThreeDayEventSection() {
               <div className="flex items-start gap-2 mb-3">
                 <MapPin className="w-4 h-4 text-neutral-500 flex-shrink-0 mt-0.5" />
                 <div className="text-xs">
-                  <div className="font-semibold">Venue TBA</div>
-                  <div className="text-neutral-500">Lagos, Nigeria</div>
+                  <div className="font-semibold">{VENUES.nationalTheatre.shortName}</div>
+                  <div className="text-neutral-500">{VENUES.nationalTheatre.city}, Nigeria</div>
                 </div>
               </div>
 
@@ -170,8 +170,8 @@ export function ThreeDayEventSection() {
               <div className="flex items-center gap-2 mb-5 pb-5 border-b border-neutral-200">
                 <Calendar className="w-4 h-4 text-neutral-500 flex-shrink-0" />
                 <div className="text-xs">
-                  <div className="font-semibold">Date TBA</div>
-                  <div className="text-neutral-500">Time TBA</div>
+                  <div className="font-semibold">{EVENT_DATES.displayRange}</div>
+                  <div className="text-neutral-500">Lagos, Nigeria</div>
                 </div>
               </div>
 

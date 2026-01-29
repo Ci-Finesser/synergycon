@@ -66,7 +66,7 @@ BEGIN
         '<p>Hello {{first_name}},</p>' ||
         '<p>Thank you for subscribing to SynergyCon updates!</p>' ||
         '<p>We''re excited to have you join us for <strong>SynergyCon 2.0</strong> ' ||
-        'happening February 4-6, 2026.</p>' ||
+        'happening March 4-6, 2026.</p>' ||
         '<p>Stay tuned for exclusive updates, speaker announcements, ' ||
         'and early bird registration opportunities.</p>' ||
         '<p>Best regards,<br>The SynergyCon Team</p>',

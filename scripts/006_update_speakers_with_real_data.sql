@@ -3,7 +3,7 @@ DELETE FROM speakers;
 
 -- Insert all 24 real speakers with their actual images
 INSERT INTO speakers (name, title, bio, company, featured, display_order, image_url, event_day, topic) VALUES
--- Day 1: Arts, Sculpture & Design (February 2)
+-- Day 1: Arts, Sculpture & Design (March 2)
 ('Mrs. Toke Benson-Awoyinka', 'Executive Secretary', 'Mrs. Toke Benson-Awoyinka is the Executive Secretary of the Lagos State Council for Arts and Culture, driving cultural policy and creative sector development across Lagos State.', 'Lagos State Council for Arts and Culture', true, 1, '/images/mrs-20toke-20benson-awoyinka.jpg', 1, 'Arts, Culture & Creative Policy'),
 ('Mr. Hakeem Shagaya', 'Principal Partner', 'Mr. Hakeem Shagaya is the Principal Partner at Shagaya Associates, specializing in sustainable design and infrastructure development across Nigeria.', 'Shagaya Associates', true, 2, '/images/mr-20hakeem-20shagaya.jpg', 1, 'Sustainable Design & Infrastructure'),
 ('Mr. Gossy Ukanwoke', 'Creative Director', 'Mr. Gossy Ukanwoke is a renowned creative director and community advocate, using arts and design to empower communities across Nigeria.', 'Gossy Ukanwoke Creative Studio', true, 3, '/images/mr-20gossy-20ukanwoke.jpg', 1, 'Community Empowerment Through Arts'),
@@ -11,14 +11,14 @@ INSERT INTO speakers (name, title, bio, company, featured, display_order, image_
 ('Mr. Jimi Aina', 'Tax & Revenue Specialist', 'Mr. Jimi Aina is a leading tax and revenue specialist, advising creative businesses on fiscal compliance and strategic tax planning.', 'Aina Tax Consultancy', true, 5, '/images/mr-20jimi-20aina.jpg', 1, 'Tax & Revenue in Creative Businesses'),
 ('Dr. Jumoke Oduwole', 'Trade & Investment Expert', 'Dr. Jumoke Oduwole is a renowned expert in trade and investment, focusing on creative economy development and international partnerships.', 'Trade Advisory', true, 6, '/images/dr-20jumoke-20oduwole.jpg', 1, 'Trade & Investment in Creative Economy'),
 
--- Day 2: Fashion, Film & Photography (February 4)
+-- Day 2: Fashion, Film & Photography (March 4)
 ('Mr. Idris Olorunnimbe', 'Talent & Media Strategist', 'Mr. Idris Olorunnimbe is a leading talent and media strategist, shaping entertainment and media strategies across Nigeria.', 'Olorunnimbe Media Group', true, 7, '/images/mr-20idris-20olorunnimbe.jpg', 2, 'Talent, Entertainment & Media Strategy'),
 ('Ms. Oyinkansola ''Foza'' Fawehinmi', 'Entertainment Lawyer', 'Ms. Oyinkansola ''Foza'' Fawehinmi is a prominent entertainment lawyer specializing in film industry policy and content rights management.', 'Fawehinmi Legal', true, 8, '/images/ms-20oyinkansola-20-e2-80-98foza-e2-80-99-20fawehinmi.jpg', 2, 'Entertainment Law & Film Industry Policy'),
 ('Mr. Bizzle Osikoya', 'Music & Entertainment Consultant', 'Mr. Bizzle Osikoya is a renowned music and entertainment consultant, advising artists and brands on strategic partnerships and growth.', 'The Plug Entertainment', true, 9, '/images/mr-20bizzle-20osikoya.jpg', 2, 'Music & Entertainment Consulting'),
 ('Mr. Olakunle Olusanya Esq', 'Corporate Communications Expert', 'Mr. Olakunle Olusanya Esq is a corporate communications and brand strategy expert, helping organizations build compelling narratives.', 'Olusanya Communications', true, 10, '/images/mr-20olakunle-20olusanya-20esq.jpg', 2, 'Corporate Communications & Brand Strategy'),
 ('Mr. Rotimi Akapo', 'Media & Tech Regulator', 'Mr. Rotimi Akapo is an expert in media, telecom, and tech regulation, shaping policies that govern Nigeria''s digital landscape.', 'Regulatory Affairs Consultancy', true, 11, '/images/mr-20rotimi-20akapo.jpg', 2, 'Media, Telecom & Tech Regulation'),
 
--- Day 3: Music, Tech & Gaming (February 8)
+-- Day 3: Music, Tech & Gaming (March 8)
 ('Mr. Tega Oghenejobo', 'Music Industry Executive', 'Mr. Tega Oghenejobo is a leading music industry executive, managing operations and strategy for top Nigerian artists and labels.', 'Freeme Digital', true, 12, '/images/mr-20tega-20oghenejobo.jpg', 3, 'Music Industry Operations & Strategy'),
 ('Mr. Akinyemi Ayinoluwa', 'Music Lawyer & Songwriter Advocate', 'Mr. Akinyemi Ayinoluwa is a music lawyer specializing in songwriter rights and music publishing, advocating for fair compensation in the industry.', 'Ayinoluwa Legal & Music', true, 13, '/images/mr-20akinyemi-20ayinoluwa.jpg', 3, 'Music Law & Songwriter Advocacy'),
 ('Engr. Tunde Bally', 'Fintech & Gaming Innovator', 'Engr. Tunde Bally is a fintech and gaming innovator, pioneering digital lending solutions and gaming platforms across Africa.', 'Bally Gaming & Fintech', true, 14, '/images/engr-20tunde-20bally.jpg', 3, 'Fintech, Digital Lending & Gaming'),

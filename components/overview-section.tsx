@@ -47,7 +47,7 @@ export function OverviewSection() {
                 <div className="space-y-0.5">
                   <div className="text-xs md:text-sm text-muted-foreground font-medium">Date</div>
                   <div className="font-semibold text-sm md:text-base">{EVENT_DATES.displayRange}</div>
-                  <div className="text-xs md:text-sm text-muted-foreground">{EVENT_DATES.daysCountDisplay} Transformative Days</div>
+                  <div className="text-xs md:text-sm text-muted-foreground">{EVENT_DATES.daysCountDisplay} Transformative Day</div>
                 </div>
               </div>
 

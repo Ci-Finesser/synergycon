@@ -70,15 +70,18 @@ export function MediaPartnersSection() {
 
   const partners = getPartnersByCategory(activeCategory)
   const scrollRef = useRef<HTMLDivElement>(null)
+  const [isPaused, setIsPaused] = useState(false)
 
   useEffect(() => {
     const el = scrollRef.current
     if (!el) return
     let rafId: number
-    const speed = 0.4
+    const speed = 0.6
     const step = () => {
       if (!el) return
-      el.scrollLeft += speed
+      if (!isPaused) {
+        el.scrollLeft += speed
+      }
       if (el.scrollLeft + el.clientWidth >= el.scrollWidth - 1) {
         el.scrollLeft = 0
       }
@@ -87,7 +90,7 @@ export function MediaPartnersSection() {
     el.scrollLeft = 0
     rafId = requestAnimationFrame(step)
     return () => cancelAnimationFrame(rafId)
-  }, [activeCategory])
+  }, [activeCategory, isPaused])
   const info = categoryInfo[activeCategory]
   const CategoryIcon = info.icon
 
@@ -140,13 +143,18 @@ export function MediaPartnersSection() {
           </div>
         </div>
 
-        <div ref={scrollRef} className="overflow-x-auto scrollbar-hide">
+        <div
+          ref={scrollRef}
+          className="overflow-x-auto scrollbar-hide"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
           <div key={activeCategory} className="flex gap-3">
             {Array.from({ length: 2 }).flatMap((_, copy) =>
               partners.map((partner: any, i: number) => (
                 <div
                   key={`${activeCategory}-${(partner.id ?? i)}-copy-${copy}`}
-                  className="group bg-white border-2 border-foreground/10 rounded-xl p-3 hover:border-foreground/30 hover:shadow-lg transition-all flex items-center gap-3 w-64 flex-shrink-0"
+                  className="group bg-white border-2 border-foreground/10 rounded-xl p-3 hover:border-foreground/30 hover:shadow-lg transition-all flex items-center gap-3 w-64 md:w-72 h-28 md:h-32 flex-shrink-0"
                 >
                   <div className="w-12 h-12 bg-muted rounded-full flex items-center justify-center flex-shrink-0">
                     {getTypeIcon(partner.type)}

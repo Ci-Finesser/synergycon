@@ -66,7 +66,7 @@ export async function POST(req: NextRequest) {
           attendee_name: member.name,
           attendee_email: member.email,
           ticket_number: ticketNumber,
-          event_date: 'February 20-22, 2026',
+          event_date: 'March 20-22, 2026',
           price: 0, // Enterprise tickets are part of package
           metadata: {
             team_purchase: true,

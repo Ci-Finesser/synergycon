@@ -6,11 +6,8 @@ import {
   EVENT_YEAR,
   EVENT_DATES, 
   EVENT_LOCATION, 
-  DISTRICTS,
   VENUES,
-  ALL_VENUES,
-  TICKET_TYPES,
-  TRACKS
+  TICKET_TYPES
 } from '@/lib/constants'
 
 // ============================================================================
@@ -20,7 +17,7 @@ import {
 export const siteConfig = {
   name: `SynergyCon ${EVENT_YEAR}`,
   tagline: EVENT_TAGLINE,
-  description: "Nigeria's Premier Creative Economy Conference. Join industry leaders, policymakers, creatives, and innovators for 3 transformative days of inspiration, learning, and networking across multiple venues in Lagos.",
+  description: "Nigeria's Premier Creative Economy Conference. A single-day experience on March 27, 2026 at the National Theatre, Lagos — featuring four districts within one venue, packed with inspiration, learning, and networking.",
   shortDescription: "Nigeria's largest creative economy conference bringing together 5000+ professionals.",
   url: process.env.NEXT_PUBLIC_APP_URL || 'https://synergycon.live',
   ogImage: '/og-image.png',
@@ -79,13 +76,15 @@ export const siteConfig = {
     },
     
     // All Event Locations (District Venues)
-    locations: ALL_VENUES.map((venue, index) => ({
-      name: venue.name,
-      city: venue.city,
-      date: EVENT_DATES.startDate, // All venues active during the event
-      address: venue.address,
-      geo: venue.geo,
-    })),
+    locations: [
+      {
+        name: VENUES.nationalTheatre.name,
+        city: VENUES.nationalTheatre.city,
+        date: EVENT_DATES.startDate,
+        address: VENUES.nationalTheatre.address,
+        geo: VENUES.nationalTheatre.geo,
+      },
+    ],
     
     // Ticket Information
     tickets: [
@@ -95,7 +94,7 @@ export const siteConfig = {
         priceCurrency: TICKET_TYPES.vip.priceCurrency,
         availability: 'InStock',
         validFrom: '2025-10-01',
-        validThrough: '2026-03-17',
+        validThrough: '2026-03-27',
         description: TICKET_TYPES.vip.description,
       },
       {
@@ -104,7 +103,7 @@ export const siteConfig = {
         priceCurrency: TICKET_TYPES["vip-plus"].priceCurrency,
         availability: 'InStock',
         validFrom: '2025-10-01',
-        validThrough: '2026-03-17',
+        validThrough: '2026-03-27',
         description: TICKET_TYPES["vip-plus"].description,
       },
       {
@@ -113,7 +112,7 @@ export const siteConfig = {
         priceCurrency: TICKET_TYPES.vvip.priceCurrency,
         availability: 'InStock',
         validFrom: '2025-10-01',
-        validThrough: '2026-03-17',
+        validThrough: '2026-03-27',
         description: TICKET_TYPES.vvip.description,
       },
       {
@@ -122,7 +121,7 @@ export const siteConfig = {
         priceCurrency: TICKET_TYPES["priority-pass"].priceCurrency,
         availability: 'InStock',
         validFrom: '2025-10-01',
-        validThrough: '2026-03-17',
+        validThrough: '2026-03-27',
         description: TICKET_TYPES["priority-pass"].description,
       },
     ],
@@ -169,7 +168,7 @@ export const siteConfig = {
     { name: 'Home', url: '/', description: 'SynergyCon 2026 homepage' },
     { name: 'Register', url: '/register', description: 'Register for SynergyCon 2026' },
     { name: 'Speakers', url: '/speakers', description: 'Meet our world-class speakers' },
-    { name: 'Schedule', url: '/schedule', description: 'View the 3-day event schedule' },
+    { name: 'Schedule', url: '/schedule', description: 'View the event schedule' },
     { name: 'Partners', url: '/partners', description: 'Our sponsors and partners' },
     { name: 'Gallery', url: '/gallery', description: 'Photos and videos from past events' },
     { name: 'About', url: '/about', description: 'Learn about SynergyCon' },
@@ -182,7 +181,7 @@ export const siteConfig = {
   faqs: [
     {
       question: `When and where is SynergyCon ${EVENT_YEAR}?`,
-      answer: `SynergyCon ${EVENT_YEAR} takes place ${EVENT_DATES.displayRange} across multiple venues in Lagos, Nigeria, featuring four distinct districts: Arts & Design at J. Randle Centre, Fashion & Film at Royal Box, Tech & Gaming at Lion Wonder Arena, and the Main Conference at National Theatre.`,
+      answer: `SynergyCon ${EVENT_YEAR} takes place ${EVENT_DATES.displayRange} at the National Theatre Nigeria, Lagos. All four districts are hosted within the venue's different halls and spaces, with pop-up experiences throughout the day.`,
     },
     {
       question: `How much are tickets for SynergyCon ${EVENT_YEAR}?`,
