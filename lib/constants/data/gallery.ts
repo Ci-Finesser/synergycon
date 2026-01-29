@@ -9,14 +9,15 @@
 
 export interface GalleryItemData {
   id: string
-  title: string | null
+  title: string
   description: string | null
-  image_url: string
-  thumbnail_url: string | null
+  type: 'image' | 'video'
+  media_url: string | null
+  youtube_url: string | null
+  content: string | null
   category: string | null
-  year: number | null
   display_order: number
-  is_featured: boolean
+  is_active: boolean
   created_at: string
   updated_at: string
 }

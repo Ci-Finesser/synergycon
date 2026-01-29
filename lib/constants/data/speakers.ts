@@ -27,7 +27,7 @@ export const SPEAKERS_DATA = [
   // FEATURED SPEAKERS & SPECIAL GUESTS
   // =========================================
   {
-    "id": "jide-sanwo-olu",
+    "id": "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d",
     "name": "Jide Sanwo-Olu",
     "title": "The Governor of Lagos State",
     "bio": "He is the Governor of Lagos State, Nigeria, serving since May 2019. Before becoming governor, he built a career in banking and held several public service roles, including Commissioner for Commerce and Industry, Commissioner for Budget and Planning, and Managing Director of the Lagos State Property Development Corporation. As governor, he is recognized for his focus on infrastructure, healthcare, digital innovation, and cultural development, and he continues to play a key role in shaping Lagos as a leading African megacity.",
@@ -52,7 +52,7 @@ export const SPEAKERS_DATA = [
     "confirmed": false
   },
   {
-    "id": "hannatu-musawa",
+    "id": "b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6e",
     "name": "Hannatu Musawa",
     "title": "Minister of Art, Culture, and the Creative Economy",
     "bio": "Hannatu Musa Musawa is Nigeria's Minister of Art, Culture, and the Creative Economy, appointed in August 2023 by President Bola Ahmed Tinubu. A lawyer, politician, author, and cultural advocate, she is widely recognized for her leadership in shaping Nigeria's creative industries and promoting cultural diplomacy.",
@@ -102,7 +102,7 @@ export const SPEAKERS_DATA = [
     "confirmed": false
   },
   {
-    "id": "wale-edun",
+    "id": "c3d4e5f6-a7b8-4c9d-0e1f-2a3b4c5d6e7f",
     "name": "Hon. Wale Edun",
     "title": "Federal Minister of Finance & Coordinating Minister of the Economy",
     "bio": "Hon. Wale Edun is Nigeria's Federal Minister of Finance and Coordinating Minister of the Economy, a seasoned economist and investment banker with decades of global and domestic finance experience. He drives transformative economic impact by leading fiscal reforms, stabilizing macroeconomic conditions, and strengthening investor confidence to unlock sustainable growth. His strategic leadership positions Nigeria as a resilient, globally competitive economy with robust private sector participation.",
@@ -127,7 +127,7 @@ export const SPEAKERS_DATA = [
     "confirmed": false
   },
   {
-    "id": "bosun-tijani",
+    "id": "d4e5f6a7-b8c9-4d0e-1f2a-3b4c5d6e7f8a",
     "name": "HM Olatunbosun Tijani",
     "title": "Minister of Communications, Innovation & Digital Economy",
     "bio": "HM Olatunbosun \"Bosun\" Tijani is a Nigerian-British entrepreneur and public servant, currently serving as Nigeria's Honourable Minister of Communications, Innovation & Digital Economy. He leads national efforts in digital transformation, broadband expansion, and innovation, positioning technology as a core driver of economic growth. Prior to his ministerial appointment in August 2023, he co-founded Co-Creation Hub (CcHUB), Africa's leading innovation centre, which expanded across Nigeria, Kenya, and Rwanda, strengthening collaboration and innovation across the continent.",
@@ -152,7 +152,7 @@ export const SPEAKERS_DATA = [
     "confirmed": false
   },
   {
-    "id": "doris-uzoka-anite",
+    "id": "e5f6a7b8-c9d0-4e1f-2a3b-4c5d6e7f8a9b",
     "name": "Dr. Doris Uzoka-Anite",
     "title": "Honourable Minister of State for Finance",
     "bio": "Dr. Doris Uzoka‑Anite, MFR is Nigeria's Honourable Minister of State for Finance and a distinguished leader in public finance and economic policy. She drives transformative impact by modernizing fiscal frameworks, attracting strategic investments, and strengthening capital markets to accelerate sustainable economic growth. Her leadership combines visionary policy execution with financial innovation, positioning Nigeria as a competitive and resilient economy on the global stage.",
@@ -177,7 +177,7 @@ export const SPEAKERS_DATA = [
     "confirmed": false
   },
   {
-    "id": "ayodele-olawande",
+    "id": "f6a7b8c9-d0e1-4f2a-3b4c-5d6e7f8a9b0c",
     "name": "Hon. Ayodele Olawande",
     "title": "Minister for Youth Development",
     "bio": "Hon. Ayodele Olawande is Nigeria's Minister for Youth Development and a transformative leader in youth empowerment and policy innovation. He drives national impact by creating scalable opportunities in education, entrepreneurship, and digital skills, while strengthening youth engagement in governance. His leadership positions Nigeria's young population as a key engine for innovation, economic growth, and societal transformation.",
@@ -202,7 +202,7 @@ export const SPEAKERS_DATA = [
     "confirmed": false
   },
   {
-    "id": "seyi-tinubu",
+    "id": "a7b8c9d0-e1f2-4a3b-4c5d-6e7f8a9b0c1d",
     "name": "Barr. Oluwaseyi Afolabi Tinubu",
     "title": "CEO/Chairman, Loatsad Promomedia and Co-Founder, Noella Foundation",
     "bio": "Barr. Oluwaseyi Afolabi Tinubu is a Nigerian lawyer, entrepreneur, and philanthropist, best known as the co-founder and Chief Executive Officer of Loatsad Promomedia, one of Nigeria's leading outdoor advertising companies. A member of the Nigerian Bar Association, he has built a reputation for combining legal expertise with business innovation and social impact.",
@@ -502,7 +502,7 @@ export const SPEAKERS_DATA = [
     "confirmed": false
   },
   {
-    "id": "kehinde-ogunwumiju",
+    "id": "b8c9d0e1-f2a3-4b4c-5d6e-7f8a9b0c1d2e",
     "name": "Mr. Kehinde Ogunwumiju SAN, OFR",
     "title": "Managing Partner at Afe Babalola & Co.",
     "bio": "A distinguished legal professional with deep expertise in high‑stakes litigation and complex election law matters. He represents clients in international arbitration, navigating cross‑border disputes with precision and strategic insight. His practice also spans commercial and maritime law, delivering robust advocacy across diverse legal terrains.",
@@ -555,7 +555,7 @@ export const SPEAKERS_DATA = [
   // NEW SPECIAL GUESTS - ENTERTAINMENT & MEDIA
   // =========================================
   {
-    "id": "olisa-adibua",
+    "id": "c9d0e1f2-a3b4-4c5d-6e7f-8a9b0c1d2e3f",
     "name": "Olisa Adibua",
     "title": "Co-Founder at Storm360 & Founder at Olisa TV",
     "bio": "He is one of the most respected and in-demand radio and television executive producers and presenters in Africa. He has been at the cutting edge of electronic media and entertainment since 1988, with more than 30 years of experience in television, radio, film, and live events. He is recognized as one of the biggest personalities on the continent, consistently shaping and elevating African entertainment.",
@@ -580,7 +580,7 @@ export const SPEAKERS_DATA = [
     "confirmed": false
   },
   {
-    "id": "dbanj",
+    "id": "d4e5f6a7-b8c9-4d0e-1f2a-3b4c5d6e7f8b",
     "name": "Oladapo Daniel Oyebanji",
     "title": "CEO, The CREAM",
     "bio": "He is a singer, rapper, music executive, event host, and television personality. He has built a career that spans multiple facets of entertainment, combining creativity with leadership. He is recognized for his dynamic presence on stage and screen, as well as his influence behind the scenes in shaping music and media.",
@@ -605,7 +605,7 @@ export const SPEAKERS_DATA = [
     "confirmed": false
   },
   {
-    "id": "kunle-afolayan",
+    "id": "d0e1f2a3-b4c5-4d6e-7f8a-9b0c1d2e3f4a",
     "name": "Kunle Afolayan",
     "title": "Managing Director/CEO at Golden Effects Pictures and Kap motion pictures",
     "bio": "He is an award-winning Nigerian film director, producer, and actor, widely regarded as a leading voice in African cinema. He made his directorial debut with Irapada (2006), the first Nigerian film screened at the Pan African Film Festival. His films, including The Figurine, October 1, and Citation, have been showcased at major international festivals such as FESPACO, IFFR, BFI London Film Festival, and TIFF. He has also contributed to global film discourse, serving as an expert at the Berlinale Talent Campus and appearing in TIFF's \"In Conversation\" series alongside Genevieve Nnaji.",
@@ -630,7 +630,7 @@ export const SPEAKERS_DATA = [
     "confirmed": false
   },
   {
-    "id": "sarz",
+    "id": "e5f6a7b8-c9d0-4e1f-2a3b-4c5d6e7f8a9c",
     "name": "Osabuohien Osaretin (Sarz)",
     "title": "Founder, The Sarz Academy (TSA)",
     "bio": "Osabuohien Osaretin (Sarz) is a Nigerian executive-level music producer and entrepreneur, recognized for shaping the contemporary Afrobeats landscape. He has produced chart-topping tracks for leading artists, while also founding Sarz Academy, a strategic initiative to develop and mentor the next generation of music producers. His work combines creative leadership with industry innovation, establishing him as a key influencer in Africa's entertainment and cultural economy.",
@@ -655,7 +655,7 @@ export const SPEAKERS_DATA = [
     "confirmed": false
   },
   {
-    "id": "bimbo-ademoye",
+    "id": "e1f2a3b4-c5d6-4e7f-8a9b-0c1d2e3f4a5b",
     "name": "Bimbo Ademoye",
     "title": "Award Winning Actor, Brand Influencer, Model",
     "bio": "Bimbo Ademoye is a Nigerian award-winning actress, model, and brand influencer known for her dynamic roles in Nollywood films and TV series. She drives impact by shaping contemporary African storytelling, inspiring emerging talent, and leveraging her personal brand to influence fashion, lifestyle, and cultural trends across the continent.",
@@ -680,7 +680,7 @@ export const SPEAKERS_DATA = [
     "confirmed": false
   },
   {
-    "id": "timini-egbuson",
+    "id": "f2a3b4c5-d6e7-4f8a-9b0c-1d2e3f4a5b6c",
     "name": "Timini Egbuson",
     "title": "Award Winning Actor",
     "bio": "Timini Egbuson is a Nigerian award‑winning actor and media personality, recognized for his versatility in Nollywood films and television. He began his career on the M‑Net soap opera Tinsel and rose to prominence through roles in Shuga, Elevator Baby, and Skinny Girl in Transit. A graduate of Psychology from the University of Lagos, Timini combines charisma with depth in his performances, earning the Africa Magic Viewers' Choice Award for Best Actor in a Drama. Beyond acting, he is a cultural influencer and brand ambassador, shaping contemporary African storytelling and inspiring emerging talent across the continent.",
@@ -705,7 +705,7 @@ export const SPEAKERS_DATA = [
     "confirmed": false
   },
   {
-    "id": "nicole-abebe",
+    "id": "a3b4c5d6-e7f8-4a9b-0c1d-2e3f4a5b6c7d",
     "name": "Nicole Abebe",
     "title": "Journalist",
     "bio": "Nicole Abebe is a Nigerian multimedia journalist, broadcaster, and content creator, recognized for her dynamic presence on radio, television, and digital platforms. She currently hosts The Midday Show on The Beat 99.9 FM Lagos and co-produces the visual podcast Spill The Tea with the Abebes, blending entertainment with cultural commentary.",
@@ -733,7 +733,7 @@ export const SPEAKERS_DATA = [
   // NEW SPECIAL GUESTS - CORPORATE & GOVERNMENT
   // =========================================
   {
-    "id": "oswald-guobadia",
+    "id": "b4c5d6e7-f8a9-4b0c-1d2e-3f4a5b6c7d8e",
     "name": "Oswald O. Guobadia",
     "title": "Managing Partner at DigitA, Adviser, Author, Advancing Africa's Digital Evolution",
     "bio": "He is the Managing Partner at DigitA, a trusted adviser and published author committed to advancing Africa's digital evolution. With extensive experience in strategy, innovation, and technology adoption, he works with organizations and policymakers to drive digital transformation across industries. As a thought leader, he contributes to shaping Africa's digital future through advisory roles, publications, and initiatives that empower businesses and communities to thrive in the digital age.",
@@ -758,7 +758,7 @@ export const SPEAKERS_DATA = [
     "confirmed": false
   },
   {
-    "id": "christabel-onyejekwe",
+    "id": "c5d6e7f8-a9b0-4c1d-2e3f-4a5b6c7d8e9f",
     "name": "Dr. Christabel Onyejekwe",
     "title": "Executive Vice Chairman, FIC",
     "bio": "She is an accomplished banker and corporate leader with more than three decades of expertise in finance, technology, and corporate governance. She has held senior positions across major Nigerian banks and retired as Executive Director of Technology & Operations at the Nigeria Inter-Bank Settlement System (NIBSS). She continues to serve as a Non-Executive Director on several boards, where she brings her deep knowledge of corporate strategy, treasury management, and digital infrastructure to the financial services industry.",
@@ -783,7 +783,7 @@ export const SPEAKERS_DATA = [
     "confirmed": false
   },
   {
-    "id": "mike-dada",
+    "id": "d6e7f8a9-b0c1-4d2e-3f4a-5b6c7d8e9f0a",
     "name": "Mike Dada",
     "title": "CEO, PRM Africa Marketing & Communications Limited",
     "bio": "Mike Dada is the CEO of PRM Africa Marketing & Communications Limited and the founder and president of the All Africa Music Awards (AFRIMA). He is a leading strategist in brand communications and cultural promotion, driving visibility for African talent and institutions. His work positions culture as a powerful economic and global influence.",
@@ -808,7 +808,7 @@ export const SPEAKERS_DATA = [
     "confirmed": false
   },
   {
-    "id": "adetoro-fowoshere",
+    "id": "e7f8a9b0-c1d2-4e3f-4a5b-6c7d8e9f0a1b",
     "name": "Adetoro Fowoshere",
     "title": "CEO, Hudson Bay Holding Ltd",
     "bio": "Adetoro Fowoshere is the CEO of Hudson Bay Holding Ltd and a seasoned entrepreneur in Nigeria's entertainment and events sector. She drives strategic growth by leading diversified business ventures, promoting talent, and building high-impact brand partnerships. Her leadership blends corporate acumen with creative innovation, positioning her as a key influencer in Nigeria's business and entertainment landscape.",
@@ -833,7 +833,7 @@ export const SPEAKERS_DATA = [
     "confirmed": false
   },
   {
-    "id": "abubakar-suleiman",
+    "id": "f8a9b0c1-d2e3-4f4a-5b6c-7d8e9f0a1b2c",
     "name": "Abubakar Suleiman",
     "title": "CEO at Sterling Bank Limited",
     "bio": "Abubakar Suleiman is a Nigerian banker, economist, and corporate leader, currently serving as the Managing Director/Chief Executive Officer of Sterling Bank Plc since April 2018. He is widely recognized for his transformative leadership, sustainability-driven initiatives, and commitment to positioning Sterling Bank as a forward-thinking financial institution.",
@@ -858,7 +858,7 @@ export const SPEAKERS_DATA = [
     "confirmed": false
   },
   {
-    "id": "olasupo-olusi",
+    "id": "a9b0c1d2-e3f4-4a5b-6c7d-8e9f0a1b2c3d",
     "name": "Dr. Olasupo Olusi",
     "title": "CEO, Bank of Industry Limited",
     "bio": "Dr. Olasupo Olusi is the CEO of Bank of Industry (BOI), driving industrial and entrepreneurial growth in Nigeria. He accelerates access to finance for SMEs and large-scale projects, fostering economic diversification, job creation, and sustainable industrial development.",
@@ -883,7 +883,7 @@ export const SPEAKERS_DATA = [
     "confirmed": false
   },
   {
-    "id": "abubakar-bello-nexim",
+    "id": "b0c1d2e3-f4a5-4b6c-7d8e-9f0a1b2c3d4e",
     "name": "Mr. Abubakar A. Bello",
     "title": "Managing Director at Nigerian Export Import Bank (NEXIM)",
     "bio": "Mr. Abubakar A. Bello is the Managing Director of the Nigerian Export-Import Bank (NEXIM), driving Nigeria's non-oil export growth. He empowers exporters, unlocks trade financing, and strengthens global competitiveness to accelerate economic diversification and sustainable development.",
@@ -911,7 +911,7 @@ export const SPEAKERS_DATA = [
   // NEW SPECIAL GUESTS - GOVERNMENT & POLICY
   // =========================================
   {
-    "id": "oluyemisi-falaye",
+    "id": "c1d2e3f4-a5b6-4c7d-8e9f-0a1b2c3d4e5f",
     "name": "Oluyemisi Falaye",
     "title": "Senior Associate, ACAS-Law (Adepetun Caxton-Martins Agbor & Segun)",
     "bio": "Oluyemisi Falaye is a Nigerian entertainment lawyer and corporate strategist, recognized for her leadership in intellectual property and cultural business advisory. She is a Senior Associate at Adepetun Caxton-Martins Agbor & Segun (ACAS-Law) and heads the firm's Entertainment Law Group, where she provides premium legal counsel to Nigeria's thriving creative industries.",
@@ -936,7 +936,7 @@ export const SPEAKERS_DATA = [
     "confirmed": false
   },
   {
-    "id": "gabriel-saleh",
+    "id": "d2e3f4a5-b6c7-4d8e-9f0a-1b2c3d4e5f6a",
     "name": "Gabriel Saleh",
     "title": "Member of the House of Representatives",
     "bio": "Gabriel Saleh Zock is a Nigerian politician and entrepreneur, best known for serving as a Member of the House of Representatives for the Kachia/Kagarko Federal Constituency of Kaduna State under the All Progressives Congress (APC) from 2019. He is recognized for his leadership in grassroots development, legislative advocacy, and cultural promotion within Nigeria's political landscape.",
@@ -961,7 +961,7 @@ export const SPEAKERS_DATA = [
     "confirmed": false
   },
   {
-    "id": "mariam-ajaga",
+    "id": "e3f4a5b6-c7d8-4e9f-0a1b-2c3d4e5f6a7b",
     "name": "Mariam Ajaga",
     "title": "SA to the President on Art & Culture, Office of the Honorable Minister",
     "bio": "Mariam Ajaga is a Nigerian cultural strategist and government adviser, currently serving as Special Adviser on Visual Arts and Culture to the Minister of Art, Culture, Tourism & Creative Economy. She is recognized for her leadership in promoting Nigeria's creative industries and positioning culture as a driver of economic growth and global influence.",
@@ -986,7 +986,7 @@ export const SPEAKERS_DATA = [
     "confirmed": false
   },
   {
-    "id": "charles-odii",
+    "id": "f4a5b6c7-d8e9-4f0a-1b2c-3d4e5f6a7b8c",
     "name": "Mr. Charles Odii",
     "title": "Director General/CEO Small & Medium Enterprises Development Agency of Nigeria",
     "bio": "Charles Odii is the Director General and Chief Executive Officer of the Small and Medium Enterprises Development Agency of Nigeria (SMEDAN). He is a distinguished author, entrepreneurship development expert, and small business advocate, recognized for his leadership in advancing Nigeria's SME sector and empowering millions of entrepreneurs.",
@@ -1011,7 +1011,7 @@ export const SPEAKERS_DATA = [
     "confirmed": false
   },
   {
-    "id": "khalil-halilu",
+    "id": "a5b6c7d8-e9f0-4a1b-2c3d-4e5f6a7b8c9d",
     "name": "Mr. Khalil Suleiman Halilu",
     "title": "EVC & CEO National Agency for Science and Engineering Infrastructure (NASENIHQ)",
     "bio": "Khalil Suleiman Halilu is a Nigerian entrepreneur, technocrat, and the current Executive Vice Chairman/Chief Executive Officer of the National Agency for Science and Engineering Infrastructure (NASENI), appointed by President Bola Ahmed Tinubu in September 2023. He is recognized for his innovative leadership in technology, industrial development, and sustainability.",
@@ -1036,7 +1036,7 @@ export const SPEAKERS_DATA = [
     "confirmed": false
   },
   {
-    "id": "ibrahim-adeyanju",
+    "id": "b6c7d8e9-f0a1-4b2c-3d4e-5f6a7b8c9d0e",
     "name": "Prof. Ibrahim Adeyanju",
     "title": "Managing Director/ CEO at Galaxy Backbone",
     "bio": "Prof. Ibrahim Adeyanju is CEO of Galaxy Backbone, leading Nigeria's digital transformation. He drives impact by expanding robust ICT infrastructure, enabling secure government services, and accelerating the growth of the nation's digital economy.",
@@ -1061,7 +1061,7 @@ export const SPEAKERS_DATA = [
     "confirmed": false
   },
   {
-    "id": "olumbe-akinkugbe",
+    "id": "c7d8e9f0-a1b2-4c3d-4e5f-6a7b8c9d0e1f",
     "name": "Mr. Olumbe Akinkugbe",
     "title": "Executive Director Digital Exploration & Technical Services at Galaxy Backbone",
     "bio": "Mr. Olumbe Akinkugbe is Executive Director at Galaxy Backbone, driving Nigeria's digital transformation. He leads the deployment of advanced ICT infrastructure and solutions, enhancing national connectivity, secure digital services, and the growth of the country's digital economy.",
@@ -1086,7 +1086,7 @@ export const SPEAKERS_DATA = [
     "confirmed": false
   },
   {
-    "id": "abisoye-fagade",
+    "id": "d8e9f0a1-b2c3-4d4e-5f6a-7b8c9d0e1f2a",
     "name": "Aare (Dr) Abisoye Ayoyinka Fagade (FIMC)",
     "title": "Director General/CEO at NIHOTOUR",
     "bio": "Aare (Dr) Abisoye Ayoyinka Fagade (FIMC) is the Director General/CEO of NIHOTOUR (Nigerian Institute for Hospitality and Tourism). He drives national impact by professionalizing the hospitality and tourism sector, developing skilled talent, and promoting industry standards that enhance Nigeria's global competitiveness and sustainable tourism growth.",
@@ -1111,7 +1111,7 @@ export const SPEAKERS_DATA = [
     "confirmed": false
   },
   {
-    "id": "ayo-adeagbo",
+    "id": "e9f0a1b2-c3d4-4e5f-6a7b-8c9d0e1f2a3b",
     "name": "Mr. Ayo Adeagbo",
     "title": "Special Assistant to the President (Arts, Culture and the Creative Economy)",
     "bio": "Mr. Ayo Adeagbo is the Special Assistant to the President on Arts, Culture, and the Creative Economy, driving Nigeria's creative sectors as engines of economic growth. He shapes policy, attracts investment, and builds platforms that amplify talent, foster global partnerships, and position culture as a strategic economic asset.",
@@ -1136,7 +1136,7 @@ export const SPEAKERS_DATA = [
     "confirmed": false
   },
   {
-    "id": "amu-ogbeide",
+    "id": "f0a1b2c3-d4e5-4f6a-7b8c-9d0e1f2a3b4c",
     "name": "Mr. Amu Ogbeide",
     "title": "Governing Council Member at CIBN, Co-Founder & GCEO at Sapphital",
     "bio": "Mr. Amu Ogbeide is a financial services leader, Governing Council member of the Chartered Institute of Bankers of Nigeria (CIBN), and Co‑Founder & GCEO of Sapphital. He drives transformative impact by advancing professional banking standards, promoting financial inclusion, and leveraging fintech innovation to expand investment access. His leadership strengthens Nigeria's financial ecosystem, fostering sustainable growth, transparency, and global competitiveness.",
@@ -1161,7 +1161,7 @@ export const SPEAKERS_DATA = [
     "confirmed": false
   },
   {
-    "id": "ife-adebayo",
+    "id": "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5e",
     "name": "Mr. Ife Adebayo",
     "title": "National Coordinator, iDICE Programme",
     "bio": "Ife Adebayo is the National Coordinator of Nigeria's Investment in Digital & Creative Enterprises (iDICE) Programme and a leading architect of the country's tech and creative economy initiatives. He drives transformative impact by mobilizing investment, scaling youth-led startups, and fostering innovation across digital and creative sectors. His leadership positions Nigeria as a global hub for technology-driven entrepreneurship and sustainable economic growth.",
@@ -1186,7 +1186,7 @@ export const SPEAKERS_DATA = [
     "confirmed": false
   },
   {
-    "id": "olanipekun-olukoyede",
+    "id": "b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6f",
     "name": "Mr. Olanipekun Olukoyede",
     "title": "Executive Chairman, EFCC",
     "bio": "Mr. Olanipekun Olukoyede is the Executive Chairman of Nigeria's Economic and Financial Crimes Commission (EFCC) and a seasoned lawyer and fraud management expert. He leads the national fight against corruption, financial crimes, and economic sabotage, driving stronger enforcement, asset recovery, and institutional accountability.",
@@ -1211,7 +1211,7 @@ export const SPEAKERS_DATA = [
     "confirmed": false
   },
   {
-    "id": "kashifu-abdullahi",
+    "id": "c3d4e5f6-a7b8-4c9d-0e1f-2a3b4c5d6e7a",
     "name": "Mr. Kashifu Inuwa Abdullahi, CCIE",
     "title": "Chief Information Technology Officer of Nigeria",
     "bio": "Mr. Kashifu Inuwa Abdullahi, CCIE is a Nigerian technology executive and Director-General/CEO of the National Information Technology Development Agency (NITDA). He drives national impact by leading Nigeria's digital transformation agenda, strengthening cybersecurity and data protection, and scaling digital skills development to accelerate economic growth and innovation.",
