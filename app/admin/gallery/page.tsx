@@ -3,15 +3,17 @@
 import type React from "react"
 
 import { useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
 import { createClient } from "@/lib/supabase/client"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { Plus, Edit, Trash2, WifiOff } from "lucide-react"
+import { Plus, Edit, Trash2, WifiOff, Loader2 } from "lucide-react"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { AdminNavigation } from "@/components/admin-navigation"
 import { useNetworkStore } from "@/lib/stores/network-store"
+import { useAdminAuth } from "@/hooks/use-admin-auth"
 
 // Force dynamic rendering to prevent prerendering during build
 export const dynamic = 'force-dynamic'
@@ -29,7 +31,9 @@ type GalleryItem = {
 }
 
 export default function AdminGalleryPage() {
+  const router = useRouter()
   const { isOnline } = useNetworkStore()
+  const { isLoading: isAuthLoading, isAuthenticated } = useAdminAuth()
   const [items, setItems] = useState<GalleryItem[]>([])
   const [isAddingNew, setIsAddingNew] = useState(false)
   const [editingInlineId, setEditingInlineId] = useState<string | null>(null)
@@ -45,9 +49,18 @@ export default function AdminGalleryPage() {
 
   const supabase = createClient()
 
+  // Redirect if not authenticated
   useEffect(() => {
-    fetchItems()
-  }, [])
+    if (!isAuthLoading && !isAuthenticated) {
+      router.push('/admin/login')
+    }
+  }, [isAuthLoading, isAuthenticated, router])
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetchItems()
+    }
+  }, [isAuthenticated])
 
   const fetchItems = async () => {
     const { data } = await supabase.from("gallery_items").select("*").order("display_order")
@@ -184,6 +197,15 @@ export default function AdminGalleryPage() {
       </div>
     </form>
   )
+
+  // Show loading while checking auth
+  if (isAuthLoading || !isAuthenticated) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-muted-foreground" />
+      </div>
+    )
+  }
 
   return (
     <>

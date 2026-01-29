@@ -3,19 +3,18 @@
 import type React from "react"
 
 import { useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
 import { createClient } from "@/lib/supabase/client"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { Plus, Edit, Trash2, Eye, EyeOff, WifiOff } from "lucide-react"
+import { Plus, Edit, Trash2, Eye, EyeOff, WifiOff, Loader2 } from "lucide-react"
 import { AdminNavigation } from "@/components/admin-navigation"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
 import { useNetworkStore } from "@/lib/stores/network-store"
-
-// Force dynamic rendering to prevent prerendering during build
-export const dynamic = 'force-dynamic'
+import { useAdminAuth } from "@/hooks/use-admin-auth"
 
 type Speaker = {
   id: string
@@ -36,7 +35,9 @@ type Speaker = {
 }
 
 export default function AdminSpeakersPage() {
+  const router = useRouter()
   const { isOnline } = useNetworkStore()
+  const { isLoading: isAuthLoading, isAuthenticated } = useAdminAuth()
   const [speakers, setSpeakers] = useState<Speaker[]>([])
   const [isAddingNew, setIsAddingNew] = useState(false)
   const [editingInlineId, setEditingInlineId] = useState<string | null>(null)
@@ -57,13 +58,36 @@ export default function AdminSpeakersPage() {
 
   const supabase = createClient()
 
+  // Redirect if not authenticated
   useEffect(() => {
-    fetchSpeakers()
-  }, [])
+    if (!isAuthLoading && !isAuthenticated) {
+      router.push('/admin/login')
+    }
+  }, [isAuthLoading, isAuthenticated, router])
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetchSpeakers()
+    }
+  }, [isAuthenticated])
 
   const fetchSpeakers = async () => {
     const { data } = await supabase.from("speakers").select("*").order("display_order")
     if (data) setSpeakers(data)
+  }
+
+  // Show loading while checking auth
+  if (isAuthLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-muted-foreground" />
+      </div>
+    )
+  }
+
+  // Don't render if not authenticated
+  if (!isAuthenticated) {
+    return null
   }
 
   const toggleSpeakerStatus = async (id: string, currentStatus: string) => {

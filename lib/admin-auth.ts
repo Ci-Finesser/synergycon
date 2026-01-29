@@ -38,6 +38,33 @@ export async function verifyAdminSession(): Promise<AdminUser | null> {
 }
 
 /**
+ * Verify admin session exists without requiring 2FA verification
+ * Use this for 2FA setup and settings pages that must be accessible before 2FA is complete
+ */
+export async function verifyAdminSessionWithout2FA(): Promise<AdminUser | null> {
+  try {
+    const cookieStore = await cookies()
+    const adminSessionCookie = cookieStore.get("admin_session")
+
+    if (!adminSessionCookie?.value) {
+      return null
+    }
+
+    const adminUser = JSON.parse(adminSessionCookie.value) as AdminUser
+
+    // Validate required fields
+    if (!adminUser.id || !adminUser.email) {
+      return null
+    }
+
+    return adminUser
+  } catch (error) {
+    console.error("Error verifying admin session:", error)
+    return null
+  }
+}
+
+/**
  * Get admin user from session - throws if not authenticated
  * For use in server components that require authentication
  */

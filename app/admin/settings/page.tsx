@@ -1,23 +1,18 @@
 import { redirect } from "next/navigation"
-import { cookies } from "next/headers"
 import Link from "next/link"
 import { Shield, Mail, Key, ArrowLeft } from "lucide-react"
 import { AdminNavigation } from "@/components/admin-navigation"
 import { Button } from "@/components/ui/button"
 import { TwoFactorSettings } from "@/components/admin/two-factor-settings"
+import { verifyAdminSessionWithout2FA } from "@/lib/admin-auth"
+
+export const dynamic = 'force-dynamic'
 
 export default async function AdminSettingsPage() {
-  const cookieStore = await cookies()
-  const adminSessionCookie = cookieStore.get("admin_session")
+  // Use session check that doesn't require 2FA (since this is where 2FA is set up)
+  const adminUser = await verifyAdminSessionWithout2FA()
 
-  if (!adminSessionCookie) {
-    redirect("/admin/login")
-  }
-
-  let adminUser
-  try {
-    adminUser = JSON.parse(adminSessionCookie.value)
-  } catch (error) {
+  if (!adminUser) {
     redirect("/admin/login")
   }
 

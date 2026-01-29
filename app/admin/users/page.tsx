@@ -1,19 +1,14 @@
 import { redirect } from "next/navigation"
-import { cookies } from "next/headers"
 import { AdminNavigation } from "@/components/admin-navigation"
 import { AdminUsersManager } from "@/components/admin/admin-users-manager"
+import { getAdminUser } from "@/lib/admin-auth"
+
+export const dynamic = 'force-dynamic'
 
 export default async function AdminUsersPage() {
-  const cookieStore = await cookies()
-  const adminSessionCookie = cookieStore.get("admin_session")
-
-  if (!adminSessionCookie) {
-    redirect("/admin/login")
-  }
-
   let adminUser
   try {
-    adminUser = JSON.parse(adminSessionCookie.value)
+    adminUser = await getAdminUser()
   } catch (error) {
     redirect("/admin/login")
   }

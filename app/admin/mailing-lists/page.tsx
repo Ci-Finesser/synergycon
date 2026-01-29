@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
-import { Plus, Users, Edit } from "lucide-react"
+import { Plus, Users, Edit, Loader2, Trash2, MoreVertical } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -16,7 +16,24 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog"
 import { AdminNavigation } from "@/components/admin-navigation"
+import { useAdminAuth } from "@/hooks/use-admin-auth"
 
 interface MailingList {
   id: string
@@ -29,15 +46,31 @@ interface MailingList {
 export default function MailingListsPage() {
   const router = useRouter()
   const { toast } = useToast()
+  const { isLoading: isAuthLoading, isAuthenticated, authFetch } = useAdminAuth()
   const [mailingLists, setMailingLists] = useState<MailingList[]>([])
   const [loading, setLoading] = useState(true)
   const [showCreateDialog, setShowCreateDialog] = useState(false)
+  const [showEditDialog, setShowEditDialog] = useState(false)
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false)
+  const [selectedList, setSelectedList] = useState<MailingList | null>(null)
   const [newList, setNewList] = useState({ name: "", description: "" })
+  const [editList, setEditList] = useState({ name: "", description: "" })
   const [creating, setCreating] = useState(false)
+  const [updating, setUpdating] = useState(false)
+  const [deleting, setDeleting] = useState(false)
+
+  // Redirect if not authenticated
+  useEffect(() => {
+    if (!isAuthLoading && !isAuthenticated) {
+      router.push('/admin/login')
+    }
+  }, [isAuthLoading, isAuthenticated, router])
 
   useEffect(() => {
-    fetchMailingLists()
-  }, [])
+    if (isAuthenticated) {
+      fetchMailingLists()
+    }
+  }, [isAuthenticated])
 
   const fetchMailingLists = async () => {
     try {
@@ -118,6 +151,119 @@ export default function MailingListsPage() {
     }
   }
 
+  const handleEditList = async () => {
+    if (!selectedList || !editList.name.trim()) {
+      toast({
+        title: "Error",
+        description: "Please enter a name for the mailing list",
+        variant: "destructive",
+      })
+      return
+    }
+
+    setUpdating(true)
+
+    try {
+      const response = await authFetch("/api/admin/mailing-lists", {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: selectedList.id,
+          name: editList.name,
+          description: editList.description,
+        }),
+      })
+
+      if (!response.ok) {
+        const data = await response.json()
+        toast({
+          title: "Error",
+          description: data.error || "Failed to update mailing list",
+          variant: "destructive",
+        })
+        return
+      }
+
+      toast({
+        title: "Success",
+        description: "Mailing list updated successfully",
+      })
+      setShowEditDialog(false)
+      setSelectedList(null)
+      fetchMailingLists()
+    } catch (error) {
+      console.error("Error updating mailing list:", error)
+      toast({
+        title: "Error",
+        description: "Network error. Please check your connection and try again.",
+        variant: "destructive",
+      })
+    } finally {
+      setUpdating(false)
+    }
+  }
+
+  const handleDeleteList = async () => {
+    if (!selectedList) return
+
+    setDeleting(true)
+
+    try {
+      const response = await authFetch(`/api/admin/mailing-lists?id=${selectedList.id}`, {
+        method: "DELETE",
+      })
+
+      if (!response.ok) {
+        const data = await response.json()
+        toast({
+          title: "Error",
+          description: data.error || "Failed to delete mailing list",
+          variant: "destructive",
+        })
+        return
+      }
+
+      toast({
+        title: "Success",
+        description: "Mailing list deleted successfully",
+      })
+      setShowDeleteDialog(false)
+      setSelectedList(null)
+      fetchMailingLists()
+    } catch (error) {
+      console.error("Error deleting mailing list:", error)
+      toast({
+        title: "Error",
+        description: "Network error. Please check your connection and try again.",
+        variant: "destructive",
+      })
+    } finally {
+      setDeleting(false)
+    }
+  }
+
+  const openEditDialog = (list: MailingList) => {
+    setSelectedList(list)
+    setEditList({ name: list.name, description: list.description || "" })
+    setShowEditDialog(true)
+  }
+
+  const openDeleteDialog = (list: MailingList) => {
+    setSelectedList(list)
+    setShowDeleteDialog(true)
+  }
+
+  // Show loading while checking auth
+  if (isAuthLoading || !isAuthenticated) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-muted-foreground" />
+      </div>
+    )
+  }
+
   return (
     <>
       <AdminNavigation />
@@ -176,18 +322,46 @@ export default function MailingListsPage() {
                         <span>Created {new Date(list.created_at).toLocaleDateString()}</span>
                       </div>
                     </div>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        router.push(`/admin/mailing-lists/${list.id}`)
-                      }}
-                      className="gap-1.5"
-                    >
-                      <Edit className="w-3.5 h-3.5" />
-                      Manage
-                    </Button>
+                    <div className="flex items-center gap-2">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          router.push(`/admin/mailing-lists/${list.id}`)
+                        }}
+                        className="gap-1.5"
+                      >
+                        <Users className="w-3.5 h-3.5" />
+                        Manage
+                      </Button>
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild onClick={(e) => e.stopPropagation()}>
+                          <Button variant="ghost" size="icon" className="h-8 w-8">
+                            <MoreVertical className="w-4 h-4" />
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                          <DropdownMenuItem onClick={(e) => {
+                            e.stopPropagation()
+                            openEditDialog(list)
+                          }}>
+                            <Edit className="w-4 h-4 mr-2" />
+                            Edit
+                          </DropdownMenuItem>
+                          <DropdownMenuItem 
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              openDeleteDialog(list)
+                            }}
+                            className="text-destructive focus:text-destructive"
+                          >
+                            <Trash2 className="w-4 h-4 mr-2" />
+                            Delete
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -196,6 +370,7 @@ export default function MailingListsPage() {
         </div>
       </main>
 
+      {/* Create Dialog */}
       <Dialog open={showCreateDialog} onOpenChange={setShowCreateDialog}>
         <DialogContent>
           <DialogHeader>
@@ -235,6 +410,69 @@ export default function MailingListsPage() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      {/* Edit Dialog */}
+      <Dialog open={showEditDialog} onOpenChange={setShowEditDialog}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Edit Mailing List</DialogTitle>
+            <DialogDescription>
+              Update the mailing list name and description
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            <div>
+              <Label htmlFor="edit-name">Name *</Label>
+              <Input
+                id="edit-name"
+                placeholder="e.g., Newsletter Subscribers"
+                value={editList.name}
+                onChange={(e) => setEditList({ ...editList, name: e.target.value })}
+              />
+            </div>
+            <div>
+              <Label htmlFor="edit-description">Description (optional)</Label>
+              <Textarea
+                id="edit-description"
+                placeholder="Describe this mailing list..."
+                rows={3}
+                value={editList.description}
+                onChange={(e) => setEditList({ ...editList, description: e.target.value })}
+              />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setShowEditDialog(false)} disabled={updating}>
+              Cancel
+            </Button>
+            <Button onClick={handleEditList} disabled={updating}>
+              {updating ? "Saving..." : "Save Changes"}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Delete Confirmation Dialog */}
+      <AlertDialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Delete Mailing List</AlertDialogTitle>
+            <AlertDialogDescription>
+              Are you sure you want to delete "{selectedList?.name}"? This will also remove all {selectedList?.total_subscribers || 0} subscriber(s) from this list. This action cannot be undone.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel disabled={deleting}>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={handleDeleteList}
+              disabled={deleting}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            >
+              {deleting ? "Deleting..." : "Delete"}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </>
   )
 }

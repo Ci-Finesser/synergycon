@@ -1,7 +1,10 @@
 import { Metadata } from 'next';
-import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import ActiveSessions from '@/components/admin/active-sessions';
+import { AdminNavigation } from "@/components/admin-navigation";
+import { getAdminUser } from "@/lib/admin-auth";
+
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: 'Active Sessions | Admin Dashboard',
@@ -9,17 +12,26 @@ export const metadata: Metadata = {
 };
 
 export default async function SessionsPage() {
-  // Check if admin is authenticated
-  const cookieStore = await cookies();
-  const adminSession = cookieStore.get('admin_session');
-
-  if (!adminSession) {
+  try {
+    await getAdminUser();
+  } catch (error) {
     redirect('/admin/login');
   }
 
   return (
-    <div className="container mx-auto py-10 px-4">
-      <ActiveSessions autoRefresh={true} refreshInterval={30000} />
-    </div>
+    <>
+      <AdminNavigation />
+      <main className="min-h-screen py-12 px-4 md:px-6 bg-muted/30">
+        <div className="max-w-7xl mx-auto">
+          <div className="mb-8">
+            <h1 className="text-2xl md:text-3xl font-bold tracking-tight mb-2">Active Sessions</h1>
+            <p className="text-sm text-muted-foreground">
+              Manage your active login sessions across all devices
+            </p>
+          </div>
+          <ActiveSessions autoRefresh={true} refreshInterval={30000} />
+        </div>
+      </main>
+    </>
   );
 }

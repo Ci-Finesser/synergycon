@@ -1,26 +1,17 @@
 import { NextResponse } from "next/server"
-import { cookies } from "next/headers"
 import { createClient } from "@/lib/supabase/server"
 import { validateRequestSecurity, cleanSecurityFields } from "@/lib/api-security"
 import { RATE_LIMITS } from "@/lib/rate-limit"
 import { logSecurityEvent } from "@/lib/security-logger"
+import { verifyAdminSession, createUnauthorizedResponse } from "@/lib/admin-auth"
 
 // GET - List all admins
 export async function GET(request: Request) {
   try {
     // Verify admin session
-    const cookieStore = await cookies()
-    const adminSessionCookie = cookieStore.get("admin_session")
-
-    if (!adminSessionCookie) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
-    }
-
-    let adminUser
-    try {
-      adminUser = JSON.parse(adminSessionCookie.value)
-    } catch (error) {
-      return NextResponse.json({ error: "Invalid session" }, { status: 401 })
+    const adminUser = await verifyAdminSession()
+    if (!adminUser) {
+      return createUnauthorizedResponse('Invalid admin session')
     }
 
     const supabase = await createClient()
@@ -56,18 +47,9 @@ export async function POST(request: Request) {
     const { email, password, full_name, role } = cleanSecurityFields(body)
 
     // Verify admin session
-    const cookieStore = await cookies()
-    const adminSessionCookie = cookieStore.get("admin_session")
-
-    if (!adminSessionCookie) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
-    }
-
-    let adminUser
-    try {
-      adminUser = JSON.parse(adminSessionCookie.value)
-    } catch (error) {
-      return NextResponse.json({ error: "Invalid session" }, { status: 401 })
+    const adminUser = await verifyAdminSession()
+    if (!adminUser) {
+      return createUnauthorizedResponse('Invalid admin session')
     }
 
     // Validate required fields
@@ -151,18 +133,9 @@ export async function DELETE(request: Request) {
     const body = await request.json()
 
     // Verify admin session
-    const cookieStore = await cookies()
-    const adminSessionCookie = cookieStore.get("admin_session")
-
-    if (!adminSessionCookie) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
-    }
-
-    let adminUser
-    try {
-      adminUser = JSON.parse(adminSessionCookie.value)
-    } catch (error) {
-      return NextResponse.json({ error: "Invalid session" }, { status: 401 })
+    const adminUser = await verifyAdminSession()
+    if (!adminUser) {
+      return createUnauthorizedResponse('Invalid admin session')
     }
 
     const { admin_id } = body
@@ -203,6 +176,88 @@ export async function DELETE(request: Request) {
     })
   } catch (error) {
     console.error("[Admin Users API] DELETE error:", error)
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 })
+  }
+}
+
+// PATCH - Update admin user
+export async function PATCH(request: Request) {
+  try {
+    const body = await request.json()
+
+    // Validate security with strict rate limiting
+    const securityError = await validateRequestSecurity(request, body, {
+      skipTiming: false,
+      rateLimit: RATE_LIMITS.FORM,
+    })
+    if (securityError) return securityError
+
+    const { admin_id, full_name, role, is_active } = cleanSecurityFields(body)
+
+    // Verify admin session
+    const adminUser = await verifyAdminSession()
+    if (!adminUser) {
+      return createUnauthorizedResponse('Invalid admin session')
+    }
+
+    if (!admin_id) {
+      return NextResponse.json({ error: "Admin ID is required" }, { status: 400 })
+    }
+
+    // Build update object with only provided fields
+    const updates: Record<string, unknown> = {}
+    if (full_name !== undefined) updates.full_name = full_name
+    if (role !== undefined) {
+      const validRoles = ["admin", "super_admin"]
+      if (!validRoles.includes(role)) {
+        return NextResponse.json({ error: "Invalid role" }, { status: 400 })
+      }
+      updates.role = role
+    }
+    if (is_active !== undefined) {
+      // Prevent self-deactivation
+      if (admin_id === adminUser.id && is_active === false) {
+        return NextResponse.json(
+          { error: "You cannot deactivate your own account" },
+          { status: 400 }
+        )
+      }
+      updates.is_active = is_active
+    }
+
+    if (Object.keys(updates).length === 0) {
+      return NextResponse.json({ error: "No valid fields to update" }, { status: 400 })
+    }
+
+    updates.updated_at = new Date().toISOString()
+
+    const supabase = await createClient()
+
+    const { data, error } = await supabase
+      .from("admin_users")
+      .update(updates)
+      .eq("id", admin_id)
+      .select()
+      .single()
+
+    if (error) {
+      console.error("[Admin Users API] Error updating admin:", error)
+      return NextResponse.json({ error: "Failed to update admin user" }, { status: 500 })
+    }
+
+    logSecurityEvent({
+      type: 'admin_user_updated',
+      endpoint: request.url,
+      details: `Admin user updated: ${admin_id} by ${adminUser.email}`,
+    })
+
+    return NextResponse.json({
+      success: true,
+      message: "Admin user updated successfully",
+      admin: data,
+    })
+  } catch (error) {
+    console.error("[Admin Users API] PATCH error:", error)
     return NextResponse.json({ error: "Internal server error" }, { status: 500 })
   }
 }

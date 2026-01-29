@@ -1,8 +1,8 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
-import { ArrowLeft, Mail, Send, Settings, Plus, Eye } from "lucide-react"
+import { ArrowLeft, Mail, Send, Settings, Plus, Eye, Loader2 } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -12,6 +12,7 @@ import { useToast } from "@/hooks/use-toast"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { AdminNavigation } from "@/components/admin-navigation"
 import { EVENT_NAME, EVENT_DATES, VENUE_SHORT_NAMES } from "@/lib/constants"
+import { useAdminAuth } from "@/hooks/use-admin-auth"
 
 const venueList = VENUE_SHORT_NAMES.join(", ")
 
@@ -29,6 +30,14 @@ export default function EmailCampaignsPage() {
   const [showSettings, setShowSettings] = useState(false)
   const router = useRouter()
   const { toast } = useToast()
+  const { isLoading: isAuthLoading, isAuthenticated } = useAdminAuth()
+
+  // Redirect if not authenticated
+  useEffect(() => {
+    if (!isAuthLoading && !isAuthenticated) {
+      router.push('/admin/login')
+    }
+  }, [isAuthLoading, isAuthenticated, router])
 
   const sentEmails: SentEmail[] = [
     {
@@ -342,6 +351,15 @@ export default function EmailCampaignsPage() {
             </div>
           </div>
         </div>
+      </div>
+    )
+  }
+
+  // Show loading while checking auth
+  if (isAuthLoading || !isAuthenticated) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-muted-foreground" />
       </div>
     )
   }

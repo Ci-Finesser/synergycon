@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
 import { createClient } from "@/lib/supabase/server"
-import { cookies } from "next/headers"
 import { validateRequestSecurity, cleanSecurityFields } from "@/lib/api-security"
 import { RATE_LIMITS } from "@/lib/rate-limit"
 import { verifyAdminSession, createUnauthorizedResponse } from "@/lib/admin-auth"
@@ -155,11 +154,10 @@ export async function POST(request: NextRequest) {
 
 export async function PUT(request: NextRequest) {
   try {
-    const cookieStore = await cookies()
-    const adminSessionCookie = cookieStore.get("admin_session")
-
-    if (!adminSessionCookie) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+    // Verify admin authentication
+    const adminUser = await verifyAdminSession();
+    if (!adminUser) {
+      return createUnauthorizedResponse('Invalid admin session');
     }
 
     const body = await request.json()
@@ -223,11 +221,10 @@ export async function PUT(request: NextRequest) {
 
 export async function DELETE(request: NextRequest) {
   try {
-    const cookieStore = await cookies()
-    const adminSessionCookie = cookieStore.get("admin_session")
-
-    if (!adminSessionCookie) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+    // Verify admin authentication
+    const adminUser = await verifyAdminSession();
+    if (!adminUser) {
+      return createUnauthorizedResponse('Invalid admin session');
     }
 
     const body = await request.json()

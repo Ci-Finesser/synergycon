@@ -3,18 +3,20 @@
 import type React from "react"
 
 import { useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
 import { createClient } from "@/lib/supabase/client"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { Plus, Edit, Trash2, Eye, EyeOff, WifiOff } from "lucide-react"
+import { Plus, Edit, Trash2, Eye, EyeOff, WifiOff, Loader2 } from "lucide-react"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Checkbox } from "@/components/ui/checkbox"
 import { AdminNavigation } from "@/components/admin-navigation"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
 import { useNetworkStore } from "@/lib/stores/network-store"
+import { useAdminAuth } from "@/hooks/use-admin-auth"
 
 // Force dynamic rendering to prevent prerendering during build
 export const dynamic = 'force-dynamic'
@@ -37,7 +39,9 @@ type Sponsor = {
 }
 
 export default function AdminSponsorsPage() {
+  const router = useRouter()
   const { isOnline } = useNetworkStore()
+  const { isLoading: isAuthLoading, isAuthenticated } = useAdminAuth()
   const [sponsors, setSponsors] = useState<Sponsor[]>([])
   const [isAddingNew, setIsAddingNew] = useState(false)
   const [editingInlineId, setEditingInlineId] = useState<string | null>(null)
@@ -57,9 +61,18 @@ export default function AdminSponsorsPage() {
 
   const supabase = createClient()
 
+  // Redirect if not authenticated
   useEffect(() => {
-    fetchSponsors()
-  }, [])
+    if (!isAuthLoading && !isAuthenticated) {
+      router.push('/admin/login')
+    }
+  }, [isAuthLoading, isAuthenticated, router])
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetchSponsors()
+    }
+  }, [isAuthenticated])
 
   const fetchSponsors = async () => {
     const { data } = await supabase.from("sponsors").select("*").order("display_order")
@@ -343,6 +356,15 @@ export default function AdminSponsorsPage() {
 
   const draftSponsors = sponsors.filter((s) => s.status === "draft")
   const liveSponsors = sponsors.filter((s) => s.status === "live")
+
+  // Show loading while checking auth
+  if (isAuthLoading || !isAuthenticated) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-muted-foreground" />
+      </div>
+    )
+  }
 
   return (
     <>

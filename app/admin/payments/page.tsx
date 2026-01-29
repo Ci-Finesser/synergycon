@@ -7,6 +7,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -33,7 +34,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from 'recharts'
-import { Download, RefreshCw, Filter, TrendingUp, WifiOff } from 'lucide-react'
+import { Download, RefreshCw, Filter, TrendingUp, WifiOff, Loader2 } from 'lucide-react'
 import type {
   PaymentStats,
   PaymentRecord,
@@ -43,9 +44,15 @@ import type {
   PaymentStatus,
 } from '@/types/payment'
 import { useNetworkStore } from '@/lib/stores/network-store'
+import { useAdminAuth } from '@/hooks/use-admin-auth'
+import { AdminNavigation } from '@/components/admin-navigation'
 
 export default function AdminPaymentsDashboard() {
+  const router = useRouter()
   const { isOnline } = useNetworkStore()
+  const { isLoading: isAuthLoading, isAuthenticated, authFetch } = useAdminAuth()
+  
+  // All useState hooks must be at the top, before any conditional returns
   const [stats, setStats] = useState<PaymentStats | null>(null)
   const [payments, setPayments] = useState<PaymentRecord[]>([])
   const [dailyRevenue, setDailyRevenue] = useState<DailyRevenue[]>([])
@@ -63,15 +70,26 @@ export default function AdminPaymentsDashboard() {
 
   const ITEMS_PER_PAGE = 10
 
+  // Redirect if not authenticated
+  useEffect(() => {
+    if (!isAuthLoading && !isAuthenticated) {
+      router.push('/admin/login')
+    }
+  }, [isAuthLoading, isAuthenticated, router])
+
   // Load analytics data
   useEffect(() => {
-    loadAnalytics()
-  }, [startDate, endDate])
+    if (isAuthenticated) {
+      loadAnalytics()
+    }
+  }, [isAuthenticated, startDate, endDate])
 
   // Load payments list
   useEffect(() => {
-    loadPayments()
-  }, [statusFilter, currentPage])
+    if (isAuthenticated) {
+      loadPayments()
+    }
+  }, [isAuthenticated, statusFilter, currentPage])
 
   const loadAnalytics = async () => {
     try {
@@ -148,18 +166,40 @@ export default function AdminPaymentsDashboard() {
 
   const COLORS = ['#3b82f6', '#ef4444', '#f97316', '#8b5cf6', '#06b6d4']
 
+  // Show loading while checking auth
+  if (isAuthLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-muted-foreground" />
+      </div>
+    )
+  }
+
+  // Don't render if not authenticated
+  if (!isAuthenticated) {
+    return null
+  }
+
   if (loading) {
-    return <div className="p-8 text-center">Loading...</div>
+    return (
+      <>
+        <AdminNavigation />
+        <div className="p-8 text-center">Loading...</div>
+      </>
+    )
   }
 
   return (
-    <div className="space-y-8 p-8">
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold">Payments Dashboard</h1>
-          <p className="text-muted-foreground mt-1">Manage and analyze all payment transactions</p>
-        </div>
+    <>
+      <AdminNavigation />
+      <main className="min-h-screen py-12 px-4 md:px-6 bg-muted/30">
+        <div className="max-w-7xl mx-auto space-y-8">
+          {/* Header */}
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-2xl md:text-3xl font-bold tracking-tight mb-2">Payments Dashboard</h1>
+              <p className="text-sm text-muted-foreground">Manage and analyze all payment transactions</p>
+            </div>
         <div className="flex gap-2">
           <Button onClick={() => loadAnalytics()} variant="outline" size="sm">
             <RefreshCw className="w-4 h-4 mr-2" />
@@ -452,6 +492,8 @@ export default function AdminPaymentsDashboard() {
           )}
         </CardContent>
       </Card>
-    </div>
+        </div>
+      </main>
+    </>
   )
 }

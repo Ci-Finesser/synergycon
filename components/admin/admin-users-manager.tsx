@@ -20,11 +20,17 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { UserPlus, Trash2, Shield, User, Mail, Calendar, Loader2, AlertCircle } from "lucide-react"
+import { UserPlus, Trash2, Shield, User, Mail, Calendar, Loader2, AlertCircle, Edit, MoreVertical } from "lucide-react"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { HoneypotFields } from "@/components/ui/honeypot-fields"
 import { useFormSecurity } from "@/hooks/use-form-security"
 import type { Admin, AdminUsersManagerProps } from '@/types/components'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 
 // Re-export for backward compatibility
 export type { Admin, AdminUsersManagerProps }
@@ -49,6 +55,15 @@ export function AdminUsersManager({ currentAdminId }: AdminUsersManagerProps) {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false)
   const [adminToDelete, setAdminToDelete] = useState<Admin | null>(null)
   const [deleteLoading, setDeleteLoading] = useState(false)
+
+  // Edit dialog state
+  const [editDialogOpen, setEditDialogOpen] = useState(false)
+  const [adminToEdit, setAdminToEdit] = useState<Admin | null>(null)
+  const [editLoading, setEditLoading] = useState(false)
+  const [editFormData, setEditFormData] = useState({
+    full_name: "",
+    role: "admin",
+  })
 
   const { csrfToken, honeypotFields, updateHoneypot } = useFormSecurity()
 
@@ -145,6 +160,57 @@ export function AdminUsersManager({ currentAdminId }: AdminUsersManagerProps) {
       setError(err.message || "Failed to delete admin user")
     } finally {
       setDeleteLoading(false)
+    }
+  }
+
+  // Open edit dialog
+  const openEditDialog = (admin: Admin) => {
+    setAdminToEdit(admin)
+    setEditFormData({
+      full_name: admin.full_name,
+      role: admin.role,
+    })
+    setEditDialogOpen(true)
+  }
+
+  // Handle edit admin
+  const handleEditAdmin = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!adminToEdit) return
+
+    setEditLoading(true)
+    setError(null)
+    setSuccess(null)
+
+    try {
+      const response = await fetch("/api/admin/users", {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRF-Token": csrfToken || "",
+        },
+        body: JSON.stringify({
+          admin_id: adminToEdit.id,
+          ...editFormData,
+          ...honeypotFields,
+          _csrf: csrfToken,
+        }),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to update admin")
+      }
+
+      setSuccess("Admin user updated successfully!")
+      setEditDialogOpen(false)
+      setAdminToEdit(null)
+      fetchAdmins() // Refresh the list
+    } catch (err: any) {
+      setError(err.message || "Failed to update admin user")
+    } finally {
+      setEditLoading(false)
     }
   }
 
@@ -251,22 +317,43 @@ export function AdminUsersManager({ currentAdminId }: AdminUsersManagerProps) {
                 </div>
 
                 {/* Actions */}
-                {admin.id !== currentAdminId && (
-                  <div className="pt-4 border-t">
+                <div className="pt-4 border-t flex gap-2">
+                  {admin.id !== currentAdminId ? (
+                    <>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="flex-1"
+                        onClick={() => openEditDialog(admin)}
+                      >
+                        <Edit className="w-4 h-4 mr-2" />
+                        Edit
+                      </Button>
+                      <Button
+                        variant="destructive"
+                        size="sm"
+                        className="flex-1"
+                        onClick={() => {
+                          setAdminToDelete(admin)
+                          setDeleteDialogOpen(true)
+                        }}
+                      >
+                        <Trash2 className="w-4 h-4 mr-2" />
+                        Delete
+                      </Button>
+                    </>
+                  ) : (
                     <Button
-                      variant="destructive"
+                      variant="outline"
                       size="sm"
                       className="w-full"
-                      onClick={() => {
-                        setAdminToDelete(admin)
-                        setDeleteDialogOpen(true)
-                      }}
+                      onClick={() => openEditDialog(admin)}
                     >
-                      <Trash2 className="w-4 h-4 mr-2" />
-                      Delete Admin
+                      <Edit className="w-4 h-4 mr-2" />
+                      Edit Profile
                     </Button>
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
             </Card>
           ))}
@@ -402,6 +489,74 @@ export function AdminUsersManager({ currentAdminId }: AdminUsersManagerProps) {
               Delete Admin
             </Button>
           </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Edit Admin Dialog */}
+      <Dialog open={editDialogOpen} onOpenChange={setEditDialogOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Edit Admin User</DialogTitle>
+            <DialogDescription>
+              Update admin user details. Email cannot be changed.
+            </DialogDescription>
+          </DialogHeader>
+
+          <form onSubmit={handleEditAdmin} className="space-y-4">
+            <HoneypotFields values={honeypotFields} onChange={updateHoneypot} />
+
+            <div className="bg-muted/50 p-3 rounded-lg">
+              <div className="flex items-center gap-2 text-sm">
+                <Mail className="w-4 h-4 text-muted-foreground" />
+                <span className="text-muted-foreground">{adminToEdit?.email}</span>
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="edit_full_name">Full Name</Label>
+              <Input
+                id="edit_full_name"
+                value={editFormData.full_name}
+                onChange={(e) => setEditFormData({ ...editFormData, full_name: e.target.value })}
+                placeholder="Enter full name"
+                required
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="edit_role">Role</Label>
+              <Select
+                value={editFormData.role}
+                onValueChange={(value) => setEditFormData({ ...editFormData, role: value })}
+              >
+                <SelectTrigger id="edit_role">
+                  <SelectValue placeholder="Select role" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="admin">Admin</SelectItem>
+                  <SelectItem value="super_admin">Super Admin</SelectItem>
+                </SelectContent>
+              </Select>
+              <p className="text-xs text-muted-foreground">
+                Super admins have full system access
+              </p>
+            </div>
+
+            <DialogFooter className="gap-2">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setEditDialogOpen(false)}
+                disabled={editLoading}
+              >
+                Cancel
+              </Button>
+              <Button type="submit" disabled={editLoading}>
+                {editLoading && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
+                Save Changes
+              </Button>
+            </DialogFooter>
+          </form>
         </DialogContent>
       </Dialog>
     </div>

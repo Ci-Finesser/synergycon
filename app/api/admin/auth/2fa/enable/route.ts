@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server"
-import { cookies } from "next/headers"
 import { createClient } from "@/lib/supabase/server"
 import { checkRateLimit, RATE_LIMITS } from "@/lib/rate-limit"
+import { verifyAdminSessionWithout2FA } from "@/lib/admin-auth"
 
 export async function POST(request: Request) {
   try {
@@ -14,14 +14,12 @@ export async function POST(request: Request) {
       )
     }
 
-    const cookieStore = await cookies()
-    const adminSessionCookie = cookieStore.get("admin_session")
+    const adminUser = await verifyAdminSessionWithout2FA()
 
-    if (!adminSessionCookie) {
+    if (!adminUser) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
     }
 
-    const adminUser = JSON.parse(adminSessionCookie.value)
     const supabase = await createClient()
 
     // Enable 2FA for the admin

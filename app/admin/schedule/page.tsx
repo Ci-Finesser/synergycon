@@ -3,14 +3,16 @@
 import type React from "react"
 
 import { useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
 import { createClient } from "@/lib/supabase/client"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { Plus, Edit, Trash2, Clock, MapPin } from "lucide-react"
+import { Plus, Edit, Trash2, Clock, MapPin, Loader2 } from "lucide-react"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { AdminNavigation } from "@/components/admin-navigation"
+import { useAdminAuth } from "@/hooks/use-admin-auth"
 
 // Force dynamic rendering to prevent prerendering during build
 export const dynamic = 'force-dynamic'
@@ -31,6 +33,8 @@ type ScheduleSession = {
 }
 
 export default function AdminSchedulePage() {
+  const router = useRouter()
+  const { isLoading: isAuthLoading, isAuthenticated } = useAdminAuth()
   const [sessions, setSessions] = useState<ScheduleSession[]>([])
   const [isAddingNew, setIsAddingNew] = useState(false)
   const [editingInlineId, setEditingInlineId] = useState<string | null>(null)
@@ -50,9 +54,18 @@ export default function AdminSchedulePage() {
 
   const supabase = createClient()
 
+  // Redirect if not authenticated
   useEffect(() => {
-    fetchSessions()
-  }, [])
+    if (!isAuthLoading && !isAuthenticated) {
+      router.push('/admin/login')
+    }
+  }, [isAuthLoading, isAuthenticated, router])
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetchSessions()
+    }
+  }, [isAuthenticated])
 
   const fetchSessions = async () => {
     const { data } = await supabase.from("schedule_sessions").select("*").order("day").order("time")
@@ -267,6 +280,15 @@ export default function AdminSchedulePage() {
     day,
     sessions: sessions.filter((s) => s.day === day),
   }))
+
+  // Show loading while checking auth
+  if (isAuthLoading || !isAuthenticated) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-muted-foreground" />
+      </div>
+    )
+  }
 
   return (
     <>

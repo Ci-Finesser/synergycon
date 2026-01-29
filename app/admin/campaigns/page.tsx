@@ -2,11 +2,28 @@
 
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
-import { Plus, Mail, Eye, Tag } from "lucide-react"
+import { Plus, Mail, Eye, Tag, Loader2, MoreVertical, Edit, Trash2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useToast } from "@/hooks/use-toast"
 import { Badge } from "@/components/ui/badge"
 import { AdminNavigation } from "@/components/admin-navigation"
+import { useAdminAuth } from "@/hooks/use-admin-auth"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog"
 
 interface Campaign {
   id: string
@@ -28,16 +45,23 @@ interface Campaign {
 export default function CampaignsPage() {
   const router = useRouter()
   const { toast } = useToast()
+  const { isLoading: isAuthLoading, isAuthenticated, authFetch } = useAdminAuth()
   const [campaigns, setCampaigns] = useState<Campaign[]>([])
   const [loading, setLoading] = useState(true)
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false)
+  const [selectedCampaign, setSelectedCampaign] = useState<Campaign | null>(null)
+  const [deleting, setDeleting] = useState(false)
 
+  // Redirect if not authenticated
   useEffect(() => {
-    fetchCampaigns()
-  }, [])
+    if (!isAuthLoading && !isAuthenticated) {
+      router.push('/admin/login')
+    }
+  }, [isAuthLoading, isAuthenticated, router])
 
   const fetchCampaigns = async () => {
     try {
-      const response = await fetch("/api/admin/campaigns")
+      const response = await authFetch("/api/admin/campaigns")
       
       if (!response.ok) {
         const data = await response.json()
@@ -63,6 +87,57 @@ export default function CampaignsPage() {
     }
   }
 
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetchCampaigns()
+    }
+  }, [isAuthenticated])
+
+  const openDeleteDialog = (campaign: Campaign) => {
+    setSelectedCampaign(campaign)
+    setShowDeleteDialog(true)
+  }
+
+  const handleDeleteCampaign = async () => {
+    if (!selectedCampaign) return
+
+    setDeleting(true)
+    try {
+      const response = await authFetch("/api/admin/campaigns", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: selectedCampaign.id }),
+      })
+
+      if (!response.ok) {
+        const data = await response.json()
+        toast({
+          title: "Error",
+          description: data.error || "Failed to delete campaign",
+          variant: "destructive",
+        })
+        return
+      }
+
+      toast({
+        title: "Success",
+        description: "Campaign deleted successfully",
+      })
+      setShowDeleteDialog(false)
+      setSelectedCampaign(null)
+      fetchCampaigns()
+    } catch (error) {
+      console.error("Error deleting campaign:", error)
+      toast({
+        title: "Error",
+        description: "Failed to delete campaign",
+        variant: "destructive",
+      })
+    } finally {
+      setDeleting(false)
+    }
+  }
+
   const getStatusColor = (status: string) => {
     switch (status) {
       case "sent":
@@ -76,6 +151,20 @@ export default function CampaignsPage() {
       default:
         return "bg-gray-500/10 text-gray-700 dark:text-gray-400"
     }
+  }
+
+  // Show loading while checking auth
+  if (isAuthLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-muted-foreground" />
+      </div>
+    )
+  }
+
+  // Don't render if not authenticated
+  if (!isAuthenticated) {
+    return null
   }
 
   return (
@@ -102,6 +191,7 @@ export default function CampaignsPage() {
 
           {loading ? (
             <div className="text-center py-12">
+              <Loader2 className="w-8 h-8 animate-spin mx-auto mb-2 text-muted-foreground" />
               <p className="text-muted-foreground">Loading campaigns...</p>
             </div>
           ) : campaigns.length === 0 ? (
@@ -159,7 +249,7 @@ export default function CampaignsPage() {
                       <div className={`px-2 py-1 rounded text-xs font-medium capitalize ${getStatusColor(campaign.status)}`}>
                         {campaign.status}
                       </div>
-                      <div className="flex gap-2">
+                      <div className="flex items-center gap-2">
                         <Button
                           variant="ghost"
                           size="sm"
@@ -169,6 +259,29 @@ export default function CampaignsPage() {
                           <Eye className="w-3.5 h-3.5" />
                           View
                         </Button>
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <Button variant="ghost" size="icon" className="h-8 w-8">
+                              <MoreVertical className="w-4 h-4" />
+                            </Button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent align="end">
+                            {campaign.status === "draft" && (
+                              <DropdownMenuItem onClick={() => router.push(`/admin/campaigns/${campaign.id}/edit`)}>
+                                <Edit className="w-4 h-4 mr-2" />
+                                Edit
+                              </DropdownMenuItem>
+                            )}
+                            <DropdownMenuItem 
+                              onClick={() => openDeleteDialog(campaign)}
+                              className="text-destructive focus:text-destructive"
+                              disabled={campaign.status !== "draft"}
+                            >
+                              <Trash2 className="w-4 h-4 mr-2" />
+                              Delete
+                            </DropdownMenuItem>
+                          </DropdownMenuContent>
+                        </DropdownMenu>
                       </div>
                     </div>
                   </div>
@@ -178,6 +291,28 @@ export default function CampaignsPage() {
           )}
         </div>
       </main>
+
+      {/* Delete Confirmation Dialog */}
+      <AlertDialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Delete Campaign</AlertDialogTitle>
+            <AlertDialogDescription>
+              Are you sure you want to delete the campaign "{selectedCampaign?.name}"? This action cannot be undone.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel disabled={deleting}>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={handleDeleteCampaign}
+              disabled={deleting}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            >
+              {deleting ? "Deleting..." : "Delete"}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </>
   )
 }

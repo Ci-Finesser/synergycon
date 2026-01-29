@@ -4,6 +4,7 @@ import { useActionState } from "react"
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { useEffect as useLayoutEffect } from "react"
+import { Loader2 } from "lucide-react"
 import { loginAdmin } from "./actions"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -22,7 +23,7 @@ const initialState = {
 
 export default function AdminLoginPage() {
   const router = useRouter()
-  const [state, formAction] = useActionState(loginAdmin, initialState)
+  const [state, formAction, isPending] = useActionState(loginAdmin, initialState)
   const [showTwoFactor, setShowTwoFactor] = useState(false)
   const { honeypotFields, updateHoneypot } = useFormSecurity()
 
@@ -64,21 +65,6 @@ export default function AdminLoginPage() {
   return (
     <main className="min-h-screen flex items-center justify-center px-6 py-20 bg-muted/30">
       <div className="w-full max-w-md">
-        {/* Security Notice */}
-        <div className="mb-4 p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-700 dark:text-amber-400 text-xs">
-          <div className="flex items-start gap-2">
-            <svg className="w-4 h-4 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-            </svg>
-            <div>
-              <div className="font-semibold mb-1">Secure Admin Access</div>
-              <div className="text-[11px] leading-relaxed">
-                This area is monitored. Login attempts are rate-limited (max 5 per 15 min). Suspicious activity is logged and may result in IP blocking.
-              </div>
-            </div>
-          </div>
-        </div>
-        
         <div className="bg-background border border-border rounded-3xl p-8 md:p-12 shadow-sm">
           {showTwoFactor ? (
             <TwoFactorVerification
@@ -129,9 +115,17 @@ export default function AdminLoginPage() {
 
                 <Button
                   type="submit"
+                  disabled={isPending}
                   className="w-full rounded-xl text-base h-auto py-3 bg-foreground text-background hover:bg-foreground/90"
                 >
-                  Sign In
+                  {isPending ? (
+                    <>
+                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                      Signing in...
+                    </>
+                  ) : (
+                    "Sign In"
+                  )}
                 </Button>
               </form>
             </>
