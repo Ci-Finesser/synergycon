@@ -155,7 +155,7 @@ const Hero: React.FC = () => {
           {/* Tagline */}
           <div className="mb-6 md:mb-8 opacity-0 animate-[fadeIn_1s_ease-out_0.5s_forwards]">
             <p className="text-lg md:text-xl lg:text-2xl text-zinc-600 font-light leading-relaxed max-w-2xl">
-              Where <span className="font-semibold text-black">creativity</span>, <span className="font-semibold text-black">technology</span>, and <span className="font-semibold text-black">culture</span> collide to shape Nigeria&apos;s tomorrow.
+              Where <span className="font-semibold text-black">creativity</span>, <span className="font-semibold text-black">technology</span>, and <span className="font-semibold text-black">culture</span> converge to shape Nigeria&apos;s tomorrow.
             </p>
             <p className="mt-2 text-sm md:text-base text-zinc-500">
               One powerful day. Four creative districts. Infinite possibilities.
