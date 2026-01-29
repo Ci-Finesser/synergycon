@@ -250,6 +250,29 @@ export default function RegisterPage() {
         return
       }
 
+      // Send order confirmation email
+      try {
+        const emailResponse = await fetch('/api/register/email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: formData.email,
+            name: formData.fullName,
+            orderNumber: newOrderId,
+            tickets: getOrderSummary(),
+            totalAmount: totalAmount,
+            currency: 'NGN',
+          }),
+        })
+
+        if (!emailResponse.ok) {
+          console.warn('Failed to send confirmation email, but order was created')
+        }
+      } catch (emailError) {
+        console.warn('Email send error:', emailError)
+        // Don't fail the order if email fails
+      }
+
       // Order created successfully - show success
       toast({
         title: "Success!",

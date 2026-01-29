@@ -19,6 +19,7 @@ export type EmailType =
   | 'password_reset'
   | 'newsletter_welcome'
   | 'admin_notification'
+  | 'order_pending'
   | 'general'
 
 /**

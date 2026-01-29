@@ -733,3 +733,129 @@ export async function sendWelcomeEmail(
   return result
 }
 
+/**
+ * Order Pending Email
+ * Sent when a ticket order is submitted with pending payment status
+ * Dark monochrome theme
+ */
+export interface OrderPendingEmailOptions {
+  email: string
+  name: string
+  orderNumber: string
+  tickets: string // e.g., "2x VIP, 1x VVIP"
+  totalAmount: number
+  currency?: string
+}
+
+export async function sendOrderPendingEmail(
+  options: OrderPendingEmailOptions
+): Promise<EmailResult> {
+  const { email, name, orderNumber, tickets, totalAmount, currency = 'NGN' } = options
+  
+  const currencySymbol = currency === 'NGN' ? '₦' : currency === 'USD' ? '$' : currency
+  const formattedAmount = `${currencySymbol}${totalAmount.toLocaleString()}`
+  const orderDate = new Date().toLocaleDateString('en-NG', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  })
+
+  const html = `
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #0A0A0A;">
+      <div style="background-color: #171717; padding: 40px; text-align: center; border-bottom: 1px solid #262626;">
+        <h1 style="color: #FAFAFA; font-size: 28px; margin: 0;">SynergyCon 2.0</h1>
+        <p style="color: #A3A3A3; font-size: 16px; margin: 10px 0 0 0;">Order Confirmation</p>
+      </div>
+
+      <div style="padding: 40px; background-color: #0F0F0F;">
+        <p style="color: #FAFAFA; font-size: 18px; margin-bottom: 20px;">
+          Hi ${name},
+        </p>
+
+        <p style="color: #D4D4D4; font-size: 16px; line-height: 1.6; margin-bottom: 30px;">
+          Thank you for your ticket order! We've received your registration and your tickets are reserved. To complete your purchase, please proceed with payment using the details below:
+        </p>
+
+        <div style="background-color: #171717; padding: 25px; border-radius: 8px; margin: 30px 0; border-left: 4px solid #FAFAFA;">
+          <h3 style="margin: 0 0 20px 0; color: #FAFAFA; font-size: 18px; border-bottom: 1px solid #262626; padding-bottom: 10px;">
+            Order Details
+          </h3>
+          <p style="margin: 0 0 10px 0; color: #D4D4D4; font-size: 14px;">
+            <strong style="color: #FAFAFA;">Order Number:</strong> ${orderNumber}
+          </p>
+          <p style="margin: 0 0 10px 0; color: #D4D4D4; font-size: 14px;">
+            <strong style="color: #FAFAFA;">Tickets:</strong> ${tickets}
+          </p>
+          <p style="margin: 0 0 10px 0; color: #D4D4D4; font-size: 14px;">
+            <strong style="color: #FAFAFA;">Amount Due:</strong> ${formattedAmount}
+          </p>
+          <p style="margin: 0; color: #D4D4D4; font-size: 14px;">
+            <strong style="color: #FAFAFA;">Order Date:</strong> ${orderDate}
+          </p>
+        </div>
+
+        <div style="background-color: #1A1A1A; padding: 20px; border-radius: 8px; margin: 30px 0; border: 1px solid #262626;">
+          <p style="margin: 0 0 10px 0; color: #FAFAFA; font-size: 16px; font-weight: bold;">
+            💳 Payment Required
+          </p>
+          <p style="margin: 0; color: #A3A3A3; font-size: 14px; line-height: 1.6;">
+            Your order has been created but payment is still pending. You will receive a follow-up email shortly with instructions on how to complete your payment. Please reference your order number <strong style="color: #FAFAFA;">${orderNumber}</strong> when making payment.
+          </p>
+        </div>
+
+        <p style="color: #D4D4D4; font-size: 14px; line-height: 1.6; margin-bottom: 20px;">
+          <strong style="color: #FAFAFA;">What happens next?</strong>
+        </p>
+        <ul style="color: #A3A3A3; font-size: 14px; line-height: 1.8; margin-bottom: 30px; padding-left: 20px;">
+          <li>Look out for an email with payment instructions</li>
+          <li>Complete payment using your order number as reference</li>
+          <li>Once payment is confirmed, your tickets will be sent to this email</li>
+          <li>Present your tickets at the venue on event day</li>
+        </ul>
+
+        <div style="text-align: center; margin: 40px 0;">
+          <a href="https://synergycon.live" style="background-color: #FAFAFA; color: #0A0A0A; padding: 15px 40px; text-decoration: none; border-radius: 8px; font-weight: bold; display: inline-block;">
+            Visit SynergyCon
+          </a>
+        </div>
+
+        <p style="color: #D4D4D4; font-size: 14px; line-height: 1.6;">
+          We're excited to see you at SynergyCon 2.0 - Nigeria's Premier Creative Economy Conference!
+        </p>
+      </div>
+
+      <div style="padding: 30px; text-align: center; background-color: #0A0A0A; border-top: 1px solid #262626; font-size: 12px;">
+        <p style="margin: 0; color: #737373;">© 2026 SynergyCon. All rights reserved.</p>
+        <p style="margin: 10px 0 0 0; color: #737373;">
+          Questions? Contact us at <a href="mailto:support@synergycon.live" style="color: #A3A3A3;">support@synergycon.live</a>
+        </p>
+      </div>
+    </div>
+  `
+
+  const result = await sendEmail({
+    to: email,
+    subject: `SynergyCon 2.0 - Order Received (${orderNumber})`,
+    html,
+    emailType: 'order_pending',
+    recipientName: name,
+    logMetadata: {
+      order_id: orderNumber,
+      amount: String(totalAmount),
+      currency,
+      tickets,
+    },
+  })
+
+  logSecurityEvent({
+    type: result.success ? 'order_pending_email_sent' : 'order_pending_email_failed',
+    endpoint: 'email/order-pending',
+    details: result.success
+      ? `Order pending email sent to ${email} for order ${orderNumber}`
+      : `Failed to send order pending email to ${email}: ${result.error}`,
+  })
+
+  return result
+}
+

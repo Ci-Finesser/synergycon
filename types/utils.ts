@@ -115,6 +115,9 @@ export interface SecurityEvent {
     // Welcome email events
     | 'welcome_email_sent'
     | 'welcome_email_failed'
+    // Order pending email events
+    | 'order_pending_email_sent'
+    | 'order_pending_email_failed'
     // API access control events
     | 'api_blocked'
   endpoint: string
