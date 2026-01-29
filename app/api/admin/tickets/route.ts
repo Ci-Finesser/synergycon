@@ -6,6 +6,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createServerClient } from '@/lib/supabase/server'
 import { logSecurityEvent } from '@/lib/security-logger'
+import { verifyAdminSession, createUnauthorizedResponse } from '@/lib/admin-auth'
 import type {
   AdminTicketListResponse,
   AdminTicketResponse,
@@ -22,10 +23,10 @@ export async function GET(
   req: NextRequest
 ): Promise<NextResponse<AdminTicketListResponse | { error: string }>> {
   try {
-    // Check admin authorization
-    const authHeader = req.headers.get('authorization')
-    if (!authHeader?.startsWith('Bearer ')) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    // Verify admin authentication
+    const adminUser = await verifyAdminSession()
+    if (!adminUser) {
+      return createUnauthorizedResponse('Invalid admin session')
     }
 
     const supabase = await createServerClient()
@@ -90,9 +91,9 @@ export async function POST(
   req: NextRequest
 ): Promise<NextResponse<AdminTicketResponse>> {
   try {
-    // Check admin authorization
-    const authHeader = req.headers.get('authorization')
-    if (!authHeader?.startsWith('Bearer ')) {
+    // Verify admin authentication
+    const adminUser = await verifyAdminSession()
+    if (!adminUser) {
       return NextResponse.json(
         { success: false, error: 'Unauthorized' },
         { status: 401 }
@@ -166,9 +167,9 @@ export async function PATCH(
   req: NextRequest
 ): Promise<NextResponse<AdminTicketResponse>> {
   try {
-    // Check admin authorization
-    const authHeader = req.headers.get('authorization')
-    if (!authHeader?.startsWith('Bearer ')) {
+    // Verify admin authentication
+    const adminUser = await verifyAdminSession()
+    if (!adminUser) {
       return NextResponse.json(
         { success: false, error: 'Unauthorized' },
         { status: 401 }
@@ -242,9 +243,9 @@ export async function DELETE(
   req: NextRequest
 ): Promise<NextResponse<AdminTicketResponse>> {
   try {
-    // Check admin authorization
-    const authHeader = req.headers.get('authorization')
-    if (!authHeader?.startsWith('Bearer ')) {
+    // Verify admin authentication
+    const adminUser = await verifyAdminSession()
+    if (!adminUser) {
       return NextResponse.json(
         { success: false, error: 'Unauthorized' },
         { status: 401 }

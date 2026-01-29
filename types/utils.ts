@@ -103,6 +103,7 @@ export interface SecurityEvent {
     | 'admin_user_created'
     | 'admin_user_deleted'
     | 'admin_session_revoked'
+    | 'admin_action'
     // Newsletter events
     | 'newsletter_subscribed'
     // Application events

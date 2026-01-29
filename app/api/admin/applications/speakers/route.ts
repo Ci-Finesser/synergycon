@@ -7,9 +7,16 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createServerClient } from '@/lib/supabase/server'
 import { validateRequestSecurity, cleanSecurityFields } from '@/lib/api-security'
 import { RATE_LIMITS } from '@/lib/rate-limit'
+import { verifyAdminSession, createUnauthorizedResponse } from '@/lib/admin-auth'
 
 export async function PATCH(req: NextRequest) {
   try {
+    // Verify admin authentication
+    const adminUser = await verifyAdminSession()
+    if (!adminUser) {
+      return createUnauthorizedResponse('Invalid admin session')
+    }
+
     const body = await req.json()
 
     // Validate security (CSRF, rate limiting, honeypot)

@@ -1,8 +1,15 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { deleteRegistration, updateRegistration } from "@/lib/registrations"
+import { verifyAdminSession, createUnauthorizedResponse } from "@/lib/admin-auth"
 
 export async function PATCH(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
+    // Verify admin authentication
+    const adminUser = await verifyAdminSession()
+    if (!adminUser) {
+      return createUnauthorizedResponse('Invalid admin session')
+    }
+
     const { id } = await params
     const data = await request.json()
 
@@ -20,6 +27,12 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
 
 export async function DELETE(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
+    // Verify admin authentication
+    const adminUser = await verifyAdminSession()
+    if (!adminUser) {
+      return createUnauthorizedResponse('Invalid admin session')
+    }
+
     const { id } = await params
 
     const success = await deleteRegistration(id)
