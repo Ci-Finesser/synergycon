@@ -28,7 +28,7 @@ const faqs = [
   {
     question: "What ticket options are available?",
     answer:
-      "We offer multiple access tiers: VIP Day Pass (₦5,000) for single-district access, VIP+ (₦10,000) for enhanced access with networking lounges, VVIP (₦100,000) for all-access including backstage and deal rooms, and Priority Pass (₦250,000) for the ultimate premium experience.",
+      "We offer four ticket tiers: VIP Access (₦25,000) for full-day access to all districts and sessions, VIP+ Premium (₦50,000) with priority seating and VIP lounge access, VVIP Experience (₦100,000) including backstage access and speaker meet-and-greets, and Priority Pass (₦150,000) for the ultimate experience with personal concierge and exclusive speaker dinner.",
   },
   {
     question: "Can I become a speaker at SynergyCon?",
