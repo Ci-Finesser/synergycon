@@ -55,7 +55,7 @@ export const TICKET_TYPES_DATA = [
     "early_bird_until": "2026-02-28T23:59:59+01:00",
     "group_discount_threshold": 5,
     "group_discount_percent": 10,
-    "access_type": "general"
+    "access_type": "day"
   },
   {
     "id": "54dda731-d4f8-432d-9cd2-fd5c3060ad55",
@@ -90,7 +90,7 @@ export const TICKET_TYPES_DATA = [
     "early_bird_until": "2026-02-28T23:59:59+01:00",
     "group_discount_threshold": 5,
     "group_discount_percent": 15,
-    "access_type": "general"
+    "access_type": "day"
   },
   {
     "id": "adc472ff-3592-4efb-8106-4365cdffc804",
@@ -127,7 +127,7 @@ export const TICKET_TYPES_DATA = [
     "early_bird_until": "2026-02-28T23:59:59+01:00",
     "group_discount_threshold": 3,
     "group_discount_percent": 10,
-    "access_type": "backstage"
+    "access_type": "full"
   },
   {
     "id": "653ffc92-188f-4615-974e-3dd1c2c18dd2",
@@ -166,7 +166,7 @@ export const TICKET_TYPES_DATA = [
     "early_bird_until": "2026-02-28T23:59:59+01:00",
     "group_discount_threshold": null,
     "group_discount_percent": null,
-    "access_type": "all-access"
+    "access_type": "full"
   }
 ] as const
 

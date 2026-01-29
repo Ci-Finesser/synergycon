@@ -16,7 +16,7 @@ export function OverviewSection() {
                 The Epicenter of Nigeria&apos;s Creative Revolution
               </h2>
               <p className="text-sm md:text-base text-muted-foreground text-pretty leading-relaxed">
-                SynergyCon 2.0 is Nigeria&apos;s flagship creative economy summit—a full-day immersive experience uniting 
+                SynergyCon 2.0 is Nigeria&apos;s flagship creative economy summit, a full-day immersive experience uniting 
                 visionary entrepreneurs, industry titans, policymakers, and global investors under one iconic roof.
               </p>
               <p className="text-sm md:text-base text-muted-foreground text-pretty leading-relaxed">

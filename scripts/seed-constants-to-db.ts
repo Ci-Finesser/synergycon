@@ -51,11 +51,70 @@ const SEED_CONFIGS: SeedConfig[] = [
   { filename: 'special-guests.ts', tableName: 'special_guests', dataKey: 'SPECIAL_GUESTS_DATA', primaryKey: 'id' },
   { filename: 'speakers.ts', tableName: 'speakers', dataKey: 'SPEAKERS_DATA', primaryKey: 'id' },
   { filename: 'sponsors.ts', tableName: 'sponsors', dataKey: 'SPONSORS_DATA', primaryKey: 'id' },
-  { filename: 'partners.ts', tableName: 'partners', dataKey: 'PARTNERS_DATA', primaryKey: 'id' },
-  { filename: 'schedule.ts', tableName: 'schedule_items', dataKey: 'SCHEDULE_ITEMS_DATA', primaryKey: 'id' },
-  { filename: 'faqs.ts', tableName: 'faqs', dataKey: 'FAQS_DATA', primaryKey: 'id' },
+  // Note: partners table doesn't exist in database schema - needs migration to create table
+  // { filename: 'partners.ts', tableName: 'partners', dataKey: 'PARTNERS_DATA', primaryKey: 'id' },
+  { filename: 'schedule.ts', tableName: 'schedule_sessions', dataKey: 'SCHEDULE_ITEMS_DATA', primaryKey: 'id' },
+  // Note: faqs table doesn't exist in database schema - skipping
   { filename: 'gallery.ts', tableName: 'gallery_items', dataKey: 'GALLERY_ITEMS_DATA', primaryKey: 'id' },
 ]
+
+/**
+ * Transform schedule data to match database schema.
+ * The constants file has different column names than the database table.
+ */
+function transformScheduleData(data: any[]): any[] {
+  return data.map((item: any) => {
+    const {
+      track,           // renamed to 'district' in DB
+      is_featured,     // doesn't exist in DB
+      tags,            // doesn't exist in DB
+      speaker_ids,     // DB has 'speaker_id' (singular, UUID not array)
+      ...rest
+    } = item
+    
+    return {
+      ...rest,
+      district: track || 'main-conference',  // Map track → district
+      date: 'March 27, 2026',                 // Single day event
+      time: item.start_time || '09:00',       // Use start_time as time
+      venue: item.location || 'National Theatre',  // venue is required
+      speaker: null,                          // Set speaker name if needed
+      speaker_id: speaker_ids?.[0] || null,   // Take first speaker_id if array
+      capacity: 100,                          // Default capacity
+    }
+  })
+}
+
+/**
+ * Converts TypeScript object syntax to valid JSON.
+ * Handles unquoted keys, trailing commas, and comments.
+ */
+function tsToJson(tsCode: string): string {
+  let result = tsCode
+  
+  // Remove single-line comments (// ...) but be careful not to match URLs
+  // Match // only when not preceded by : (which would be part of a URL like https://)
+  result = result.replace(/(?<!:)\/\/[^\n]*/g, '')
+  
+  // Remove multi-line comments (/* ... */)
+  result = result.replace(/\/\*[\s\S]*?\*\//g, '')
+  
+  // Convert TypeScript object keys to JSON quoted keys
+  // This regex matches property names that are not already quoted
+  // Pattern: word characters followed by colon, at start of line or after { or ,
+  result = result.replace(/^\s*([a-zA-Z_][a-zA-Z0-9_]*)\s*:/gm, '"$1":')
+  
+  // Handle keys that appear after { or , on the same line
+  result = result.replace(/([{,])\s*([a-zA-Z_][a-zA-Z0-9_]*)\s*:/g, '$1"$2":')
+  
+  // Remove trailing commas before ] or }
+  result = result.replace(/,(\s*[\]}])/g, '$1')
+  
+  // Clean up any double-quoted keys (in case some were already quoted)
+  result = result.replace(/""([^"]+)""/g, '"$1"')
+  
+  return result
+}
 
 function extractDataFromFile(filePath: string, dataKey: string): any[] {
   if (!fs.existsSync(filePath)) {
@@ -64,21 +123,80 @@ function extractDataFromFile(filePath: string, dataKey: string): any[] {
   
   const content = fs.readFileSync(filePath, 'utf-8')
   
-  // Extract the data array using regex - match from dataKey to 'as const'
-  const regex = new RegExp(`export const ${dataKey}\\s*=\\s*(\\[[\\s\\S]*?\\])\\s*as const`, 'm')
-  const match = content.match(regex)
+  // Try multiple patterns to match the data array:
+  // 1. With 'as const' suffix: export const DATA = [...] as const
+  // 2. With type annotation: export const DATA: Type[] = [...]
+  // 3. Plain export: export const DATA = [...]
   
-  if (!match) {
-    console.warn(`  ⚠️  Could not find ${dataKey} in file`)
-    return []
+  const patterns = [
+    // Pattern 1: With 'as const'
+    new RegExp(`export const ${dataKey}\\s*=\\s*(\\[[\\s\\S]*?\\])\\s*as const`, 'm'),
+    // Pattern 2: With type annotation (stops at the closing bracket before export/function/const/type)
+    new RegExp(`export const ${dataKey}(?::\\s*\\w+\\[\\])?\\s*=\\s*(\\[[\\s\\S]*?\\])\\s*(?=\\/\\/|export|function|const|type|\\n\\n)`, 'm'),
+    // Pattern 3: Match array until we find a closing bracket followed by newlines and non-array content
+    new RegExp(`export const ${dataKey}(?::\\s*\\w+\\[\\])?\\s*=\\s*(\\[[\\s\\S]*?\\])\\s*$`, 'm'),
+  ]
+  
+  let arrayContent: string | null = null
+  
+  for (const regex of patterns) {
+    const match = content.match(regex)
+    if (match && match[1]) {
+      arrayContent = match[1]
+      break
+    }
+  }
+  
+  if (!arrayContent) {
+    // Fallback: Try to extract array more aggressively
+    const startMarker = `export const ${dataKey}`
+    const startIdx = content.indexOf(startMarker)
+    if (startIdx === -1) {
+      console.warn(`  ⚠️  Could not find ${dataKey} in file`)
+      return []
+    }
+    
+    // Find the opening bracket
+    const bracketStart = content.indexOf('[', startIdx)
+    if (bracketStart === -1) {
+      console.warn(`  ⚠️  Could not find array start for ${dataKey}`)
+      return []
+    }
+    
+    // Find matching closing bracket
+    let depth = 0
+    let bracketEnd = -1
+    for (let i = bracketStart; i < content.length; i++) {
+      if (content[i] === '[') depth++
+      else if (content[i] === ']') {
+        depth--
+        if (depth === 0) {
+          bracketEnd = i
+          break
+        }
+      }
+    }
+    
+    if (bracketEnd === -1) {
+      console.warn(`  ⚠️  Could not find array end for ${dataKey}`)
+      return []
+    }
+    
+    arrayContent = content.substring(bracketStart, bracketEnd + 1)
   }
   
   try {
-    // Parse the JSON-like array
-    return JSON.parse(match[1])
-  } catch (e) {
-    console.warn(`  ⚠️  Could not parse ${dataKey}:`, e)
-    return []
+    // First, try direct JSON parse (for already valid JSON)
+    return JSON.parse(arrayContent)
+  } catch {
+    // If that fails, convert TypeScript syntax to JSON
+    try {
+      const jsonContent = tsToJson(arrayContent)
+      return JSON.parse(jsonContent)
+    } catch (e) {
+      console.warn(`  ⚠️  Could not parse ${dataKey}:`, e)
+      return []
+    }
   }
 }
 
@@ -90,11 +208,16 @@ async function seedTable(config: SeedConfig): Promise<{ success: boolean; count:
     return { success: true, count: 0 }
   }
   
-  const data = extractDataFromFile(filePath, config.dataKey)
+  let data = extractDataFromFile(filePath, config.dataKey)
   
   if (data.length === 0) {
     console.log(`  ⏭️  ${config.filename} (no data)`)
     return { success: true, count: 0 }
+  }
+  
+  // Apply special transformations for schedule data to match DB schema
+  if (config.tableName === 'schedule_sessions') {
+    data = transformScheduleData(data)
   }
   
   // Remove auto-generated fields before upserting
