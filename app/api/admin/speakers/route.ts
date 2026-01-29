@@ -246,7 +246,7 @@ export async function DELETE(req: NextRequest) {
     }
 
     logSecurityEvent({
-      type: 'admin_action',
+      type: 'admin_user_deleted',
       endpoint: '/api/admin/speakers',
       details: `Speaker deleted: ${speaker?.name || id} by ${adminUser.email}`,
     })

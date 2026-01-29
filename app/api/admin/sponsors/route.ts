@@ -141,7 +141,7 @@ export async function POST(req: NextRequest) {
     }
 
     logSecurityEvent({
-      type: 'admin_action',
+      type: 'admin_user_updated',
       endpoint: '/api/admin/sponsors',
       clientId: adminUser.id,
       details: `Sponsor created: ${validation.data.name} by ${adminUser.email}`,
@@ -198,7 +198,7 @@ export async function PATCH(req: NextRequest) {
     }
 
     logSecurityEvent({
-      type: 'admin_action',
+      type: 'admin_user_updated',
       endpoint: '/api/admin/sponsors',
       clientId: adminUser.id,
       details: `Sponsor updated: ${id} by ${adminUser.email}`,
@@ -250,7 +250,7 @@ export async function DELETE(req: NextRequest) {
     }
 
     logSecurityEvent({
-      type: 'admin_action',
+      type: 'admin_user_deleted',
       endpoint: '/api/admin/sponsors',
       details: `Sponsor deleted: ${sponsor?.name || id} by ${adminUser.email}`,
     })

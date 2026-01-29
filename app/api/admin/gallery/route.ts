@@ -120,7 +120,7 @@ export async function POST(req: NextRequest) {
     }
 
     logSecurityEvent({
-      type: 'admin_action',
+      type: 'admin_user_updated',
       endpoint: '/api/admin/gallery',
       clientId: session.userId,
       details: `Gallery item created: ${data.title}`,
@@ -182,7 +182,7 @@ export async function PATCH(req: NextRequest) {
     }
 
     logSecurityEvent({
-      type: 'admin_action',
+      type: 'admin_user_updated',
       endpoint: '/api/admin/gallery',
       clientId: session.userId,
       details: `Gallery item updated: ${id} (${Object.keys(updateData).join(', ')})`,
@@ -241,7 +241,7 @@ export async function DELETE(req: NextRequest) {
     }
 
     logSecurityEvent({
-      type: 'admin_action',
+      type: 'admin_user_deleted',
       endpoint: '/api/admin/gallery',
       clientId: session.userId,
       details: `Gallery item deleted: ${id}`,

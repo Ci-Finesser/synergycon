@@ -121,8 +121,10 @@ export async function POST(req: NextRequest) {
     }
 
     logSecurityEvent({
-      type: 'admin_action',
-      endpoint: '/api/admin/schedule',      clientId: adminUser.id,      details: `Schedule session created: ${validation.data.title} by ${adminUser.email}`,
+      type: 'admin_user_updated',
+      endpoint: '/api/admin/schedule',
+      clientId: adminUser.id,
+      details: `Schedule session created: ${validation.data.title} by ${adminUser.email}`,
     })
 
     return NextResponse.json({ success: true, session }, { status: 201 })
@@ -176,8 +178,10 @@ export async function PATCH(req: NextRequest) {
     }
 
     logSecurityEvent({
-      type: 'admin_action',
-      endpoint: '/api/admin/schedule',      clientId: adminUser.id,      details: `Schedule session updated: ${id} by ${adminUser.email}`,
+      type: 'admin_user_updated',
+      endpoint: '/api/admin/schedule',
+      clientId: adminUser.id,
+      details: `Schedule session updated: ${id} by ${adminUser.email}`,
     })
 
     return NextResponse.json({ success: true, session })
@@ -226,7 +230,7 @@ export async function DELETE(req: NextRequest) {
     }
 
     logSecurityEvent({
-      type: 'admin_action',
+      type: 'admin_user_deleted',
       endpoint: '/api/admin/schedule',
       clientId: adminUser.id,
       details: `Schedule session deleted: ${session?.title || id} by ${adminUser.email}`,

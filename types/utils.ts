@@ -101,6 +101,7 @@ export interface SecurityEvent {
     | 'registration_failed'
     // Admin events
     | 'admin_user_created'
+    | 'admin_user_updated'
     | 'admin_user_deleted'
     | 'admin_session_revoked'
     | 'admin_action'

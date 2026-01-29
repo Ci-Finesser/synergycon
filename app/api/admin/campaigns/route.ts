@@ -75,18 +75,10 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const cookieStore = await cookies()
-    const adminSessionCookie = cookieStore.get("admin_session")
-
-    if (!adminSessionCookie) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
-    }
-
-    let adminUser
-    try {
-      adminUser = JSON.parse(adminSessionCookie.value)
-    } catch (error) {
-      return NextResponse.json({ error: "Invalid session" }, { status: 401 })
+    // Verify admin authentication
+    const adminUser = await verifyAdminSession();
+    if (!adminUser) {
+      return createUnauthorizedResponse('Invalid admin session');
     }
 
     const body = await request.json()
