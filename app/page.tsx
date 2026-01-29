@@ -9,6 +9,8 @@ import { SpeakersSection } from "@/components/speakers-section"
 import { SpecialGuestSection } from "@/components/special-guest-section"
 import { GallerySection } from "@/components/gallery-section"
 import { SponsorsSection } from "@/components/sponsors-section"
+import { VendorsSection } from "@/components/vendors-section"
+import { ProductShowcaseSection } from "@/components/product-showcase-section"
 import { MediaPartnersSection } from "@/components/media-partners-section"
 import { Footer } from "@/components/footer"
 import { RegistrationModal } from "@/components/registration-modal"
@@ -86,6 +88,12 @@ export default async function HomePage({
       </div>
       <div style={{ borderBottom: "0.5px solid #e5e7eb" }}>
         <SponsorsSection />
+      </div>
+      <div style={{ borderBottom: "0.5px solid #e5e7eb" }}>
+        <VendorsSection />
+      </div>
+      <div style={{ borderBottom: "0.5px solid #e5e7eb" }}>
+        <ProductShowcaseSection />
       </div>
       <div style={{ borderBottom: "0.5px solid #e5e7eb" }}>
         <MediaPartnersSection />

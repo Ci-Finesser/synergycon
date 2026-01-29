@@ -558,38 +558,48 @@ export function SpecialGuestSection({
   return (
     <section id="special-guests" className="py-16 md:py-24 px-4 md:px-6 bg-gradient-to-b from-amber-50/50 to-white">
       <div className="max-w-7xl mx-auto">
-        {/* Section Header */}
-        <div className="text-center mb-12 md:mb-16">
-          <div className="inline-flex items-center gap-2 bg-amber-100 text-amber-800 px-4 py-2 rounded-full text-sm font-semibold mb-4">
-            <Star className="w-4 h-4 fill-current" />
-            Featured Appearances
+        <div className="mb-8 md:mb-10">
+          <div className="flex items-center justify-between">
+            <div className="text-center mx-auto">
+              <div className="inline-flex items-center gap-2 bg-amber-100 text-amber-800 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+                <Star className="w-4 h-4 fill-current" />
+                Featured Appearances
+              </div>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-2">
+                {title}
+              </h2>
+              <p className="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto">
+                {subtitle}
+              </p>
+            </div>
+            <a
+              href="/speakers?category=Special%20Guest"
+              className="hidden md:inline-flex items-center text-sm font-semibold hover:underline"
+            >
+              View All Special Guests
+              <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
           </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
-            {title}
-          </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            {subtitle}
-          </p>
         </div>
 
-        {/* Guests Grid - Same layout as speakers */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {guests.map((guest) => (
-            <GuestCard
-              key={guest.id}
-              guest={guest}
-              onClick={() => handleOpenModal(guest)}
-            />
-          ))}
+        <div className="overflow-x-auto scrollbar-hide">
+          <div className="flex gap-4">
+            {guests.map((guest) => (
+              <div key={guest.id} className="w-64 md:w-72 flex-shrink-0">
+                <GuestCard guest={guest} onClick={() => handleOpenModal(guest)} />
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* Bio Modal */}
-        <GuestBioModal
-          guest={selectedGuest}
-          isOpen={isModalOpen}
-          onClose={handleCloseModal}
-        />
+        <GuestBioModal guest={selectedGuest} isOpen={isModalOpen} onClose={handleCloseModal} />
       </div>
+
+      <style jsx>{`
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+      `}</style>
     </section>
   )
 }

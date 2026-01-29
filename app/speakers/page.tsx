@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { ArrowLeft, ArrowRight, Calendar, Grid3x3, List, Mic } from "lucide-react"
 import Link from "next/link"
 import { useState, useEffect } from "react"
+import { useRouter } from "next/navigation"
 import { SpeakerBioModal } from "@/components/speaker-bio-modal"
 import { SpeakersNotice } from "@/components/speakers-notice"
 import { createClient } from "@/lib/supabase/client"
@@ -12,29 +13,7 @@ import { useSearchParams } from "next/navigation"
 // Force dynamic rendering to prevent prerendering during build
 export const dynamic = 'force-dynamic'
 
-const dayConfig = [
-  {
-    day: "Day 1",
-    date: "February 4, 2026",
-    theme: "Arts, Sculpture & Design",
-    color: "#EF4444",
-    eventDay: 1,
-  },
-  {
-    day: "Day 2",
-    date: "February 5, 2026",
-    theme: "Fashion, Film & Photography",
-    color: "#10B981",
-    eventDay: 2,
-  },
-  {
-    day: "Day 3",
-    date: "February 6, 2026",
-    theme: "Music, Tech & Gaming",
-    color: "#3B82F6",
-    eventDay: 3,
-  },
-]
+const CATEGORIES = ["Special Guest", "Guest", "Panelist", "Speaker"] as const
 
 type Speaker = {
   id: string
@@ -51,14 +30,16 @@ type Speaker = {
   featured: boolean
   event_day: number | null
   tags: string | null
+  speaker_role: string | null
 }
 
 export default function SpeakersPage() {
   const searchParams = useSearchParams()
-  const dayFromUrl = searchParams.get("day")
+  const router = useRouter()
+  const categoryFromUrl = searchParams.get("category")
 
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid")
-  const [selectedDay, setSelectedDay] = useState<string>(dayFromUrl ? `Day ${dayFromUrl}` : "all")
+  const [selectedCategory, setSelectedCategory] = useState<string>(categoryFromUrl ?? "all")
   const [speakers, setSpeakers] = useState<Speaker[]>([])
   const [loading, setLoading] = useState(true)
 
@@ -81,15 +62,36 @@ export default function SpeakersPage() {
     fetchSpeakers()
   }, [])
 
-  const speakersByDay = dayConfig
-    .map((config) => ({
-      ...config,
-      speakers: speakers.filter((s) => s.event_day === config.eventDay),
-    }))
-    .filter((day) => day.speakers.length > 0)
+  useEffect(() => {
+    const fromUrl = searchParams.get("category")
+    setSelectedCategory(fromUrl ?? "all")
+  }, [searchParams])
 
-  const filteredSpeakers =
-    selectedDay === "all" ? speakersByDay : speakersByDay.filter((day) => day.day === selectedDay)
+  function updateCategory(next: string) {
+    const params = new URLSearchParams(searchParams.toString())
+    if (next === "all") {
+      params.delete("category")
+    } else {
+      params.set("category", next)
+    }
+    router.replace(`/speakers?${params.toString()}`, { scroll: false })
+    setSelectedCategory(next)
+  }
+
+  const categoryGroups = CATEGORIES
+    .map((category) => ({
+      category,
+      speakers: speakers.filter((s) => {
+        const raw = s.speaker_role ?? ''
+        const roles = raw.split(',').map((t) => t.trim()).filter(Boolean)
+        const normalized = roles.length > 0 ? roles : ["Speaker"]
+        return normalized.includes(category)
+      }),
+    }))
+    .filter((group) => group.speakers.length > 0)
+
+  const filteredGroups =
+    selectedCategory === "all" ? categoryGroups : categoryGroups.filter((g) => g.category === selectedCategory)
 
   if (loading) {
     return (
@@ -127,29 +129,28 @@ export default function SpeakersPage() {
           </div>
 
           <div className="flex flex-wrap items-center justify-between gap-3 mb-5 md:mb-6">
-            {/* Day filter buttons */}
             <div className="flex flex-wrap items-center gap-2">
               <button
-                onClick={() => setSelectedDay("all")}
+                onClick={() => updateCategory("all")}
                 className={`px-3 py-1.5 text-xs md:text-sm font-medium rounded-md border-[1.5px] transition-colors ${
-                  selectedDay === "all"
+                  selectedCategory === "all"
                     ? "bg-foreground text-background border-foreground"
                     : "bg-transparent border-foreground hover:bg-neutral-50"
                 }`}
               >
-                All Days
+                All Categories
               </button>
-              {speakersByDay.map((day) => (
+              {CATEGORIES.map((category) => (
                 <button
-                  key={day.day}
-                  onClick={() => setSelectedDay(day.day)}
+                  key={category}
+                  onClick={() => updateCategory(category)}
                   className={`px-3 py-1.5 text-xs md:text-sm font-medium rounded-md border-[1.5px] transition-colors ${
-                    selectedDay === day.day
+                    selectedCategory === category
                       ? "bg-foreground text-background border-foreground"
                       : "bg-transparent border-foreground hover:bg-neutral-50"
                   }`}
                 >
-                  {day.day}
+                  {category}
                 </button>
               ))}
             </div>
@@ -181,18 +182,11 @@ export default function SpeakersPage() {
 
       <section className="pb-10 md:pb-12 lg:pb-16 px-4 md:px-6">
         <div className="max-w-7xl mx-auto space-y-8 md:space-y-10">
-          {filteredSpeakers.map((dayGroup, dayIndex) => (
-            <div key={dayIndex}>
+          {filteredGroups.map((group, groupIndex) => (
+            <div key={groupIndex}>
               <div className="flex items-center gap-2.5 mb-4 md:mb-5">
-                <div
-                  className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-bold"
-                  style={{ backgroundColor: `${dayGroup.color}15`, color: dayGroup.color }}
-                >
-                  <Calendar className="w-3.5 h-3.5" />
-                  {dayGroup.day}
-                </div>
-                <div className="text-xs md:text-sm text-muted-foreground">
-                  {dayGroup.date} • {dayGroup.theme}
+                <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-bold border border-foreground">
+                  {group.category}
                 </div>
               </div>
 
@@ -203,8 +197,11 @@ export default function SpeakersPage() {
                     : "flex flex-col gap-4 md:gap-5"
                 }
               >
-                {dayGroup.speakers.map((speaker) => {
-                  const tags = speaker.tags ? speaker.tags.split(",").map((t) => t.trim()) : []
+                {group.speakers.map((speaker) => {
+                  const roleRaw = speaker.speaker_role ?? ''
+                  const roleTags = roleRaw ? roleRaw.split(',').map((t) => t.trim()).filter(Boolean) : ["Speaker"]
+                  const extraTags = speaker.tags ? speaker.tags.split(',').map((t) => t.trim()).filter(Boolean) : []
+                  const tags = [...roleTags, ...extraTags]
 
                   return (
                     <SpeakerBioModal

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react"
 import { Radio, Tv, Globe, Users } from "lucide-react"
 import {
   MEDIA_PARTNERS_BROADCAST,
@@ -69,6 +69,25 @@ export function MediaPartnersSection() {
   }
 
   const partners = getPartnersByCategory(activeCategory)
+  const scrollRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const el = scrollRef.current
+    if (!el) return
+    let rafId: number
+    const speed = 0.4
+    const step = () => {
+      if (!el) return
+      el.scrollLeft += speed
+      if (el.scrollLeft + el.clientWidth >= el.scrollWidth - 1) {
+        el.scrollLeft = 0
+      }
+      rafId = requestAnimationFrame(step)
+    }
+    el.scrollLeft = 0
+    rafId = requestAnimationFrame(step)
+    return () => cancelAnimationFrame(rafId)
+  }, [activeCategory])
   const info = categoryInfo[activeCategory]
   const CategoryIcon = info.icon
 
@@ -121,29 +140,29 @@ export function MediaPartnersSection() {
           </div>
         </div>
 
-        {/* Partners Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-          {partners.map((partner) => (
-            <div
-              key={partner.id}
-              className="group relative bg-white border-2 border-foreground/10 rounded-xl p-4 hover:border-foreground/30 hover:shadow-lg transition-all"
-            >
-              <div className="flex flex-col items-center text-center">
-                {/* Placeholder for logo */}
-                <div className="w-16 h-16 bg-muted rounded-full flex items-center justify-center mb-3 group-hover:bg-muted/70 transition-colors">
-                  {getTypeIcon(partner.type)}
+        <div ref={scrollRef} className="overflow-x-auto scrollbar-hide">
+          <div key={activeCategory} className="flex gap-3">
+            {Array.from({ length: 2 }).flatMap((_, copy) =>
+              partners.map((partner: any, i: number) => (
+                <div
+                  key={`${activeCategory}-${(partner.id ?? i)}-copy-${copy}`}
+                  className="group bg-white border-2 border-foreground/10 rounded-xl p-3 hover:border-foreground/30 hover:shadow-lg transition-all flex items-center gap-3 w-64 flex-shrink-0"
+                >
+                  <div className="w-12 h-12 bg-muted rounded-full flex items-center justify-center flex-shrink-0">
+                    {getTypeIcon(partner.type)}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h4 className="font-semibold text-sm mb-0.5 truncate">
+                      {"shortName" in partner ? partner.shortName : partner.name}
+                    </h4>
+                    <span className="text-xs text-muted-foreground">
+                      {getTypeLabel(partner.type)}
+                    </span>
+                  </div>
                 </div>
-                
-                <h4 className="font-semibold text-sm mb-1 line-clamp-2">
-                  {"shortName" in partner ? partner.shortName : partner.name}
-                </h4>
-                
-                <span className="text-xs text-muted-foreground">
-                  {getTypeLabel(partner.type)}
-                </span>
-              </div>
-            </div>
-          ))}
+              ))
+            )}
+          </div>
         </div>
 
         {/* Partner Stats */}
@@ -168,6 +187,9 @@ export function MediaPartnersSection() {
           </div>
         </div>
       </div>
+      <style jsx>{`
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+      `}</style>
     </section>
   )
 }

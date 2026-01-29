@@ -86,6 +86,9 @@ export function SpeakersSection() {
             </div>
           </div>
         </div>
+      <style jsx>{`
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+      `}</style>
       </section>
     )
   }
@@ -126,7 +129,9 @@ export function SpeakersSection() {
         <div className="overflow-x-auto scrollbar-hide pt-2 px-4 md:px-6">
           <div className="flex gap-5 md:gap-6 pb-4">
             {featuredSpeakers.map((speaker) => {
-              const tags = [speaker.title, speaker.company].filter(Boolean) as string[]
+              const roleRaw = speaker.speaker_role ?? speaker.role
+              const roleTags = roleRaw ? roleRaw.split(',').map((t) => t.trim()).filter(Boolean) : []
+              const tags = [...roleTags, ...([speaker.title, speaker.company].filter(Boolean) as string[])]
 
               return (
                 <SpeakerBioModal
@@ -160,6 +165,20 @@ export function SpeakersSection() {
                       <div>
                         <h3 className="font-bold text-sm md:text-base text-balance mb-1">{speaker.name}</h3>
                         <p className="text-xs md:text-sm text-muted-foreground text-pretty">{speaker.title}</p>
+                        {tags.length > 0 && (
+                          <div className="flex flex-wrap gap-1.5 mt-2">
+                            {tags.slice(0, 2).map((tag, tagIndex) => (
+                              <span key={tagIndex} className="px-2 py-0.5 text-xs border border-foreground rounded">
+                                {tag}
+                              </span>
+                            ))}
+                            {tags.length > 2 && (
+                              <span className="px-2 py-0.5 text-xs border border-foreground rounded bg-muted">
+                                +{tags.length - 2} more
+                              </span>
+                            )}
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>

@@ -196,7 +196,7 @@ export const EVENT_LOCATION = {
 export const EVENT_STATS = {
   maximumAttendeeCapacity: 5000,
   expectedSpeakers: 100,
-  expectedPartners: 30, // Updated: 14 broadcast + 11 digital + 5 sponsors + 8 government = 38 confirmed partners
+  expectedPartners: 38, // Updated: 14 broadcast + 11 digital + 5 sponsors + 8 government = 38 confirmed partners
   typicalAgeRange: "18-65",
   isAccessibleForFree: false,
   inLanguage: "en",

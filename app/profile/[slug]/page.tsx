@@ -19,12 +19,8 @@ import {
 
 async function getProfile(slug: string) {
   try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_SITE_URL}/api/user/profile/${slug}`,
-      {
-        cache: 'no-store',
-      }
-    )
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL ?? process.env.NEXT_PUBLIC_BASE_URL ?? 'http://localhost:3000'
+    const res = await fetch(`${baseUrl}/api/user/profile/${slug}`, { cache: 'no-store' })
 
     if (!res.ok) return null
 

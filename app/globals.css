@@ -218,6 +218,15 @@ html {
   color: #ffffff;
 }
 
+/* Cross-browser scrollbar hide utility */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
 /* Remove default focus outline, add custom */
 *:focus-visible {
   outline: 2px solid #0a0a0a;

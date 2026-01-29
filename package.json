@@ -7,6 +7,7 @@
     "build:webpack": "NEXT_TURBOPACK=0 next build",
     "dev": "next dev",
     "lint": "eslint .",
+    "type-check": "tsc --noEmit",
     "start": "next start",
     "migrate": "supabase db push",
     "migrate:cli": "bash scripts/migrate.sh",

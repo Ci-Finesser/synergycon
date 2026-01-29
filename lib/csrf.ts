@@ -6,6 +6,7 @@
  */
 
 import { cookies } from 'next/headers'
+import { randomBytes } from 'crypto'
 
 const CSRF_TOKEN_NAME = 'csrf_token'
 const CSRF_TOKEN_LENGTH = 32
@@ -14,8 +15,7 @@ const CSRF_TOKEN_LENGTH = 32
  * Generate a cryptographically secure random token (server-side)
  */
 function generateCSRFTokenServer(): string {
-  const crypto = require('crypto')
-  return crypto.randomBytes(CSRF_TOKEN_LENGTH).toString('hex')
+  return randomBytes(CSRF_TOKEN_LENGTH).toString('hex')
 }
 
 /**

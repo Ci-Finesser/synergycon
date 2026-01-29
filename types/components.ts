@@ -18,7 +18,8 @@ export interface Speaker {
   image_url?: string | null
   image?: string | null  // Alias for image_url
   topic?: string | null
-  role?: string  // Speaker role
+  role?: string
+  speaker_role?: string | null
   linkedin_url?: string | null
   twitter_url?: string | null
   instagram_url?: string | null

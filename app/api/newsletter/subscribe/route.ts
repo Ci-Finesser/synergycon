@@ -4,7 +4,6 @@ import { validateRequestSecurity, cleanSecurityFields } from "@/lib/api-security
 import { RATE_LIMITS } from "@/lib/rate-limit"
 import { getResend, isResendConfigured } from "@/lib/resend"
 import { logSecurityEvent } from "@/lib/security-logger"
-import { log } from "console"
 import { EVENT_NAME, EVENT_TAGLINE, EVENT_DATES, VENUE_SHORT_NAMES } from "@/lib/constants"
 
 export async function POST(req: NextRequest) {
