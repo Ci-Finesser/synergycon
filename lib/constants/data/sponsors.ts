@@ -94,7 +94,7 @@ export const SPONSORS_DATA = [
     "contact_email": "zainab@afrothreads.ng",
     "contact_phone": "+234 802 345 6789",
     "featured": false,
-    "bio": "SynergyCon represents the creative convergence we embody in our brand. We want to support Day 1 focus on arts and design while connecting with potential collaborators and customers.",
+    "bio": "SynergyCon represents the creative convergence we embody in our brand. We are excited to support the Arts, Sculpture & Design District and connect with potential collaborators and customers across all four creative zones.",
     "website": "https://afrothreads.ng",
     "status": "draft",
     "application_id": "d3da2a64-2a24-403f-8a5e-fdcd8aad682f",

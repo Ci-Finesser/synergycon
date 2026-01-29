@@ -13,9 +13,8 @@ export const EVENT_HASHTAG = "#SynergyCon2026"
 export const EVENT_HASHTAGS = ["SynergyCon2026", "CreativeEconomy", "Innovation"]
 
 // ============================================================================
-// Event Dates
+// Event Dates - Single Day Event
 // ============================================================================
-// Note: Exact dates are TBA. Using placeholder dates for March 2026.
 export const EVENT_DATES = {
   startDate: "2026-03-27",
   endDate: "2026-03-27",
@@ -232,7 +231,7 @@ export interface TicketTier {
   priceDisplay: string;
   description: string;
   accessType: "day" | "full";
-  duration: "single-day" | "multi-day" | "full-event";
+  duration: "single-day";
   features: string[];
   popular?: boolean;
 }
