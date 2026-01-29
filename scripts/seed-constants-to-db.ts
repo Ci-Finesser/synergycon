@@ -78,7 +78,7 @@ function transformScheduleData(data: any[]): any[] {
       date: 'March 27, 2026',                 // Single day event
       time: item.start_time || '09:00',       // Use start_time as time
       venue: item.location || 'National Theatre',  // venue is required
-      speaker: null,                          // Set speaker name if needed
+      speaker: 'TBA',                         // Default speaker name (required in DB)
       speaker_id: speaker_ids?.[0] || null,   // Take first speaker_id if array
       capacity: 100,                          // Default capacity
     }

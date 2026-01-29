@@ -301,26 +301,6 @@ export const SPONSORS_DATA = [
     "user_id": null
   },
   {
-    "id": "8da2d19a-0d65-4a1a-bd1f-63da2b21eb2c",
-    "name": "Future Nigeria",
-    "logo_url": "/images/future-Nigeria.png",
-    "description": null,
-    "tier": "ecosystem",
-    "display_order": 6,
-    "created_at": "2025-12-15T17:51:20.414904+00:00",
-    "updated_at": "2025-12-15T17:51:20.414904+00:00",
-    "category": "Partners",
-    "sub_category": "Ecosystem",
-    "contact_email": null,
-    "contact_phone": null,
-    "featured": true,
-    "bio": "Future Nigeria is a venture capital platform focused on funding and supporting Nigerian startups and entrepreneurs. The platform provides capital, mentorship, and resources to help startups scale and succeed. Future Nigeria is committed to building a thriving ecosystem for Nigerian innovation, driving economic growth, and creating opportunities for the next generation of Nigerian entrepreneurs.",
-    "website": "https://www.future.Nigeria/",
-    "status": "live",
-    "application_id": null,
-    "user_id": null
-  },
-  {
     "id": "3c6e66f7-6db3-4cde-9b4a-1b3ab08ee4c1",
     "name": "Nelson Jack Solutions",
     "logo_url": "/images/nelson-jack.png",
