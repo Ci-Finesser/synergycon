@@ -61,7 +61,7 @@ export function LocationSection() {
             One Iconic Venue. Four Creative Districts.
           </h2>
           <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto">
-            All the action unfolds at Nigeria&apos;s cultural landmark\u2014National Theatre, Iganmu. Navigate between districts throughout the day to craft your perfect experience.
+            All the action unfolds at Nigeria&apos;s cultural landmark \u2014 National Theatre, Iganmu. Navigate between districts throughout the day to craft your perfect experience.
           </p>
         </div>
 
@@ -109,7 +109,7 @@ export function LocationSection() {
         </div>
 
         {/* District Zones */}
-        <div className="max-w-7xl mx-auto px-4 md:px-6">
+        {/* <div className="max-w-7xl mx-auto px-4 md:px-6">
           <h4 className="text-lg md:text-xl font-bold mb-4 text-center">Explore the Four Districts</h4>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
             {tracks.map((track) => (
@@ -134,7 +134,7 @@ export function LocationSection() {
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   )
