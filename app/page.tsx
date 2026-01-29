@@ -6,7 +6,6 @@ import { ThreeDayEventSection } from "@/components/three-day-event-section"
 import { OverviewSection } from "@/components/overview-section"
 import { WhatToExpect } from "@/components/what-to-expect"
 import { SpeakersSection } from "@/components/speakers-section"
-import { SpecialGuestSection } from "@/components/special-guest-section"
 import { GallerySection } from "@/components/gallery-section"
 import { SponsorsSection } from "@/components/sponsors-section"
 import { VendorsSection } from "@/components/vendors-section"
@@ -82,9 +81,6 @@ export default async function HomePage({
       </div>
       <div style={{ borderBottom: "0.5px solid #e5e7eb" }}>
         <SpeakersSection />
-      </div>
-      <div style={{ borderBottom: "0.5px solid #e5e7eb" }}>
-        <SpecialGuestSection />
       </div>
       <div style={{ borderBottom: "0.5px solid #e5e7eb" }}>
         <SponsorsSection />

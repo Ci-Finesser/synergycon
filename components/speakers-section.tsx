@@ -100,7 +100,7 @@ export function SpeakersSection() {
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 md:gap-6 mb-6 md:mb-8 lg:mb-10">
           <div className="max-w-2xl">
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight mb-3 md:mb-4 text-balance">
-              Voices Shaping the Future
+              Special Guests & Speakers
             </h2>
             <p className="text-sm md:text-base text-muted-foreground text-pretty leading-relaxed">
               From Grammy-winning producers to tech unicorn founders, meet the trailblazers who&apos;ll share battle-tested insights on March 27.
@@ -151,7 +151,7 @@ export function SpeakersSection() {
                   }}
                 >
                   <div className="group flex-shrink-0 w-64 md:w-72 cursor-pointer">
-                    <div className="bg-background border-[1.5px] border-foreground rounded-xl p-3.5 md:p-4 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 h-72 md:h-80 overflow-hidden">
+                    <div className="bg-background border-[1.5px] border-foreground rounded-xl p-3.5 md:p-4 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
                       {/* Speaker Image */}
                       <div className="relative aspect-square rounded-lg overflow-hidden bg-muted border-2 border-transparent group-hover:border-foreground transition-all duration-200 mb-2.5">
                         <img
