@@ -3,26 +3,16 @@
 import type React from "react"
 
 import { useState, useEffect } from "react"
-import { ArrowLeft, Minus, Info, AlertTriangle, Loader2 } from "lucide-react"
+import { ArrowLeft, Minus, Info, CheckCircle2, Loader2 } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { NativeSelect } from "@/components/ui/native-select"
 import { Textarea } from "@/components/ui/textarea"
-import { OrderSuccess } from "@/components/order-success"
-import { UnifiedPaymentModal } from "@/components/payments/unified-payment-modal"
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog"
 import { createBrowserClient } from "@/lib/supabase/client"
 import { useNetworkStore } from "@/lib/stores/network-store"
 import { useToast } from "@/hooks/use-toast"
-import type { PaymentProvider } from "@/lib/payments/types"
 import { TICKET_TYPES } from "@/lib/constants"
 
 type TicketType = {
@@ -143,19 +133,6 @@ export default function RegisterPage() {
   const [orderId, setOrderId] = useState("")
   const [error, setError] = useState("")
   const [ticketNumbers, setTicketNumbers] = useState<Record<string, string[]>>({})
-  const [showPaymentModal, setShowPaymentModal] = useState(false)
-  
-  // Profile completion modal state
-  const [showProfileModal, setShowProfileModal] = useState(false)
-  const [profileModalData, setProfileModalData] = useState<{
-    email: string;
-    name: string;
-    phone?: string;
-    organization?: string;
-    industry?: string;
-    role?: string;
-  } | null>(null)
-  const [isCreatingProfile, setIsCreatingProfile] = useState(false)
 
   const updateQuantity = (id: string, change: number) => {
     setTickets((prev) =>
@@ -217,46 +194,8 @@ export default function RegisterPage() {
     }
   }
 
-  const handleFinalSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    setError("")
-
-    const generatedOrderId = generateOrderNumber()
-
-    const orderData = {
-      order_id: generatedOrderId,
-      full_name: formData.fullName,
-      email: formData.email,
-      phone: formData.phone,
-      how_did_you_hear: formData.heardFrom,
-      organization: formData.organization,
-      role: formData.role,
-      industry: formData.industry,
-      attendance_reason: formData.attendanceReason,
-      expectations: formData.expectations,
-      dietary_requirements: formData.dietaryRequirements,
-      tickets: JSON.stringify(getOrderSummary()),
-      total_amount: totalAmount,
-      status: "confirmed", // Assuming payment is handled separately or this is a mock
-    }
-
-    // const { error: dbError } = await supabase.from("ticket_orders").insert([orderData])
-
-    // Simulate API call delay
-    await new Promise((resolve) => setTimeout(resolve, 1500))
-
-    setIsSubmitting(false)
-
-    // if (!dbError) {
-    setOrderId(generatedOrderId)
-    setSubmitted(true)
-    // } else {
-    //   setError("Failed to submit order. Please try again.")
-    // }
-  }
-
   const handlePayment = async () => {
+    setIsSubmitting(true)
     const newOrderId = generateOrderNumber()
     setOrderId(newOrderId)
     setError("")
@@ -307,136 +246,114 @@ export default function RegisterPage() {
       if (dbError) {
         console.error("Failed to create order:", dbError)
         setError("Failed to create order. Please try again.")
+        setIsSubmitting(false)
         return
       }
 
-      // Show payment modal with provider selection
-      setShowPaymentModal(true)
+      // Order created successfully - show success
+      toast({
+        title: "Success!",
+        description: "Your ticket order has been submitted successfully.",
+        variant: "default",
+      })
+      setSubmitted(true)
     } catch (error) {
       console.error("Order creation error:", error)
       setError("An error occurred while creating your order")
-    }
-  }
-
-  const handlePaymentSuccess = (reference: string, provider: PaymentProvider) => {
-    console.log(`Payment successful via ${provider}: ${reference}`)
-    setShowPaymentModal(false)
-    setSubmitted(true)
-  }
-
-  const handlePaymentError = (errorMessage: string) => {
-    console.error("Payment error:", errorMessage)
-    setError(errorMessage)
-  }
-
-  const handleProfileCreationFailed = (userData: {
-    email: string;
-    name: string;
-    phone?: string;
-    organization?: string;
-    industry?: string;
-    role?: string;
-  }) => {
-    console.log("Profile creation failed, showing completion modal:", userData)
-    setProfileModalData(userData)
-    setShowProfileModal(true)
-  }
-
-  const handleCompleteProfile = async () => {
-    if (!profileModalData) return
-    
-    setIsCreatingProfile(true)
-    
-    try {
-      const response = await fetch('/api/profile/create', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: profileModalData.email,
-          full_name: profileModalData.name,
-          phone: profileModalData.phone || formData.phone,
-          organization: profileModalData.organization || formData.organization,
-          industry: profileModalData.industry || formData.industry,
-          role: profileModalData.role || formData.role,
-          user_type: 'attendee',
-        }),
-      })
-      
-      const data = await response.json()
-      
-      if (response.ok && data.success) {
-        toast({
-          title: "Profile Created!",
-          description: "Your account has been set up successfully.",
-        })
-        setShowProfileModal(false)
-        setSubmitted(true)
-      } else {
-        toast({
-          title: "Error",
-          description: data.error || "Failed to create profile. Please try again.",
-          variant: "destructive",
-        })
-      }
-    } catch (error) {
-      console.error("Profile creation error:", error)
-      toast({
-        title: "Error",
-        description: "A network error occurred. Please try again.",
-        variant: "destructive",
-      })
     } finally {
-      setIsCreatingProfile(false)
+      setIsSubmitting(false)
     }
   }
-
-  const handleClosePaymentModal = () => {
-    setShowPaymentModal(false)
-  }
-
-  const showSuccess = currentStep === 4
 
   if (submitted) {
     return (
-      <div className="min-h-screen bg-background text-foreground pt-20 px-4 pb-12">
-        <OrderSuccess
-          orderNumber={orderId}
-          items={getOrderSummary()}
-          totalAmount={totalAmount}
-          userEmail={formData.email}
-          returnUrl="/"
-          returnLabel="Return to Homepage"
-          successMessage="Thank you for your purchase!"
-        />
-      </div>
+      <main className="min-h-screen bg-background">
+        <div className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b-[1.5px] border-foreground">
+          <div className="max-w-7xl mx-auto px-4 md:px-6 py-2.5">
+            <Link href="/">
+              <Button variant="ghost" size="sm" className="group -ml-2 rounded-md">
+                <ArrowLeft className="mr-2 w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+                Back to Home
+              </Button>
+            </Link>
+          </div>
+        </div>
+
+        <section className="py-6 md:py-10 px-4 md:px-6">
+          <div className="max-w-3xl mx-auto">
+            <div className="bg-background border-[1.5px] border-foreground rounded-2xl p-5 md:p-6">
+              <div className="text-center py-10">
+                <div className="w-14 h-14 rounded-full bg-accent-green/10 flex items-center justify-center mx-auto mb-5">
+                  <CheckCircle2 className="w-7 h-7 text-accent-green" />
+                </div>
+                <h3 className="text-xl md:text-2xl font-bold mb-2.5">Order Submitted!</h3>
+                <p className="text-muted-foreground text-sm md:text-base mb-2 max-w-md mx-auto">
+                  Thank you for registering for SynergyCon 2.0. Your order has been received and is being processed.
+                </p>
+                <p className="text-sm font-medium mb-5">
+                  Order Number: <span className="font-bold text-foreground">{orderId}</span>
+                </p>
+
+                {/* Order Summary */}
+                <div className="bg-muted/30 rounded-lg p-4 mb-6 text-left max-w-sm mx-auto">
+                  <h4 className="font-bold mb-3 text-sm">Order Summary</h4>
+                  <div className="space-y-2">
+                    {getOrderSummary().map((ticket) => (
+                      <div key={ticket.id} className="flex justify-between text-sm">
+                        <span>
+                          {ticket.name} × {ticket.quantity}
+                        </span>
+                        <span className="font-bold">₦{(ticket.price * ticket.quantity).toLocaleString()}</span>
+                      </div>
+                    ))}
+                    <div className="border-t border-foreground/20 pt-2 mt-2">
+                      <div className="flex justify-between">
+                        <span className="font-bold">Total</span>
+                        <span className="text-base font-bold">₦{totalAmount.toLocaleString()}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <p className="text-xs text-muted-foreground mb-5 max-w-md mx-auto">
+                  A confirmation email has been sent to <span className="font-medium">{formData.email}</span>. 
+                  Our team will contact you with payment details shortly.
+                </p>
+
+                <Link href="/">
+                  <Button variant="outline" className="rounded-xl bg-transparent text-sm">
+                    Return to Homepage
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
     )
   }
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Navigation - Hidden when on success step */}
-      {!showSuccess && (
-        <div className="border-b-[1.5px] border-foreground">
-          <div className="max-w-7xl mx-auto px-6 py-4">
-            <Link
-              href="/"
-              className="flex items-center gap-2 text-foreground hover:text-foreground/80 transition-colors"
-            >
-              <ArrowLeft className="w-5 h-5" />
-              <span className="font-medium">Back to Home</span>
-            </Link>
-          </div>
+      {/* Navigation */}
+      <div className="border-b-[1.5px] border-foreground">
+        <div className="max-w-7xl mx-auto px-6 py-4">
+          <Link
+            href="/"
+            className="flex items-center gap-2 text-foreground hover:text-foreground/80 transition-colors"
+          >
+            <ArrowLeft className="w-5 h-5" />
+            <span className="font-medium">Back to Home</span>
+          </Link>
         </div>
-      )}
+      </div>
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-6 py-8 md:py-12">
-        {currentStep < 4 && (
-          <>
-            {/* Header */}
-            <div className="text-center mb-8 md:mb-12">
-              <h1 className="text-3xl md:text-4xl font-bold mb-3">CHECKOUT</h1>
-              <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-8 md:mb-12">
+          <h1 className="text-3xl md:text-4xl font-bold mb-3">CHECKOUT</h1>
+          <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto">
                 Complete your purchase for SynergyCon 2.0. You're just a few steps away from an unforgettable
                 experience.
               </p>
@@ -461,8 +378,6 @@ export default function RegisterPage() {
                 </div>
               ))}
             </div>
-          </>
-        )}
 
         {/* Step 1: Ticket Selection & Contact Details */}
         {currentStep === 1 && (
@@ -744,12 +659,12 @@ export default function RegisterPage() {
           </div>
         )}
 
-        {/* Step 3: Payment */}
+        {/* Step 3: Review & Submit */}
         {currentStep === 3 && (
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-2xl md:text-3xl font-bold mb-6 md:mb-8">Payment Details</h2>
+            <h2 className="text-2xl md:text-3xl font-bold mb-6 md:mb-8">Review & Submit</h2>
             <div className="border-[1.5px] border-foreground rounded-lg p-6 md:p-8">
-              <p className="text-center text-muted-foreground mb-6">Payment gateway integration coming soon...</p>
+              <p className="text-center text-muted-foreground mb-6">Please review your order details before submitting.</p>
 
               {/* Order Summary */}
               <div className="bg-muted/30 rounded-lg p-5 mb-6">
@@ -778,6 +693,7 @@ export default function RegisterPage() {
                 <Button
                   onClick={handleBack}
                   variant="outline"
+                  disabled={isSubmitting}
                   className="flex-1 h-11 border-[1.5px] border-foreground hover:bg-muted bg-transparent"
                 >
                   <ArrowLeft className="w-5 h-5 mr-2" />
@@ -785,153 +701,28 @@ export default function RegisterPage() {
                 </Button>
                 <Button
                   onClick={handlePayment}
+                  disabled={isSubmitting}
                   className="flex-1 h-11 bg-foreground text-background hover:bg-foreground/90 font-bold disabled:opacity-50"
                 >
-                  Complete Purchase
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Submitting...
+                    </>
+                  ) : (
+                    "Submit Order"
+                  )}
                 </Button>
               </div>
-            </div>
-          </div>
-        )}
-
-        {/* Step 4: Success Page */}
-        {currentStep === 4 && (
-          <OrderSuccess
-            orderNumber={orderId}
-            items={getOrderSummary()}
-            totalAmount={totalAmount}
-            userEmail={formData.email}
-            returnUrl="/"
-            returnLabel="Return to Homepage"
-            successMessage="Thank you for your purchase!"
-          />
-        )}
-      </div>
-
-      {/* Unified Payment Modal with Provider Selection */}
-      <UnifiedPaymentModal
-        open={showPaymentModal}
-        onOpenChange={setShowPaymentModal}
-        amount={totalAmount}
-        currency="NGN"
-        customer={{
-          email: formData.email,
-          name: formData.fullName,
-          phone: formData.phone,
-        }}
-        orderId={orderId}
-        metadata={{
-          orderId,
-          tickets: getOrderSummary().map(t => ({
-            ticket_id: t.id,
-            ticket_name: t.name,
-            ticket_tier: t.id.includes('priority') ? 'priority' : t.id.includes('vvip') ? 'vvip' : t.id.includes('vip-plus') ? 'vip-plus' : 'vip',
-            ticket_duration: t.id.includes('full') || t.id.includes('vvip') || t.id.includes('priority') ? 'full-event' : 'single-day',
-            quantity: t.quantity,
-            unit_price: t.price,
-            subtotal: t.price * t.quantity,
-          })),
-          total_quantity: totalTickets,
-        }}
-        description={`SynergyCon 2026 - ${totalTickets} ticket(s)`}
-        onSuccess={handlePaymentSuccess}
-        onError={handlePaymentError}
-        onCancel={handleClosePaymentModal}
-        onProfileCreationFailed={handleProfileCreationFailed}
-      />
-
-      {/* Profile Completion Modal */}
-      <Dialog open={showProfileModal} onOpenChange={setShowProfileModal}>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader>
-            <DialogTitle className="flex items-center gap-2">
-              <AlertTriangle className="h-5 w-5 text-amber-500" />
-              Complete Your Registration
-            </DialogTitle>
-            <DialogDescription>
-              Your payment was successful, but we need to set up your account. 
-              Please confirm your details below.
-            </DialogDescription>
-          </DialogHeader>
-
-          <div className="space-y-4 py-4">
-            <div className="space-y-2">
-              <Label htmlFor="profile-email">Email Address</Label>
-              <Input
-                id="profile-email"
-                value={profileModalData?.email || ""}
-                disabled
-                className="bg-muted"
-              />
-              <p className="text-xs text-muted-foreground">
-                This will be your login email
+              
+              <p className="text-xs text-muted-foreground mt-4 text-center">
+                By submitting, you agree to our terms. Our team will contact you with payment details.
               </p>
             </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="profile-name">Full Name</Label>
-              <Input
-                id="profile-name"
-                value={profileModalData?.name || ""}
-                disabled
-                className="bg-muted"
-              />
-            </div>
-
-            {(profileModalData?.phone || formData.phone) && (
-              <div className="space-y-2">
-                <Label htmlFor="profile-phone">Phone</Label>
-                <Input
-                  id="profile-phone"
-                  value={profileModalData?.phone || formData.phone}
-                  disabled
-                  className="bg-muted"
-                />
-              </div>
-            )}
-
-            {(profileModalData?.organization || formData.organization) && (
-              <div className="space-y-2">
-                <Label htmlFor="profile-org">Organization</Label>
-                <Input
-                  id="profile-org"
-                  value={profileModalData?.organization || formData.organization}
-                  disabled
-                  className="bg-muted"
-                />
-              </div>
-            )}
           </div>
+        )}
 
-          <div className="flex flex-col gap-3">
-            <Button
-              onClick={handleCompleteProfile}
-              disabled={isCreatingProfile}
-              className="w-full"
-            >
-              {isCreatingProfile ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Creating Account...
-                </>
-              ) : (
-                "Complete Registration"
-              )}
-            </Button>
-            <Button
-              variant="ghost"
-              onClick={() => {
-                setShowProfileModal(false)
-                setSubmitted(true)
-              }}
-              disabled={isCreatingProfile}
-              className="w-full text-muted-foreground"
-            >
-              Skip for now
-            </Button>
-          </div>
-        </DialogContent>
-      </Dialog>
+      </div>
     </div>
   )
 }
