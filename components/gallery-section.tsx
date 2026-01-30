@@ -6,6 +6,7 @@ import { VideoLightbox } from "@/components/video-lightbox"
 import { ImageLightbox } from "@/components/image-lightbox"
 import { createClient } from "@/lib/supabase/client"
 import { getCachedData, setCachedData } from "@/lib/supabase/cache"
+import { GALLERY_ITEMS_DATA } from "@/lib/constants/data/gallery"
 
 type GalleryItem = {
   id: string
@@ -17,6 +18,33 @@ type GalleryItem = {
   category: string
   display_order: number
 }
+
+// Fallback data from constants
+const FALLBACK_IMAGES: GalleryItem[] = GALLERY_ITEMS_DATA
+  .filter((item) => item.type === "image" && item.is_active)
+  .slice(0, 2)
+  .map((item) => ({
+    id: item.id,
+    type: item.type as "image",
+    media_url: item.media_url ?? undefined,
+    title: item.title,
+    description: item.description ?? undefined,
+    category: item.category ?? "Highlights",
+    display_order: item.display_order,
+  }))
+
+const FALLBACK_VIDEOS: GalleryItem[] = GALLERY_ITEMS_DATA
+  .filter((item) => item.type === "video" && item.is_active)
+  .slice(0, 2)
+  .map((item) => ({
+    id: item.id,
+    type: item.type as "video",
+    youtube_url: item.youtube_url ?? undefined,
+    title: item.title,
+    description: item.description ?? undefined,
+    category: item.category ?? "Videos",
+    display_order: item.display_order,
+  }))
 
 export function GallerySection() {
   const [lightboxVideo, setLightboxVideo] = useState<string | null>(null)
@@ -33,7 +61,7 @@ export function GallerySection() {
       const cachedImages = getCachedData<GalleryItem[]>(imageCacheKey)
       const cachedVideos = getCachedData<GalleryItem[]>(videoCacheKey)
 
-      if (cachedImages && cachedVideos) {
+      if (cachedImages && cachedVideos && cachedImages.length > 0 && cachedVideos.length > 0) {
         setGalleryImages(cachedImages)
         setGalleryVideos(cachedVideos)
         setLoading(false)
@@ -47,36 +75,35 @@ export function GallerySection() {
           .from("gallery_items")
           .select("*")
           .eq("type", "image")
+          .eq("is_active", true)
           .order("display_order", { ascending: true })
           .limit(2),
         supabase
           .from("gallery_items")
           .select("*")
           .eq("type", "video")
+          .eq("is_active", true)
           .order("display_order", { ascending: true })
           .limit(2),
       ])
 
-      if (imagesResult.error) {
-        // Enhanced error logging for better debugging
-        if (imagesResult.error instanceof Error) {
-          console.error("Error fetching gallery images:", imagesResult.error.message, imagesResult.error.stack, imagesResult.error);
-        } else {
-          console.error("Error fetching gallery images:", imagesResult.error, JSON.stringify(imagesResult.error));
+      // Use database data if available, otherwise use fallback
+      if (imagesResult.error || !imagesResult.data || imagesResult.data.length === 0) {
+        if (imagesResult.error) {
+          console.error("Error fetching gallery images:", imagesResult.error)
         }
-      } else if (imagesResult.data) {
+        setGalleryImages(FALLBACK_IMAGES)
+      } else {
         setGalleryImages(imagesResult.data)
         setCachedData(imageCacheKey, imagesResult.data, 10 * 60 * 1000)
       }
 
-      if (videosResult.error) {
-        // Enhanced error logging for better debugging
-        if (videosResult.error instanceof Error) {
-          console.error("Error fetching gallery videos:", videosResult.error.message, videosResult.error.stack, videosResult.error);
-        } else {
-          console.error("Error fetching gallery videos:", videosResult.error, JSON.stringify(videosResult.error));
+      if (videosResult.error || !videosResult.data || videosResult.data.length === 0) {
+        if (videosResult.error) {
+          console.error("Error fetching gallery videos:", videosResult.error)
         }
-      } else if (videosResult.data) {
+        setGalleryVideos(FALLBACK_VIDEOS)
+      } else {
         setGalleryVideos(videosResult.data)
         setCachedData(videoCacheKey, videosResult.data, 10 * 60 * 1000)
       }

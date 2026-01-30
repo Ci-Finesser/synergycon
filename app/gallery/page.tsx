@@ -7,6 +7,7 @@ import Link from "next/link"
 import { ImageLightbox } from "@/components/image-lightbox"
 import { VideoLightbox } from "@/components/video-lightbox"
 import { createClient } from "@/lib/supabase/client"
+import { GALLERY_ITEMS_DATA } from "@/lib/constants/data/gallery"
 
 // Force dynamic rendering to prevent prerendering during build
 export const dynamic = 'force-dynamic'
@@ -22,6 +23,20 @@ type GalleryItem = {
   display_order: number
 }
 
+// Fallback data from constants
+const FALLBACK_GALLERY_ITEMS: GalleryItem[] = GALLERY_ITEMS_DATA
+  .filter((item) => item.is_active)
+  .map((item) => ({
+    id: item.id,
+    type: item.type as "image" | "video",
+    media_url: item.media_url ?? undefined,
+    youtube_url: item.youtube_url ?? undefined,
+    title: item.title,
+    description: item.description ?? undefined,
+    category: item.category ?? "Highlights",
+    display_order: item.display_order,
+  }))
+
 export default function GalleryPage() {
   const [filter, setFilter] = useState<string>("all")
   const [lightboxImage, setLightboxImage] = useState<{ src: string; alt: string } | null>(null)
@@ -36,12 +51,17 @@ export default function GalleryPage() {
       const { data, error } = await supabase
         .from("gallery_items")
         .select("*")
+        .eq("is_active", true)
         .order("display_order", { ascending: true })
 
-      if (error) {
-        console.error("Error fetching gallery items:", error)
+      if (error || !data || data.length === 0) {
+        if (error) {
+          console.error("Error fetching gallery items:", error)
+        }
+        // Use fallback data from constants
+        setGalleryItems(FALLBACK_GALLERY_ITEMS)
       } else {
-        setGalleryItems(data || [])
+        setGalleryItems(data)
       }
       setLoading(false)
     }
