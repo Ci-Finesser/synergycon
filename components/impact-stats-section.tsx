@@ -37,7 +37,7 @@ export function ImpactStatsSection() {
             One Day to Shape the Future
           </h2>
           <p className="text-sm md:text-base text-white/70 text-pretty leading-relaxed">
-            March 27, 2026 at National Theatre—where Nigeria&apos;s brightest creative minds converge to forge partnerships, 
+            March 26, 2026 at National Theatre, where Nigeria&apos;s brightest creative minds converge to forge partnerships, 
             launch ventures, and define the next decade of Nigeria&apos;s creative economy.
           </p>
         </div>

@@ -18,10 +18,10 @@ export const EVENT_HASHTAGS = ["SynergyCon2026", "CreativeEconomy", "Innovation"
 export const EVENT_DATES = {
   startDate: "2026-03-27",
   endDate: "2026-03-27",
-  displayRange: "March 27, 2026",
+  displayRange: "March 26, 2026",
   displayRangeShort: "Mar 27, 2026",
   datesAnnounced: true,
-  datesPlaceholder: "March 27, 2026",
+  datesPlaceholder: "March 26, 2026",
   startDateISO: "2026-03-27T09:00:00+01:00",
   endDateISO: "2026-03-27T18:00:00+01:00",
   doorTimeISO: "2026-03-27T08:00:00+01:00",

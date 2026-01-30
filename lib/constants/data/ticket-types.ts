@@ -1,7 +1,7 @@
 /**
  * TicketType Data Constants
  * 
- * SynergyCon 2.0 - Single-Day Event (March 27, 2026)
+ * SynergyCon 2.0 - Single-Day Event (March 26, 2026)
  * All tickets provide full-day access to all four creative districts
  * 
  * Last synced: 2026-01-29T00:00:00.000Z

@@ -103,7 +103,7 @@ export function RegistrationSection() {
             Claim Your Place in History
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground text-pretty">
-            Join 5,000+ visionaries, creators, and industry leaders on March 27, 2026 at National Theatre, Lagos. 
+            Join 5,000+ visionaries, creators, and industry leaders on March 26, 2026 at National Theatre, Lagos. 
             Spaces are limited—secure yours now.
           </p>
         </div>

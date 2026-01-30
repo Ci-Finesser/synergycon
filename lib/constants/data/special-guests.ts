@@ -37,7 +37,7 @@ export const SPECIAL_GUESTS_DATA = [
       "Trained 10,000+ women in tech"
     ],
     "session_title": "The Future of Tech Investment in Nigeria",
-    "session_date": "March 27, 2026",
+    "session_date": "March 26, 2026",
     "session_time": "10:00 AM - 11:30 AM",
     "session_venue": "National Theatre - Main Stage",
     "video_url": null,
@@ -73,7 +73,7 @@ export const SPECIAL_GUESTS_DATA = [
       "TEDx Speaker on Nigerian Creativity"
     ],
     "session_title": "Building Iconic Nigerian Brands",
-    "session_date": "March 27, 2026",
+    "session_date": "March 26, 2026",
     "session_time": "2:00 PM - 3:30 PM",
     "session_venue": "National Theatre - Main Stage",
     "video_url": null,
@@ -108,7 +108,7 @@ export const SPECIAL_GUESTS_DATA = [
       "UN Sustainability Ambassador"
     ],
     "session_title": "Sustainable Fashion: The Nigerian Advantage",
-    "session_date": "March 27, 2026",
+    "session_date": "March 26, 2026",
     "session_time": "11:00 AM - 12:30 PM",
     "session_venue": "National Theatre - Fashion Stage",
     "video_url": null,
@@ -144,7 +144,7 @@ export const SPECIAL_GUESTS_DATA = [
       "Mentored 200+ filmmakers"
     ],
     "session_title": "Nigerian Cinema: Beyond Borders",
-    "session_date": "March 27, 2026",
+    "session_date": "March 26, 2026",
     "session_time": "3:00 PM - 4:30 PM",
     "session_venue": "National Theatre - Cinema Hall",
     "video_url": null,
@@ -179,7 +179,7 @@ export const SPECIAL_GUESTS_DATA = [
       "Built Nigeria's top recording studio"
     ],
     "session_title": "The Science of Sound: Producing Global Hits",
-    "session_date": "March 27, 2026",
+    "session_date": "March 26, 2026",
     "session_time": "10:00 AM - 11:30 AM",
     "session_venue": "National Theatre - Music Stage",
     "video_url": null,
@@ -214,7 +214,7 @@ export const SPECIAL_GUESTS_DATA = [
       "XR Nigeria Pioneer Award"
     ],
     "session_title": "Gaming Nigeria: From Stories to Screens",
-    "session_date": "March 27, 2026",
+    "session_date": "March 26, 2026",
     "session_time": "11:00 AM - 12:30 PM",
     "session_venue": "National Theatre - Tech Stage",
     "video_url": null,
@@ -249,7 +249,7 @@ export const SPECIAL_GUESTS_DATA = [
       "Nigerian Artist of the Year 2024"
     ],
     "session_title": "Art as Activism: Sculpting Change",
-    "session_date": "March 27, 2026",
+    "session_date": "March 26, 2026",
     "session_time": "4:00 PM - 5:30 PM",
     "session_venue": "National Theatre - Main Gallery",
     "video_url": null,

@@ -106,7 +106,7 @@ export function CtaSection() {
           </h2>
 
           <p className="text-xs md:text-base text-gray-400 mb-5 md:mb-8 text-pretty leading-relaxed max-w-2xl mx-auto">
-            On March 27, 2026, the brightest minds in Nigeria&apos;s creative economy converge at National Theatre. 
+            On March 26, 2026, the brightest minds in Nigeria&apos;s creative economy converge at National Theatre. 
             {EVENT_STATS.maximumAttendeeCapacity.toLocaleString()}+ innovators. Four immersive districts. Countless opportunities to collaborate, learn, and launch what&apos;s next.
           </p>
 

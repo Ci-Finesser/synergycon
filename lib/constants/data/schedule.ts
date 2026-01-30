@@ -1,7 +1,7 @@
 /**
  * Schedule Data Constants
  * 
- * SynergyCon 2.0 - Single-Day Event (March 27, 2026)
+ * SynergyCon 2.0 - Single-Day Event (March 26, 2026)
  * Track-based schedule across four creative districts
  * 
  * Districts:

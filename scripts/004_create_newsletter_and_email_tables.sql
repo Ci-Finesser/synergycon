@@ -51,7 +51,7 @@ values (
   'newsletter_welcome',
   'Welcome to SynergyCon Updates! 🎉',
   'Thank You for Subscribing!',
-  '<p style="font-size: 16px; line-height: 1.6; color: #333;">We''re thrilled to have you join the SynergyCon community! You''ll be the first to know about:</p><ul style="font-size: 16px; line-height: 1.8; color: #333;"><li>Speaker announcements and exclusive interviews</li><li>Early bird registration opportunities</li><li>Event schedule and session details</li><li>Behind-the-scenes updates from the creative economy</li></ul><p style="font-size: 16px; line-height: 1.6; color: #333;">SynergyCon 2.0 is happening on <strong>March 27, 2026</strong> at the <strong>National Theatre Nigeria</strong>, Lagos — a single-day experience featuring four districts hosted within one venue. Mark your calendar!</p>',
+  '<p style="font-size: 16px; line-height: 1.6; color: #333;">We''re thrilled to have you join the SynergyCon community! You''ll be the first to know about:</p><ul style="font-size: 16px; line-height: 1.8; color: #333;"><li>Speaker announcements and exclusive interviews</li><li>Early bird registration opportunities</li><li>Event schedule and session details</li><li>Behind-the-scenes updates from the creative economy</li></ul><p style="font-size: 16px; line-height: 1.6; color: #333;">SynergyCon 2.0 is happening on <strong>March 26, 2026</strong> at the <strong>National Theatre Nigeria</strong>, Lagos — a single-day experience featuring four districts hosted within one venue. Mark your calendar!</p>',
   'This is a Finesser Initiative. Building Nigeria''s Creative Economy.',
   '/finesser-logo.jpg'
 ) on conflict (name) do nothing;

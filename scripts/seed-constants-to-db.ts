@@ -75,7 +75,7 @@ function transformScheduleData(data: any[]): any[] {
     return {
       ...rest,
       district: track || 'main-conference',  // Map track → district
-      date: 'March 27, 2026',                 // Single day event
+      date: 'March 26, 2026',                 // Single day event
       time: item.start_time || '09:00',       // Use start_time as time
       venue: item.location || 'National Theatre',  // venue is required
       speaker: 'TBA',                         // Default speaker name (required in DB)

@@ -1,7 +1,7 @@
 /**
  * FAQ Data Constants
  * 
- * SynergyCon 2.0 - Single-Day Event (March 27, 2026)
+ * SynergyCon 2.0 - Single-Day Event (March 26, 2026)
  * Comprehensive FAQs covering event logistics, tickets, and experience
  * 
  * Last synced: 2026-01-29T00:00:00.000Z
@@ -23,7 +23,7 @@ export const FAQS_DATA = [
   {
     "id": "faq-001",
     "question": "What is SynergyCon 2.0?",
-    "answer": "SynergyCon 2.0 is Nigeria's premier Creative Economy conference, bringing together innovators, creators, policymakers, and industry leaders under one roof. Taking place on March 27, 2026 at the iconic National Theatre in Lagos, this single-day immersive experience features four distinct creative districts running simultaneously—Arts & Design, Fashion & Film, Tech & Gaming, and the Main Conference—offering over 100 sessions, exhibitions, masterclasses, and unparalleled networking opportunities.",
+    "answer": "SynergyCon 2.0 is Nigeria's premier Creative Economy conference, bringing together innovators, creators, policymakers, and industry leaders under one roof. Taking place on March 26, 2026 at the iconic National Theatre in Lagos, this single-day immersive experience features four distinct creative districts running simultaneously—Arts & Design, Fashion & Film, Tech & Gaming, and the Main Conference—offering over 100 sessions, exhibitions, masterclasses, and unparalleled networking opportunities.",
     "category": "General",
     "display_order": 1,
     "is_published": true,
@@ -33,7 +33,7 @@ export const FAQS_DATA = [
   {
     "id": "faq-002",
     "question": "When and where is SynergyCon 2.0 taking place?",
-    "answer": "SynergyCon 2.0 takes place on Friday, March 27, 2026 at the Wole Soyinka Centre for Culture and Creative Arts (National Theatre Nigeria), located in Iganmu, Lagos. Doors open at 8:00 AM, with programming running from 9:00 AM to 6:00 PM. The after-party and networking reception continues until 9:00 PM for VVIP and Priority Pass holders.",
+    "answer": "SynergyCon 2.0 takes place on Friday, March 26, 2026 at the Wole Soyinka Centre for Culture and Creative Arts (National Theatre Nigeria), located in Iganmu, Lagos. Doors open at 8:00 AM, with programming running from 9:00 AM to 6:00 PM. The after-party and networking reception continues until 9:00 PM for VVIP and Priority Pass holders.",
     "category": "General",
     "display_order": 2,
     "is_published": true,

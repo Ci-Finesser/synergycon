@@ -130,7 +130,7 @@ export function Footer() {
             <h3 className="text-xl md:text-2xl font-bold mb-3 md:mb-4">SynergyCon</h3>
             <p className="text-background/70 text-xs md:text-sm leading-relaxed mb-4 md:mb-6">
               Nigeria&apos;s flagship summit for the creative economy. One transformative day. Four immersive districts. 
-              National Theatre, Lagos • March 27, 2026.
+              National Theatre, Lagos • March 26, 2026.
             </p>
             <div className="flex gap-2 md:gap-3 pt-2">
               <a

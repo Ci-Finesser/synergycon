@@ -1,7 +1,7 @@
 /**
  * Speaker Data Constants
  * 
- * SynergyCon 2.0 - Single-Day Event (March 27, 2026)
+ * SynergyCon 2.0 - Single-Day Event (March 26, 2026)
  * All speakers present on the single event day across four creative districts.
  * 
  * Last synced: 2026-01-29T12:00:00.000Z

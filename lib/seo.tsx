@@ -17,7 +17,7 @@ import {
 export const siteConfig = {
   name: `SynergyCon ${EVENT_YEAR}`,
   tagline: EVENT_TAGLINE,
-  description: "Nigeria's Premier Creative Economy Conference. A single-day experience on March 27, 2026 at the National Theatre, Lagos — featuring four districts within one venue, packed with inspiration, learning, and networking.",
+  description: "Nigeria's Premier Creative Economy Conference. A single-day experience on March 26, 2026 at the National Theatre, Lagos — featuring four districts within one venue, packed with inspiration, learning, and networking.",
   shortDescription: "Nigeria's largest creative economy conference bringing together 5000+ professionals.",
   url: process.env.NEXT_PUBLIC_APP_URL || 'https://synergycon.live',
   ogImage: '/og-image.png',
