@@ -16,11 +16,18 @@ export function SpeakersSection() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const cacheKey = "featured-speakers"
+    // Bump cache key when ordering/shape changes to avoid serving stale client caches.
+    const cacheKey = "featured-speakers-v2"
     const cached = getCachedData<Speaker[]>(cacheKey)
 
     if (cached) {
-      setFeaturedSpeakers(cached)
+      const sorted = [...cached].sort((a: any, b: any) => {
+        const orderA = Number(a?.display_order ?? a?.displayOrder ?? 0)
+        const orderB = Number(b?.display_order ?? b?.displayOrder ?? 0)
+        if (orderA !== orderB) return orderA - orderB
+        return String(a?.name ?? '').localeCompare(String(b?.name ?? ''))
+      })
+      setFeaturedSpeakers(sorted)
       setLoading(false)
       return
     }
@@ -33,13 +40,20 @@ export function SpeakersSection() {
           .from("speakers")
           .select("*")
           .eq("featured", true)
+          .order("display_order", { ascending: true })
           .order("name", { ascending: true })
           .limit(6)
 
         if (error) throw error
         if (data) {
-          setFeaturedSpeakers(data)
-          setCachedData(cacheKey, data)
+          const sorted = [...data].sort((a: any, b: any) => {
+            const orderA = Number(a?.display_order ?? a?.displayOrder ?? 0)
+            const orderB = Number(b?.display_order ?? b?.displayOrder ?? 0)
+            if (orderA !== orderB) return orderA - orderB
+            return String(a?.name ?? '').localeCompare(String(b?.name ?? ''))
+          })
+          setFeaturedSpeakers(sorted)
+          setCachedData(cacheKey, sorted)
         }
       } catch (error) {
         // Enhanced error logging for better debugging
@@ -70,9 +84,9 @@ export function SpeakersSection() {
               </p>
             </div>
           </div>
-          <div className="relative -mx-4 md:mx-0">
-            <div className="overflow-x-auto scrollbar-hide px-4 md:px-0 pt-2">
-              <div className="flex gap-5 md:gap-6 pb-4">
+          <div className="relative -mx-4 md:-mx-6">
+            <div className="overflow-x-auto scrollbar-hide pt-2 px-4 md:px-6">
+              <div className="flex gap-5 md:gap-6 pb-4 md:justify-center">
                 {[...Array(6)].map((_, i) => (
                   <div key={i} className="flex-shrink-0 w-64 md:w-72">
                     <div className="animate-pulse space-y-3">

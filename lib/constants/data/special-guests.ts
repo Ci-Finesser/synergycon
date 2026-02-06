@@ -22,6 +22,7 @@ export interface SpecialGuestData {
 }
 
 export const SPECIAL_GUESTS_DATA = [
+  
 ] as const
 
 export type SpecialGuestId = typeof SPECIAL_GUESTS_DATA[number]['id']

@@ -76,6 +76,7 @@ async function fetchSpeakers() {
   const { data, error } = await supabase
     .from('speakers')
     .select('*')
+    .order('display_order', { ascending: true })
     .order('name', { ascending: true })
 
   if (error) {
