@@ -315,7 +315,8 @@ export function generateEventJsonLd() {
   
   return {
     '@context': 'https://schema.org',
-    '@type': 'BusinessEvent',
+    // Google Events rich results are most consistently supported with @type: Event
+    '@type': 'Event',
     '@id': `${siteConfig.url}/#event`,
     name: event.name,
     alternateName: event.alternateName,
@@ -372,6 +373,11 @@ export function generateEventJsonLd() {
     organizer: {
       '@id': `${siteConfig.url}/#organization`,
     },
+
+    // Performer (recommended by Google; for conferences this can be the organizing brand)
+    performer: {
+      '@id': `${siteConfig.url}/#organization`,
+    },
     
     // Sponsors/Funders
     funder: {
@@ -411,7 +417,7 @@ export function generateEventJsonLd() {
 export function generateMultiLocationEventsJsonLd() {
   return siteConfig.event.locations.map((loc, index) => ({
     '@context': 'https://schema.org',
-    '@type': 'BusinessEvent',
+    '@type': 'Event',
     '@id': `${siteConfig.url}/#event-${loc.city.toLowerCase()}`,
     name: `${siteConfig.event.name} - ${loc.city}`,
     description: `Day ${index + 1} of SynergyCon 2026 in ${loc.city}, Nigeria`,
@@ -436,6 +442,10 @@ export function generateMultiLocationEventsJsonLd() {
       },
     },
     organizer: {
+      '@id': `${siteConfig.url}/#organization`,
+    },
+
+    performer: {
       '@id': `${siteConfig.url}/#organization`,
     },
     superEvent: {
