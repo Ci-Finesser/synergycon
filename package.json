@@ -17,6 +17,8 @@
     "db:seed": "npx tsx scripts/seed-constants-to-db.ts",
     "db:seed:speakers": "node --import tsx scripts/seed-speakers-to-db.ts",
     "db:seed:speakers:dry-run": "node --import tsx scripts/seed-speakers-to-db.ts --dry-run",
+    "db:seed:partners": "node --import tsx scripts/seed-partners-to-db.ts",
+    "db:seed:partners:dry-run": "node --import tsx scripts/seed-partners-to-db.ts --dry-run",
     "pwa:setup": "node scripts/setup-pwa.js",
     "pwa:verify": "node -e \"console.log('PWA Icons:'); require('fs').readdirSync('public').filter(f=>f.startsWith('icon-')).forEach(f=>console.log('  ✓',f))\"",
     "sync:images": "node --import tsx scripts/sync-speaker-images.ts",

@@ -111,7 +111,7 @@ VALUES
   (
     'First Bank of Nigeria',
     'principal',
-    '/images/sponsors/firstbank-logo.png',
+    '/images/firstbank-logo.png',
     'Nigeria''s premier banking institution, supporting creative entrepreneurs and the arts.',
     'finance',
     true,
@@ -121,7 +121,7 @@ VALUES
   (
     'MTN Nigeria',
     'principal',
-    '/images/sponsors/mtn-logo.png',
+    '/images/mtn-logo.png',
     'Connecting Africa through telecommunications and supporting digital creativity.',
     'technology',
     true,
@@ -131,7 +131,7 @@ VALUES
   (
     'Dangote Industries',
     'principal',
-    '/images/sponsors/dangote-logo.png',
+    '/images/dangote-logo.png',
     'Africa''s largest industrial conglomerate, investing in Nigeria''s creative future.',
     'industry',
     true,
@@ -141,7 +141,7 @@ VALUES
   (
     'Access Bank',
     'ecosystem',
-    '/images/sponsors/access-logo.png',
+    '/images/access-logo.png',
     'Empowering businesses and creatives across Africa.',
     'finance',
     false,
@@ -151,7 +151,7 @@ VALUES
   (
     'Nigerian Breweries',
     'ecosystem',
-    '/images/sponsors/nb-logo.png',
+    '/images/nb-logo.png',
     'Celebrating Nigerian culture and creativity.',
     'consumer',
     false,
@@ -161,7 +161,7 @@ VALUES
   (
     'Globacom',
     'ecosystem',
-    '/images/sponsors/glo-logo.png',
+    '/images/glo-logo.png',
     'Proudly Nigerian, connecting creatives worldwide.',
     'technology',
     false,
