@@ -11,128 +11,136 @@ const Hero: React.FC = () => {
       <div className="absolute inset-0 pointer-events-none z-0 overflow-visible select-none">
         {/* Subtle grid pattern */}
         <div 
-          className="absolute inset-0 opacity-[0.03]"
+          className="absolute inset-0 opacity-[0.02]"
           style={{ 
             backgroundImage: "radial-gradient(circle at 1px 1px, #000 1px, transparent 0)",
-            backgroundSize: "40px 40px"
+            backgroundSize: "48px 48px"
           }}
         />
         
         {/* === LAGOS-THEMED SVG DECORATIONS === */}
         
-        {/* Lekki-Ikoyi Bridge - Top Left */}
+        {/* Lekki-Ikoyi Bridge - Top Left - Angled for dynamism */}
         <svg
-          className="absolute top-12 left-4 md:left-12 lg:left-20 w-28 md:w-40 lg:w-52 h-auto text-zinc-300 opacity-0 animate-[fadeIn_1s_ease-out_0.4s_forwards]"
+          className="absolute top-[8%] left-[2%] md:left-[5%] lg:left-[8%] w-32 md:w-44 lg:w-56 xl:w-64 h-auto text-zinc-300 -rotate-3 opacity-0 animate-[fadeIn_1.2s_ease-out_0.3s_forwards]"
           viewBox="0 0 200 80"
           fill="none"
+          aria-hidden="true"
         >
           <path
             d="M10 70 Q50 20 100 40 Q150 60 190 30"
             stroke="currentColor"
-            strokeWidth="2.5"
-            fill="none"
-          />
-          <line x1="30" y1="70" x2="50" y2="35" stroke="currentColor" strokeWidth="1.5" />
-          <line x1="70" y1="70" x2="75" y2="38" stroke="currentColor" strokeWidth="1.5" />
-          <line x1="110" y1="70" x2="100" y2="42" stroke="currentColor" strokeWidth="1.5" />
-          <line x1="150" y1="70" x2="130" y2="48" stroke="currentColor" strokeWidth="1.5" />
-          <line x1="180" y1="70" x2="170" y2="35" stroke="currentColor" strokeWidth="1.5" />
-          <path d="M5 70 L195 70" stroke="currentColor" strokeWidth="2" />
-        </svg>
-
-        {/* Danfo Bus - Top Right */}
-        <svg
-          className="absolute top-16 right-4 md:right-12 lg:right-24 w-16 md:w-24 lg:w-32 h-auto text-zinc-400 opacity-0 animate-[fadeIn_1s_ease-out_0.5s_forwards]"
-          viewBox="0 0 100 60"
-          fill="none"
-        >
-          <rect x="10" y="15" width="80" height="35" rx="5" stroke="currentColor" strokeWidth="2" />
-          <rect x="15" y="20" width="15" height="12" rx="2" stroke="currentColor" strokeWidth="1.5" />
-          <rect x="35" y="20" width="15" height="12" rx="2" stroke="currentColor" strokeWidth="1.5" />
-          <rect x="55" y="20" width="15" height="12" rx="2" stroke="currentColor" strokeWidth="1.5" />
-          <rect x="75" y="20" width="12" height="12" rx="2" stroke="currentColor" strokeWidth="1.5" />
-          <circle cx="25" cy="55" r="5" stroke="currentColor" strokeWidth="2" />
-          <circle cx="75" cy="55" r="5" stroke="currentColor" strokeWidth="2" />
-          <path d="M5 35 L10 35" stroke="currentColor" strokeWidth="2" />
-          <path d="M90 35 L95 35" stroke="currentColor" strokeWidth="2" />
-        </svg>
-
-        {/* National Theatre - Bottom Left */}
-        <svg
-          className="absolute bottom-16 md:bottom-24 left-4 md:left-16 lg:left-28 w-24 md:w-36 lg:w-44 h-auto text-zinc-300 opacity-0 animate-[fadeIn_1s_ease-out_0.7s_forwards]"
-          viewBox="0 0 120 80"
-          fill="none"
-        >
-          <ellipse cx="60" cy="60" rx="55" ry="15" stroke="currentColor" strokeWidth="2" />
-          <path
-            d="M20 60 Q20 20 60 10 Q100 20 100 60"
-            stroke="currentColor"
             strokeWidth="2"
             fill="none"
           />
-          <path d="M35 60 L35 35" stroke="currentColor" strokeWidth="1.5" />
-          <path d="M60 60 L60 15" stroke="currentColor" strokeWidth="1.5" />
-          <path d="M85 60 L85 35" stroke="currentColor" strokeWidth="1.5" />
-          <ellipse cx="60" cy="60" rx="40" ry="10" stroke="currentColor" strokeWidth="1" strokeDasharray="4 2" />
+          <line x1="30" y1="70" x2="50" y2="35" stroke="currentColor" strokeWidth="1.2" />
+          <line x1="70" y1="70" x2="75" y2="38" stroke="currentColor" strokeWidth="1.2" />
+          <line x1="110" y1="70" x2="100" y2="42" stroke="currentColor" strokeWidth="1.2" />
+          <line x1="150" y1="70" x2="130" y2="48" stroke="currentColor" strokeWidth="1.2" />
+          <line x1="180" y1="70" x2="170" y2="35" stroke="currentColor" strokeWidth="1.2" />
+          <path d="M5 70 L195 70" stroke="currentColor" strokeWidth="1.5" />
         </svg>
 
-        {/* BRT Bus - Bottom Right */}
+        {/* Danfo Bus - Top Right - Tilted for motion */}
         <svg
-          className="absolute bottom-12 md:bottom-20 right-4 md:right-12 lg:right-20 w-20 md:w-32 lg:w-40 h-auto text-zinc-400 opacity-0 animate-[fadeIn_1s_ease-out_0.8s_forwards]"
+          className="absolute top-[12%] md:top-[10%] right-[3%] md:right-[6%] lg:right-[10%] w-14 md:w-20 lg:w-28 xl:w-32 h-auto text-amber-400 rotate-2 opacity-0 animate-[fadeIn_1.2s_ease-out_0.5s_forwards]"
+          viewBox="0 0 100 60"
+          fill="none"
+          aria-hidden="true"
+        >
+          <rect x="10" y="15" width="80" height="35" rx="5" stroke="currentColor" strokeWidth="1.8" />
+          <rect x="15" y="20" width="15" height="12" rx="2" stroke="currentColor" strokeWidth="1.2" />
+          <rect x="35" y="20" width="15" height="12" rx="2" stroke="currentColor" strokeWidth="1.2" />
+          <rect x="55" y="20" width="15" height="12" rx="2" stroke="currentColor" strokeWidth="1.2" />
+          <rect x="75" y="20" width="12" height="12" rx="2" stroke="currentColor" strokeWidth="1.2" />
+          <circle cx="25" cy="55" r="5" stroke="currentColor" strokeWidth="1.5" />
+          <circle cx="75" cy="55" r="5" stroke="currentColor" strokeWidth="1.5" />
+          <path d="M5 35 L10 35" stroke="currentColor" strokeWidth="1.5" />
+          <path d="M90 35 L95 35" stroke="currentColor" strokeWidth="1.5" />
+        </svg>
+
+        {/* National Theatre - Bottom Left - Iconic anchor */}
+        <svg
+          className="absolute bottom-[10%] md:bottom-[12%] lg:bottom-[15%] left-[3%] md:left-[8%] lg:left-[12%] w-28 md:w-40 lg:w-48 xl:w-56 h-auto text-zinc-300 opacity-0 animate-[fadeIn_1.2s_ease-out_0.7s_forwards]"
+          viewBox="0 0 120 80"
+          fill="none"
+          aria-hidden="true"
+        >
+          <ellipse cx="60" cy="60" rx="55" ry="15" stroke="currentColor" strokeWidth="1.5" />
+          <path
+            d="M20 60 Q20 20 60 10 Q100 20 100 60"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            fill="none"
+          />
+          <path d="M35 60 L35 35" stroke="currentColor" strokeWidth="1.2" />
+          <path d="M60 60 L60 15" stroke="currentColor" strokeWidth="1.2" />
+          <path d="M85 60 L85 35" stroke="currentColor" strokeWidth="1.2" />
+          <ellipse cx="60" cy="60" rx="40" ry="10" stroke="currentColor" strokeWidth="0.8" strokeDasharray="4 2" />
+        </svg>
+
+        {/* BRT Bus - Bottom Right - Slight uphill angle */}
+        <svg
+          className="absolute bottom-[8%] md:bottom-[10%] lg:bottom-[14%] right-[2%] md:right-[5%] lg:right-[9%] w-24 md:w-36 lg:w-44 xl:w-52 h-auto text-blue-400 -rotate-1 opacity-0 animate-[fadeIn_1.2s_ease-out_0.9s_forwards]"
           viewBox="0 0 140 50"
           fill="none"
+          aria-hidden="true"
         >
-          <rect x="5" y="10" width="130" height="30" rx="8" stroke="currentColor" strokeWidth="2" />
-          <rect x="12" y="15" width="18" height="12" rx="2" stroke="currentColor" strokeWidth="1.5" />
-          <rect x="35" y="15" width="18" height="12" rx="2" stroke="currentColor" strokeWidth="1.5" />
-          <rect x="58" y="15" width="18" height="12" rx="2" stroke="currentColor" strokeWidth="1.5" />
-          <rect x="81" y="15" width="18" height="12" rx="2" stroke="currentColor" strokeWidth="1.5" />
-          <rect x="104" y="15" width="18" height="12" rx="2" stroke="currentColor" strokeWidth="1.5" />
-          <circle cx="30" cy="45" r="4" stroke="currentColor" strokeWidth="2" />
-          <circle cx="70" cy="45" r="4" stroke="currentColor" strokeWidth="2" />
-          <circle cx="110" cy="45" r="4" stroke="currentColor" strokeWidth="2" />
+          <rect x="5" y="10" width="130" height="30" rx="8" stroke="currentColor" strokeWidth="1.5" />
+          <rect x="12" y="15" width="18" height="12" rx="2" stroke="currentColor" strokeWidth="1.2" />
+          <rect x="35" y="15" width="18" height="12" rx="2" stroke="currentColor" strokeWidth="1.2" />
+          <rect x="58" y="15" width="18" height="12" rx="2" stroke="currentColor" strokeWidth="1.2" />
+          <rect x="81" y="15" width="18" height="12" rx="2" stroke="currentColor" strokeWidth="1.2" />
+          <rect x="104" y="15" width="18" height="12" rx="2" stroke="currentColor" strokeWidth="1.2" />
+          <circle cx="30" cy="45" r="4" stroke="currentColor" strokeWidth="1.5" />
+          <circle cx="70" cy="45" r="4" stroke="currentColor" strokeWidth="1.5" />
+          <circle cx="110" cy="45" r="4" stroke="currentColor" strokeWidth="1.5" />
         </svg>
 
-        {/* Blue Rail Train - Left Middle */}
+        {/* Blue Rail Train - Left Middle - Vertical sentinel */}
         <svg
-          className="hidden lg:block absolute top-1/2 -translate-y-1/2 left-6 w-20 h-auto text-zinc-300 opacity-0 animate-[fadeIn_1s_ease-out_1s_forwards]"
+          className="hidden md:block absolute top-[38%] lg:top-[35%] -translate-y-1/2 left-[1%] md:left-[2%] lg:left-[4%] w-14 md:w-16 lg:w-20 xl:w-24 h-auto text-blue-300 opacity-0 animate-[fadeIn_1.2s_ease-out_1.1s_forwards]"
           viewBox="0 0 80 100"
           fill="none"
+          aria-hidden="true"
         >
-          <rect x="15" y="5" width="50" height="90" rx="10" stroke="currentColor" strokeWidth="2" />
-          <rect x="22" y="12" width="36" height="20" rx="3" stroke="currentColor" strokeWidth="1.5" />
-          <rect x="22" y="38" width="36" height="15" rx="2" stroke="currentColor" strokeWidth="1.5" />
-          <rect x="22" y="58" width="36" height="15" rx="2" stroke="currentColor" strokeWidth="1.5" />
-          <circle cx="30" cy="82" r="4" stroke="currentColor" strokeWidth="1.5" />
-          <circle cx="50" cy="82" r="4" stroke="currentColor" strokeWidth="1.5" />
-          <path d="M5 50 L15 50" stroke="currentColor" strokeWidth="2" />
-          <path d="M65 50 L75 50" stroke="currentColor" strokeWidth="2" />
+          <rect x="15" y="5" width="50" height="90" rx="10" stroke="currentColor" strokeWidth="1.5" />
+          <rect x="22" y="12" width="36" height="20" rx="3" stroke="currentColor" strokeWidth="1.2" />
+          <rect x="22" y="38" width="36" height="15" rx="2" stroke="currentColor" strokeWidth="1.2" />
+          <rect x="22" y="58" width="36" height="15" rx="2" stroke="currentColor" strokeWidth="1.2" />
+          <circle cx="30" cy="82" r="4" stroke="currentColor" strokeWidth="1.2" />
+          <circle cx="50" cy="82" r="4" stroke="currentColor" strokeWidth="1.2" />
+          <path d="M5 50 L15 50" stroke="currentColor" strokeWidth="1.5" />
+          <path d="M65 50 L75 50" stroke="currentColor" strokeWidth="1.5" />
         </svg>
 
-        {/* Ticket Stub - Right Middle */}
+        {/* Ticket Stub - Right Middle - Playful tilt */}
         <svg
-          className="hidden lg:block absolute top-1/2 -translate-y-1/2 right-8 w-16 h-auto text-zinc-400 rotate-6 opacity-0 animate-[fadeIn_1s_ease-out_1.1s_forwards]"
+          className="hidden md:block absolute top-[42%] lg:top-[38%] -translate-y-1/2 right-[1%] md:right-[3%] lg:right-[5%] w-12 md:w-14 lg:w-16 xl:w-20 h-auto text-zinc-400 rotate-12 opacity-0 animate-[fadeIn_1.2s_ease-out_1.3s_forwards]"
           viewBox="0 0 60 100"
           fill="none"
+          aria-hidden="true"
         >
-          <rect x="5" y="5" width="50" height="90" rx="4" stroke="currentColor" strokeWidth="2" />
-          <path d="M5 25 L55 25" stroke="currentColor" strokeWidth="1" strokeDasharray="4 2" />
-          <path d="M5 75 L55 75" stroke="currentColor" strokeWidth="1" strokeDasharray="4 2" />
-          <circle cx="30" cy="50" r="12" stroke="currentColor" strokeWidth="1.5" />
+          <rect x="5" y="5" width="50" height="90" rx="4" stroke="currentColor" strokeWidth="1.5" />
+          <path d="M5 25 L55 25" stroke="currentColor" strokeWidth="0.8" strokeDasharray="4 2" />
+          <path d="M5 75 L55 75" stroke="currentColor" strokeWidth="0.8" strokeDasharray="4 2" />
+          <circle cx="30" cy="50" r="12" stroke="currentColor" strokeWidth="1.2" />
           <text x="30" y="54" textAnchor="middle" fontSize="8" fill="currentColor" fontWeight="bold">VIP</text>
-          <rect x="15" y="80" width="30" height="8" rx="2" stroke="currentColor" strokeWidth="1" />
+          <rect x="15" y="80" width="30" height="8" rx="2" stroke="currentColor" strokeWidth="0.8" />
         </svg>
 
-        {/* === FLOATING GEOMETRIC SHAPES === */}
-        <div className="hidden lg:block absolute top-[15%] left-[8%] w-20 h-20 border-2 border-zinc-200 rounded-full animate-[float_8s_ease-in-out_infinite]" />
-        <div className="hidden lg:block absolute top-[25%] right-[12%] w-16 h-16 border-2 border-zinc-200 rotate-45 animate-[float_10s_ease-in-out_infinite_1s]" />
-        <div className="hidden lg:block absolute bottom-[20%] left-[15%] w-12 h-12 bg-zinc-100 rounded-lg animate-[float_9s_ease-in-out_infinite_0.5s]" />
-        <div className="hidden lg:block absolute bottom-[30%] right-[8%] w-24 h-24 border border-zinc-100 rounded-full animate-[float_11s_ease-in-out_infinite_2s]" />
+        {/* === FLOATING GEOMETRIC SHAPES - Asymmetric balance === */}
+        <div className="hidden lg:block absolute top-[18%] left-[6%] xl:left-[10%] w-16 xl:w-20 h-16 xl:h-20 border-2 border-zinc-200 rounded-full animate-[float_12s_ease-in-out_infinite]" />
+        <div className="hidden lg:block absolute top-[22%] right-[8%] xl:right-[14%] w-12 xl:w-16 h-12 xl:h-16 border-2 border-zinc-200 rotate-45 animate-[float_14s_ease-in-out_infinite_2s]" />
+        <div className="hidden xl:block absolute bottom-[22%] left-[18%] w-10 h-10 bg-zinc-100 rounded-lg animate-[float_10s_ease-in-out_infinite_1s]" />
+        <div className="hidden lg:block absolute bottom-[28%] right-[6%] xl:right-[12%] w-20 xl:w-28 h-20 xl:h-28 border border-zinc-100 rounded-full animate-[float_16s_ease-in-out_infinite_3s]" />
         
-        {/* === ACCENT DOTS === */}
-        <div className="hidden md:block absolute top-[20%] left-[25%] w-2 h-2 bg-black rounded-full animate-[pulse_3s_ease-in-out_infinite]" />
-        <div className="hidden md:block absolute top-[40%] right-[20%] w-3 h-3 bg-zinc-300 rounded-full animate-[pulse_4s_ease-in-out_infinite_1s]" />
-        <div className="hidden md:block absolute bottom-[25%] left-[30%] w-2 h-2 bg-zinc-400 rounded-full animate-[pulse_3.5s_ease-in-out_infinite_0.5s]" />
+        {/* === ACCENT DOTS - Strategic placement === */}
+        <div className="hidden lg:block absolute top-[28%] left-[20%] xl:left-[22%] w-2 h-2 bg-black rounded-full animate-[pulse_4s_ease-in-out_infinite]" />
+        <div className="hidden lg:block absolute top-[45%] right-[16%] xl:right-[18%] w-3 h-3 bg-zinc-300 rounded-full animate-[pulse_5s_ease-in-out_infinite_1.5s]" />
+        <div className="hidden xl:block absolute bottom-[32%] left-[25%] w-2 h-2 bg-zinc-400 rounded-full animate-[pulse_4.5s_ease-in-out_infinite_2s]" />
+        <div className="hidden lg:block absolute top-[60%] left-[12%] w-2.5 h-2.5 bg-zinc-300 rounded-full animate-[pulse_6s_ease-in-out_infinite_0.5s]" />
+        <div className="hidden xl:block absolute bottom-[18%] right-[22%] w-2 h-2 bg-zinc-400 rounded-full animate-[pulse_5.5s_ease-in-out_infinite_3s]" />
       </div>
 
       <div className="container mx-auto px-6 md:px-12 relative z-10">
@@ -272,4 +280,4 @@ const Hero: React.FC = () => {
   )
 }
 
-export default Hero;
+export default Hero

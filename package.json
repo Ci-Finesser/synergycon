@@ -1,5 +1,5 @@
 {
-  "name": "my-v0-project",
+  "name": "synergycon",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -15,8 +15,13 @@
     "db:reset": "supabase db reset",
     "db:pull": "npx tsx scripts/sync-db-to-constants.ts",
     "db:seed": "npx tsx scripts/seed-constants-to-db.ts",
+    "db:seed:speakers": "node --import tsx scripts/seed-speakers-to-db.ts",
+    "db:seed:speakers:dry-run": "node --import tsx scripts/seed-speakers-to-db.ts --dry-run",
     "pwa:setup": "node scripts/setup-pwa.js",
-    "pwa:verify": "node -e \"console.log('PWA Icons:'); require('fs').readdirSync('public').filter(f=>f.startsWith('icon-')).forEach(f=>console.log('  ✓',f))\""
+    "pwa:verify": "node -e \"console.log('PWA Icons:'); require('fs').readdirSync('public').filter(f=>f.startsWith('icon-')).forEach(f=>console.log('  ✓',f))\"",
+    "sync:images": "node --import tsx scripts/sync-speaker-images.ts",
+    "sync:images:dry-run": "node --import tsx scripts/sync-speaker-images.ts --dry-run",
+    "sync:speakers": "node --import tsx scripts/generate-speakers-from-csv.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
@@ -103,6 +108,7 @@
     "sharp": "^0.34.5",
     "supabase": "^1.200.3",
     "tailwindcss": "^4.1.9",
+    "tsx": "^4.21.0",
     "tw-animate-css": "1.3.3",
     "typescript": "^5.9.3"
   }
