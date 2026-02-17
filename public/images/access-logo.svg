@@ -1,12 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200" width="400" height="200">
-  <defs>
-    <linearGradient id="accessGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#FF6600;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#FF8C00;stop-opacity:1" />
-    </linearGradient>
-  </defs>
-  <rect width="400" height="200" rx="12" fill="url(#accessGrad)"/>
-  <text x="200" y="85" font-family="Arial Black, sans-serif" font-size="48" font-weight="bold" fill="#FFFFFF" text-anchor="middle">ACCESS</text>
-  <text x="200" y="130" font-family="Arial, sans-serif" font-size="28" fill="#FFFFFF" text-anchor="middle">BANK</text>
-  <text x="200" y="170" font-family="Arial, sans-serif" font-size="12" fill="#FFFFFF" text-anchor="middle" letter-spacing="2" opacity="0.9">MORE THAN BANKING</text>
+  <!-- Access Bank: Orange #F26522 with diamond -->
+  <rect width="400" height="200" rx="8" fill="#FFFFFF"/>
+  <!-- Diamond icon -->
+  <g transform="translate(80, 100)">
+    <polygon points="0,-40 40,0 0,40 -40,0" fill="#F26522"/>
+    <polygon points="0,-25 25,0 0,25 -25,0" fill="#FFFFFF"/>
+    <polygon points="0,-12 12,0 0,12 -12,0" fill="#F26522"/>
+  </g>
+  <!-- Text -->
+  <text x="250" y="95" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="#F26522" text-anchor="middle">access</text>
+  <text x="250" y="130" font-family="Arial, sans-serif" font-size="28" fill="#333333" text-anchor="middle">bank</text>
+  <!-- Tagline -->
+  <text x="250" y="165" font-family="Arial, sans-serif" font-size="12" fill="#666666" text-anchor="middle" letter-spacing="1">More than banking</text>
 </svg>
