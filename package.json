@@ -21,7 +21,11 @@
     "pwa:verify": "node -e \"console.log('PWA Icons:'); require('fs').readdirSync('public').filter(f=>f.startsWith('icon-')).forEach(f=>console.log('  ✓',f))\"",
     "sync:images": "node --import tsx scripts/sync-speaker-images.ts",
     "sync:images:dry-run": "node --import tsx scripts/sync-speaker-images.ts --dry-run",
-    "sync:speakers": "node --import tsx scripts/generate-speakers-from-csv.ts"
+    "sync:speakers": "node --import tsx scripts/generate-speakers-from-csv.ts",
+    "sync:partner-logos": "node --import tsx scripts/sync-partner-logos.ts",
+    "sync:partner-logos:dry-run": "node --import tsx scripts/sync-partner-logos.ts --dry-run",
+    "generate:partner-placeholders": "node --import tsx scripts/generate-partner-placeholders.ts",
+    "generate:partner-placeholders:force": "node --import tsx scripts/generate-partner-placeholders.ts --force"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
