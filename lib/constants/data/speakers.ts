@@ -4,12 +4,12 @@
  * SynergyCon 2.0 - Single-Day Event (March 26, 2026)
  * All speakers present on the single event day across four creative districts.
  * 
- * Last synced: 2026-02-17T08:07:48.221Z
- * Total Speakers: 58
+ * Last synced: 2026-02-17T12:15:00.000Z
+ * Total Speakers: 59
  * 
  * Categories:
  * - Special Guests: 47
- * - Speakers: 10
+ * - Speakers: 11
  * - Guests: 1
  */
 
@@ -381,7 +381,7 @@ export const SPEAKERS_DATA = [
   {
     "id": "77f3418b-585a-49de-a445-fff2f25eabec",
     "name": "Oladapo Daniel Oyebanjo",
-    "title": "CEO, The CREAM",
+    "title": "CEO, The CREAM Platform",
     "bio": "He is a singer, rapper, music executive, event host, and television personality. He has built a career that spans multiple facets of entertainment, combining creativity with leadership. He is recognized for his dynamic presence on stage and screen, as well as his influence behind the scenes in shaping music and media.",
     "image_url": "/images/oladapo-daniel-oyebanjo.jpg",
     "company": "The CREAM",
@@ -455,7 +455,7 @@ export const SPEAKERS_DATA = [
   },
   {
     "id": "50a9419c-df97-4a19-bb39-9899e4fef483",
-    "name": "Jide Sanwo-Olu",
+    "name": "Babajide Olusola Sanwo-Olu",
     "title": "The Governor of Lagos State",
     "bio": "He is the Governor of Lagos State, Nigeria, serving since May 2019. Before becoming governor, he built a career in banking and held several public service roles, including Commissioner for Commerce and Industry, Commissioner for Budget and Planning, and Managing Director of the Lagos State Property Development Corporation. As governor, he is recognized for his focus on infrastructure, healthcare, digital innovation, and cultural development, and he continues to play a key role in shaping Lagos as a leading African megacity.",
     "image_url": "/images/jide-sanwo-olu.jpg",
@@ -1309,15 +1309,15 @@ export const SPEAKERS_DATA = [
     "title": "GCEO Wakanow",
     "bio": "A strategic business leader with deep expertise in growth strategy and organizational turnaround. He drives product innovation that strengthens competitiveness and unlocks new market opportunities. His strong financial management acumen ensures sustainable performance and long‑term value creation.",
     "image_url": "/images/mr-adebayo-adedeji.jpg",
-    "company": null,
-    "linkedin_url": "Https://www.linkedin.com/in/bayolion?utm_source=share&utm_medium=member_mweb&utm_campaign=share_via&utm_content=profile",
+    "company": "Wakanow",
+    "linkedin_url": "https://www.linkedin.com/in/bayolion",
     "twitter_url": null,
     "featured": false,
     "display_order": 52,
     "created_at": "2026-02-17T08:07:48.221Z",
     "updated_at": "2026-02-17T08:07:48.221Z",
     "topic": "To Be Announced Closer to the Event",
-    "instagram_url": null,
+    "instagram_url": "https://www.instagram.com/thebayolion_",
     "website_url": null,
     "event_day": 1,
     "tags": "Growth Strategy, Turnaround Leadership, Product Innovation, Financial Management",
