@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200" width="400" height="200">
+  <defs>
+    <linearGradient id="gloGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#006400;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#228B22;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="200" rx="12" fill="url(#gloGrad)"/>
+  <text x="200" y="90" font-family="Arial Black, sans-serif" font-size="56" font-weight="bold" fill="#FFFFFF" text-anchor="middle">GLO</text>
+  <text x="200" y="130" font-family="Arial, sans-serif" font-size="22" fill="#90EE90" text-anchor="middle">GLOBACOM</text>
+  <text x="200" y="170" font-family="Arial, sans-serif" font-size="12" fill="#FFFFFF" text-anchor="middle" letter-spacing="2" opacity="0.9">RULE YOUR WORLD</text>
+</svg>
